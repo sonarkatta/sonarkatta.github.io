@@ -1,5 +1,5 @@
-const CACHE = 'sonar-katta-pages-20260928-8';
-const STATIC = ['./', './index.html', './manifest.json', './icon-512.png', './4-crystal-clean-v2.webp', './logo-card.webp', './1-logo-approved.png', './1-card-footer.webp', './gold-bars.webp', './silver-bars.webp', './1-footer-glow.webp', './2-arrow-ornament.png', './3-bill-ornament.png', './4-gst-star.png'];
+const CACHE = 'sonar-katta-pages-20260928-9';
+const STATIC = ['./', './index.html', './manifest.json', './icon-512.png', './4-crystal-clean-v2.webp', './logo-card.webp', './1-logo-approved.png', './gold-bars.webp', './silver-bars.webp', './1-footer-glow.webp', './2-arrow-ornament.png', './3-bill-ornament.png', './4-gst-star.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(STATIC)).then(() => self.skipWaiting()));
 });
