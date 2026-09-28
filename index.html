@@ -36,14 +36,25 @@
     @media(max-width:360px){.shell{padding-left:20px;padding-right:20px}.rate-title{font-size:22px}.value{font-size:32px}.metal{width:39px;height:39px;right:calc(100% - 35px)}.socials a{font-size:8px}.notice-card{font-size:11px}}
     @media(max-width:430px) and (min-height:701px){.mark{width:76px;height:76px;margin:2px auto 4px}.rates{margin:4px 0 0}.rate{min-height:clamp(74px,calc((100svh - 350px)/4),124px)}}
     @media(max-width:430px) and (max-height:700px) and (min-height:601px){.mark{width:63px;height:63px;margin:1px auto 3px}.rates{margin:3px 0 0}}
+    .notice-grid{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0;aspect-ratio:740/172;min-height:0;margin-top:6px;background:url('./1-card-footer.webp') center/100% 100% no-repeat;filter:drop-shadow(0 0 8px #e0a64b5b)}.notice-card{min-height:0;border:0;border-radius:0;background:none;box-shadow:none;padding:0;overflow:hidden}.notice-card span,.notice-card strong{opacity:0}.notice-card span{height:40%;margin:0}.notice-card strong{font-size:10px}
+    .shell{background-image:linear-gradient(90deg,#09060308 0%,#09060300 30%,#09060300 70%,#09060308 100%),url('./4-crystal-clean-v2.webp') center/100% 100% no-repeat,radial-gradient(ellipse at 50% 0%,#74501f,#080604 58%)}.shell:before{opacity:.45}
+    @media(max-width:430px){.notice-grid{margin-top:3px}.metal{width:clamp(35px,11.5vw,49px);height:clamp(32px,10.6vw,45px);left:0;filter:drop-shadow(0 0 7px #efbe6a8a)}.figure{padding-left:clamp(29px,8vw,37px)}}
+    @media(max-width:430px) and (max-height:700px){.notice-grid{margin-top:2px}.metal{width:clamp(30px,10vw,40px);height:clamp(29px,9vw,37px)}}
+    @media(max-width:430px) and (max-height:600px){.metal{width:clamp(27px,9vw,34px);height:clamp(25px,8vw,31px)}.notice-grid{margin-top:1px}}
     @media(max-width:430px){.figure{padding-left:clamp(22px,6vw,30px);justify-content:center}.value{font-size:clamp(24px,8vw,37px);max-width:calc(100% - 23px)}}
-    @media(max-width:360px){.value{font-size:clamp(23px,7.9vw,29px)}.figure{padding-left:22px}.metal{width:26px;height:25px}}
+    @media(max-width:360px){.value{font-size:clamp(23px,7.9vw,29px)}.figure{padding-left:27px}.metal{width:30px;height:28px}}
+    @media(max-width:430px){.notice-grid{height:auto;min-height:0;gap:0;margin-top:4px}.notice-card{min-height:0;padding:0;border:0;background:transparent;box-shadow:none}.notice-card span,.notice-card strong{opacity:0}.metal{width:clamp(39px,12vw,49px);height:clamp(36px,11vw,45px)}.figure{padding-left:clamp(26px,7vw,32px)}}
+    @media(max-width:430px) and (max-height:700px){.notice-grid{margin-top:2px}.metal{width:clamp(35px,10.5vw,41px);height:clamp(32px,9.8vw,38px)}}
+    @media(max-width:430px) and (max-height:600px){.metal{width:31px;height:29px}}
+    @media(max-width:430px){.mark{width:96px;height:96px;margin:5px auto 3px}.date{margin-top:1px}}
+    @media(max-width:430px) and (max-height:700px){.mark{width:76px;height:76px;margin:1px auto 2px}.rates{margin-top:1px}}
+    @media(max-width:430px) and (max-height:600px){.mark{width:55px;height:55px;margin:0 auto 1px}}
   </style>
 </head>
 <body>
 <main class="shell">
   <header class="brand">
-    <div class="brand-top">SONAR KATTA &nbsp; | &nbsp; @sonarkatta</div>
+    
     <div class="mark"><img src="./1-logo-approved.png" alt="सोनार कट्टा लोगो" width="88" height="88"></div>
     <div class="brand-line" aria-hidden="true"></div>
     <p class="date"><span id="rate-date"></span><b aria-hidden="true">|</b> महाराष्ट्र</p>
