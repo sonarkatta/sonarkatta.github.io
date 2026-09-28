@@ -1,0 +1,12 @@
+{
+  "name": "सोनार कट्टा - आजचे दर",
+  "short_name": "सोनार कट्टा",
+  "description": "महाराष्ट्रातील सोने आणि चांदीचे दर",
+  "lang": "mr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#100e0b",
+  "theme_color": "#100e0b",
+  "icons": [{"src":"./icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]
+}

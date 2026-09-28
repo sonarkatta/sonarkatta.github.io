@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="mr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#100e0b">
+  <meta name="description" content="सोनार कट्टा: महाराष्ट्रातील सोने आणि चांदीचे दर, मराठीत.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="सोनार कट्टा">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" href="./icon-512.png">
+  <link rel="apple-touch-icon" href="./icon-512.png">
+  <title>सोनार कट्टा - आजचे दर</title>
+
+  <!-- VERIFIED FALLBACK: These values were checked against the source on 28 Sep 2026, 20:25 IST. To update manually, edit date (YYYY-MM-DD), updated (ISO UTC), four prices, and region together, then redeploy. They display only when live data cannot be safely verified. -->
+  <script id="daily-rates" type="application/json">
+  {
+    "date": "2026-09-28",
+    "updated": "2026-09-28T14:55:00.000Z",
+    "gold24": "₹1,46,670",
+    "gold22": "₹1,34,448",
+    "gold18": "₹1,10,003",
+    "silver999": "₹2,25,660",
+    "region": "महाराष्ट्र"
+  }
+  </script>
+  <style>
+    :root{color-scheme:dark;--gold:#f0bf68;--cream:#fff3df}
+    *{box-sizing:border-box}html{background:#080604}body{margin:0;color:var(--cream);font-family:system-ui,"Noto Sans Devanagari",sans-serif;background:#080604;-webkit-font-smoothing:antialiased}
+    .shell{position:relative;isolation:isolate;max-width:600px;min-height:100vh;margin:auto;padding:34px 28px max(40px,env(safe-area-inset-bottom));text-align:center;background:linear-gradient(90deg,transparent 0%,#0a0704db 16%,#0b0805e8 50%,#0a0704db 84%,transparent 100%),url('./crystal-frame.webp') center / 100% 100% no-repeat,radial-gradient(ellipse at top,#513414,#080604 55%);overflow:hidden}
+    .shell:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(circle,#ffd883 1px,transparent 2px),radial-gradient(circle,#fbd487 2px,transparent 4px),radial-gradient(circle,#c2822b 1px,transparent 3px);background-size:79px 103px,153px 181px,113px 151px;background-position:15px 13px,44px 51px,73px 24px;opacity:.32;mask-image:linear-gradient(#000,transparent 85%)}
+    .shell:after{content:"";position:absolute;pointer-events:none;inset:10px;z-index:-1;border:1px solid #d9a45175;box-shadow:inset 0 0 27px #b078302b,0 0 18px #e5ae384a;border-radius:7px}
+    .brand{position:relative}.brand-top{font:700 12px/1.4 system-ui,sans-serif;letter-spacing:.09em;color:#f9e5ba}.mark{margin:17px auto 12px;width:76px;height:76px;border-radius:50%;border:1px solid #bb8b40;box-shadow:0 0 23px #d29d4c6b;background:#080604;display:grid;place-items:center}.mark img{width:65px;height:65px;border-radius:50%}.brand-line{margin:0 auto 12px;width:88px;height:1px;background:linear-gradient(90deg,transparent,#ddb66b,transparent)}.heading{margin:0;color:#f5c67d;font-size:24px;font-weight:750;line-height:1.45}.date{margin:11px 0 0;color:#f9dfaf;font-size:16px;font-weight:650}.date b{font-weight:400;padding:0 5px}
+    .rates{margin:25px 0 0}.rate{position:relative;padding:18px 0 28px;min-height:169px}.rate+.rate:before{content:"";position:absolute;top:0;left:17%;right:17%;height:1px;background:linear-gradient(90deg,transparent,#e9b858 13%,#f4d68a 50%,#e9b858 87%,transparent)}.rate+.rate:after{content:"✦";position:absolute;top:-11px;left:calc(50% - 9px);color:#ffe8ac;font-size:17px;text-shadow:0 0 15px #f4c568}.rate-title{display:block;color:var(--gold);font-size:25px;font-weight:800;line-height:1.4;text-shadow:0 2px 11px #dd972b56}.unit{display:block;color:#f1dfc2;font-size:14px;font-weight:650}.figure{display:flex;align-items:center;justify-content:center;gap:8px;margin:10px auto 0}.metal{display:inline-flex;align-items:center;justify-content:center;width:43px;height:43px;flex:none;filter:drop-shadow(0 0 7px #b98544a6)}.metal svg{width:100%;height:100%}.value{font:800 clamp(34px,9.6vw,54px)/1.12 system-ui,sans-serif;letter-spacing:-.04em;color:#fffaf0;white-space:nowrap;text-shadow:0 2px 8px #000}
+    .updated{margin:1px 0 19px;color:#ffdb95;font-size:12px;line-height:1.45}.offline{display:none;margin:14px 0;padding:10px;color:#ffe3a6;background:#493719;border-radius:8px;font-size:12px}.offline.is-visible{display:block}
+    .notice{margin:14px 0 0}.gst{display:flex;align-items:center;justify-content:center;gap:10px;font:800 14px/1.4 system-ui,sans-serif;letter-spacing:.09em;color:#ffe2a4}.gst:before,.gst:after{content:"✦";display:block;flex:1;max-width:82px;border-top:1px solid #f2c26d;line-height:0;text-align:center;color:#f8df99}.notice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.notice-card{min-height:83px;padding:13px 9px;border:1px solid #e1ad62;border-radius:12px;background:#291904b5;box-shadow:inset 0 0 15px #e4a54422,0 0 9px #d9a74240;font-size:13px;font-weight:650;line-height:1.55;color:#fff1d4}.notice-card span{display:block;color:#f5d487;font-size:20px;line-height:1.05;margin-bottom:4px}
+    footer{margin-top:28px}.follow-label{color:#ecd4a9;font-size:12px}.socials{display:flex;gap:8px;margin-top:12px}.socials a{display:flex;justify-content:center;align-items:center;flex:1;min-height:44px;padding:0 5px;border:1px solid #b68644;border-radius:8px;color:#f9e4ba;background:#221608da;text-decoration:none;font:600 12px system-ui,sans-serif}.socials a:focus-visible,.socials a:hover{outline:2px solid #f0c06b;background:#382714}
+    @media(max-width:360px){.shell{padding-left:20px;padding-right:20px}.rate-title{font-size:22px}.value{font-size:32px}.metal{width:34px;height:34px}.socials a{font-size:11px}.notice-card{font-size:11px}}
+  </style>
+</head>
+<body>
+<main class="shell">
+  <header class="brand">
+    <div class="brand-top">SONAR KATTA &nbsp; | &nbsp; @sonarkatta</div>
+    <div class="mark"><img src="./icon-512.png" alt="सोनार कट्टा लोगो" width="65" height="65"></div>
+    <div class="brand-line" aria-hidden="true"></div>
+    <h1 class="heading">सोनार कट्टा - आजचे दर</h1>
+    <p class="date"><span id="date"></span><b aria-hidden="true">|</b><span id="region"></span></p>
+  </header>
+  <section class="rates" aria-label="सोने आणि चांदीचे दर">
+    <div class="rate"><span class="rate-title">सोने २४ कॅरेट</span><span class="unit">१० ग्रॅम</span><div class="figure"><span class="metal gold" aria-hidden="true"></span><span class="value" id="gold24"></span></div></div>
+    <div class="rate"><span class="rate-title">सोने २२ कॅरेट</span><span class="unit">१० ग्रॅम</span><div class="figure"><span class="metal gold" aria-hidden="true"></span><span class="value" id="gold22"></span></div></div>
+    <div class="rate"><span class="rate-title">सोने १८ कॅरेट</span><span class="unit">१० ग्रॅम</span><div class="figure"><span class="metal gold" aria-hidden="true"></span><span class="value" id="gold18"></span></div></div>
+    <div class="rate"><span class="rate-title">चांदी ९९९</span><span class="unit">१ किलो</span><div class="figure"><span class="metal silver" aria-hidden="true"></span><span class="value" id="silver999"></span></div></div>
+  </section>
+  <p class="updated"><span id="updated"></span></p>
+  <p class="offline" id="offline" role="status">ऑफलाइन आहात. दिसणारे दर शेवटचे जतन झालेले असू शकतात.</p>
+  <aside class="notice"><div class="gst">GST CHARGES EXTRA</div><div class="notice-grid"><div class="notice-card"><span aria-hidden="true">⟳</span>दर दुकानानुसार थोडे वर-खाली असू शकतात.</div><div class="notice-card"><span aria-hidden="true">▤</span>बिलिंगच्या वेळी लागू दर तपासा.</div></div></aside>
+  <footer><div class="follow-label">आमच्याशी जोडलेले राहा</div><nav class="socials" aria-label="आमची सोशल पेजेस"><a href="https://www.youtube.com/@sonarkatta" target="_blank" rel="noopener noreferrer">YouTube ↗</a><a href="https://www.instagram.com/sonarkatta/" target="_blank" rel="noopener noreferrer">Instagram ↗</a><a href="https://www.facebook.com/SonarKatta/" target="_blank" rel="noopener noreferrer">Facebook ↗</a></nav></footer>
+</main>
+<script>
+  (() => {
+    const icon = '<svg viewBox="0 0 54 44" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="g" x2=".8" y2="1"><stop stop-color="#fff7d2"/><stop offset=".5" stop-color="#d8a643"/><stop offset="1" stop-color="#79521c"/></linearGradient><linearGradient id="s" x2=".8" y2="1"><stop stop-color="#fff"/><stop offset=".5" stop-color="#b9c1cb"/><stop offset="1" stop-color="#555e70"/></linearGradient></defs><path d="M2 30 9 19h20l7 11-6 10H8zM19 17 26 5h20l7 12-6 10H25z" fill="url(#FILL)" stroke="#fff8db" stroke-opacity=".6" stroke-width="1.5"/><path d="M9 19 15 30m14-11-6 11m3-25 6 12m14-12-6 12M2 30h34M19 17h34" stroke="#6b4b23" stroke-opacity=".65"/></svg>';
+    document.querySelectorAll('.metal').forEach(el => { el.innerHTML = icon.replace('url(#FILL)',el.classList.contains('silver')?'url(#s)':'url(#g)'); });
+    const fallback = JSON.parse(document.getElementById('daily-rates').textContent);
+    const dateFormat = new Intl.DateTimeFormat('mr-IN',{timeZone:'Asia/Kolkata',day:'numeric',month:'long',year:'numeric'});
+    const timeFormat = new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:true});
+    const dayFormat = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'});
+    const today = () => dayFormat.format(new Date());
+    function display(rates, live) {
+      const timestamp = new Date(rates.updated);
+      const sourceDate = new Date(rates.date+'T12:00:00+05:30');
+      document.getElementById('date').textContent = dateFormat.format(sourceDate);
+      document.getElementById('region').textContent = fallback.region;
+      for (const key of ['gold24','gold22','gold18','silver999']) document.getElementById(key).textContent = rates[key];
+      const dated = dateFormat.format(sourceDate)+' '+timeFormat.format(timestamp)+' IST';
+      document.getElementById('updated').textContent = live ? 'आज तपासलेले: '+timeFormat.format(timestamp)+' IST' : 'शेवटचे पडताळलेले: '+dated+' (संग्रहित दर)';
+    }
+    display(fallback, false);
+    // No direct cross-origin fetch: Netlify's server-side function verifies the source's IST date.
+    if (navigator.onLine) fetch('./.netlify/functions/rates',{cache:'no-store'})
+      .then(async res => { if(!res.ok) throw Error('Unavailable'); return res.json(); })
+      .then(data => {
+        // Independent browser-side guard if the function or deployment ever changes.
+        const stamp = new Date(data.updated);
+        if (data.date !== today() || dayFormat.format(stamp) !== today() || stamp.getTime() > Date.now()+300000 ||
+            !['gold24','gold22','gold18','silver999'].every(k => /^₹[0-9,]+$/.test(data[k]))) return;
+        display(data, true);
+      }).catch(()=>{});
+    const offline = document.getElementById('offline');
+    function showConnection() { offline.classList.toggle('is-visible', !navigator.onLine); }
+    addEventListener('online', showConnection); addEventListener('offline', showConnection); showConnection();
+    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+  })();
+</script>
+</body>
+</html>
