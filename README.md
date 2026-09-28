@@ -12,7 +12,7 @@ You need a GitHub account and a Netlify account (sign in to Netlify with GitHub)
 4. Open the site on your phone. Android Chrome: menu > **Add to Home screen** or **Install app**. iPhone Safari: Share > **Add to Home Screen**. Installation options vary by device/browser.
 5. Check the timestamp beneath the four prices. "आज तपासलेले" means today's site timestamp passed both server and browser checks. "शेवटचे पडताळलेले" means the saved fallback is showing. The app never claims a stale fetch is today's rate.
 
-No domain purchase is required. Free-plan limits and UI wording can change. Do not promise that the external rate site will always be reachable. This app rechecks on page load, not in the background. For an update while the app is already open, reopen or reload it.
+No domain purchase is required. Free-plan limits and UI wording can change. Do not promise that the external rate site will always be reachable. While open, the app checks every 5 minutes and when it comes back into view or reconnects. It does not fetch in the background after the app is closed. If checks fail or return an old date, it keeps the last verified figures and their true timestamp visible.
 
 ## Manual verified fallback update
 
