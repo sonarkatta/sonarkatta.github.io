@@ -13,18 +13,7 @@
   <link rel="apple-touch-icon" href="./icon-512.png">
   <title>सोनार कट्टा - आजचे दर</title>
 
-  <!-- VERIFIED FALLBACK: These values were checked against the source on 28 Sep 2026, 20:25 IST. To update manually, edit date (YYYY-MM-DD), updated (ISO UTC), four prices, and region together, then redeploy. They display only when live data cannot be safely verified. -->
-  <script id="daily-rates" type="application/json">
-  {
-    "date": "2026-09-28",
-    "updated": "2026-09-28T14:55:00.000Z",
-    "gold24": "₹1,46,670",
-    "gold22": "₹1,34,448",
-    "gold18": "₹1,10,003",
-    "silver999": "₹2,25,660",
-    "region": "महाराष्ट्र"
-  }
-  </script>
+  <!-- HOLDING MODE: No rate figures until the requested reference source can be verified. -->
   <style>
     :root{color-scheme:dark;--gold:#f0bf68;--cream:#fff3df}
     *{box-sizing:border-box}html{background:#080604}body{margin:0;color:var(--cream);font-family:system-ui,"Noto Sans Devanagari",sans-serif;background:#080604;-webkit-font-smoothing:antialiased}
@@ -33,7 +22,7 @@
     .shell:after{content:"";position:absolute;pointer-events:none;inset:0;z-index:-1;background:radial-gradient(ellipse 70% 22% at 50% -6%,#dc9f3940,transparent 76%),radial-gradient(ellipse 60% 15% at 50% 100%,#c580342d,transparent 82%)}
     .brand{position:relative}.brand-top{font:700 13px/1.4 system-ui,sans-serif;letter-spacing:.04em;color:#fff2d4}.mark{margin:17px auto 13px;width:88px;height:88px;border-radius:50%;box-shadow:0 0 24px #d29d4c5a;background:#080604;display:grid;place-items:center;overflow:hidden}.mark img{width:100%;height:100%;object-fit:cover;border-radius:50%}.brand-line{display:none}.heading{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.date{margin:13px 0 0;color:#f9dfaf;font-size:18px;font-weight:700}.date b{font-weight:400;padding:0 5px}
     .rates{margin:29px 0 0}.rate{position:relative;padding:16px 0 29px;min-height:182px}.rate+.rate:before{content:"";position:absolute;top:0;left:17%;right:17%;height:1px;background:linear-gradient(90deg,transparent,#e9b858 13%,#f4d68a 50%,#e9b858 87%,transparent)}.rate+.rate:after{content:"";position:absolute;top:-4px;left:calc(50% - 4px);width:8px;height:8px;border-radius:50%;background:#f8cb76;box-shadow:0 0 10px #f4c568}.rate-title{display:block;color:var(--gold);font-size:27px;font-weight:800;line-height:1.4;text-shadow:0 2px 11px #dd972b56}.unit{display:block;color:#f1dfc2;font-size:14px;font-weight:650}.figure{position:relative;display:flex;align-items:center;justify-content:center;margin:15px auto 0}.metal{position:absolute;right:calc(100% - 44px);top:50%;transform:translateY(-50%);display:block;width:52px;height:48px;filter:drop-shadow(0 0 6px #b985446e)}.metal.gold{background:url("./gold-bars.webp") center/contain no-repeat}.metal.silver{background:url("./silver-bars.webp") center/contain no-repeat}.value{font:800 clamp(37px,10vw,56px)/1.12 system-ui,sans-serif;letter-spacing:-.04em;color:#fffaf0;white-space:nowrap;text-shadow:0 2px 8px #000}
-    .updated{margin:1px 0 19px;color:#ffdb95;font-size:12px;line-height:1.45}.offline{display:none;margin:14px 0;padding:10px;color:#ffe3a6;background:#493719;border-radius:8px;font-size:12px}.offline.is-visible{display:block}
+    .rate,.updated{display:none!important}.rates{margin:36px 0 0}.holding{padding:32px 21px;margin:0 auto 20px;max-width:360px;border:1px solid #c3934e;border-radius:14px;background:#170f08c9;box-shadow:0 0 24px #bd823b40}.holding h2{margin:0 0 12px;color:#f1c578;font-size:22px}.holding p{margin:0;color:#f8e7c7;font-size:15px;line-height:1.7}.holding small{display:block;margin-top:14px;color:#d2b781;line-height:1.5}.updated{margin:1px 0 19px;color:#ffdb95;font-size:12px;line-height:1.45}.offline{display:none;margin:14px 0;padding:10px;color:#ffe3a6;background:#493719;border-radius:8px;font-size:12px}.offline.is-visible{display:block}
     .notice{margin:14px 0 0}.gst{display:flex;align-items:center;justify-content:center;gap:10px;font:800 15px/1.4 system-ui,sans-serif;letter-spacing:.09em;color:#ffe2a4}.gst:before,.gst:after{content:"✦";display:block;flex:1;max-width:82px;border-top:1px solid #f2c26d;line-height:0;text-align:center;color:#f8df99}.notice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.notice-card{min-height:102px;padding:10px 7px;border:1px solid #e1ad62;border-radius:13px;background:linear-gradient(#2d1a065e,#160f08aa);box-shadow:inset 0 0 16px #e4a5442f,0 0 12px #d9a7424f;font-size:10px;font-weight:650;line-height:1.4;color:#fff1d4}.notice-card span{display:block;color:#f5d487;font-size:27px;line-height:1;margin-bottom:6px}.notice-card strong{display:block;font:700 11px/1.35 system-ui,sans-serif;letter-spacing:.015em;color:#fff3dc}.notice-card small{display:block;margin-top:5px;font-size:10px;color:#f1ddb8}
     footer{margin-top:28px}.follow-label{color:#ecd4a9;font-size:12px}.socials{display:flex;gap:8px;margin-top:12px}.socials a{display:flex;justify-content:center;align-items:center;flex:1;min-height:44px;padding:0 5px;border:1px solid #b68644;border-radius:8px;color:#f9e4ba;background:#221608da;text-decoration:none;font:600 12px system-ui,sans-serif}.socials a:focus-visible,.socials a:hover{outline:2px solid #f0c06b;background:#382714}
     @media(max-width:360px){.shell{padding-left:20px;padding-right:20px}.rate-title{font-size:22px}.value{font-size:32px}.metal{width:39px;height:39px;right:calc(100% - 35px)}.socials a{font-size:11px}.notice-card{font-size:11px}}
@@ -46,9 +35,10 @@
     <div class="mark"><img src="./logo-card.webp" alt="सोनार कट्टा लोगो" width="88" height="88"></div>
     <div class="brand-line" aria-hidden="true"></div>
     <h1 class="heading">सोनार कट्टा - आजचे दर</h1>
-    <p class="date"><span id="date"></span><b aria-hidden="true">|</b><span id="region"></span></p>
+    <p class="date">महाराष्ट्र</p>
   </header>
-  <section class="rates" aria-label="सोने आणि चांदीचे दर">
+  <section class="rates" aria-label="दर तात्पुरते उपलब्ध नाहीत">
+    <div class="holding" role="status"><h2>दर तात्पुरते उपलब्ध नाहीत</h2><p>पडताळलेले दर मिळाल्यावर इथे दाखवू. कृपया खरेदीपूर्वी दुकानात आजचे दर तपासा.</p><small>चुकीचे किंवा जुने दर दाखवण्यापेक्षा आम्ही थांबलो आहोत.</small></div>
     <div class="rate"><span class="rate-title">सोने २४ कॅरेट</span><span class="unit">१० ग्रॅम</span><div class="figure"><span class="metal gold" aria-hidden="true"></span><span class="value" id="gold24"></span></div></div>
     <div class="rate"><span class="rate-title">सोने २२ कॅरेट</span><span class="unit">१० ग्रॅम</span><div class="figure"><span class="metal gold" aria-hidden="true"></span><span class="value" id="gold22"></span></div></div>
     <div class="rate"><span class="rate-title">सोने १८ कॅरेट</span><span class="unit">१० ग्रॅम</span><div class="figure"><span class="metal gold" aria-hidden="true"></span><span class="value" id="gold18"></span></div></div>
@@ -61,57 +51,12 @@
 </main>
 <script>
   (() => {
-    const fallback = JSON.parse(document.getElementById('daily-rates').textContent);
-    const dateFormat = new Intl.DateTimeFormat('mr-IN',{timeZone:'Asia/Kolkata',day:'numeric',month:'long',year:'numeric'});
-    const timeFormat = new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:true});
-    const dayFormat = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'});
-    const today = () => dayFormat.format(new Date());
-    function display(rates, live) {
-      const timestamp = new Date(rates.updated);
-      const sourceDate = new Date(rates.date+'T12:00:00+05:30');
-      document.getElementById('date').textContent = dateFormat.format(sourceDate);
-      document.getElementById('region').textContent = fallback.region;
-      for (const key of ['gold24','gold22','gold18','silver999']) document.getElementById(key).textContent = rates[key];
-      const dated = dateFormat.format(sourceDate)+' '+timeFormat.format(timestamp)+' IST';
-      document.getElementById('updated').textContent = live ? 'आज तपासलेले: '+timeFormat.format(timestamp)+' IST' : 'शेवटचे पडताळलेले: '+dated+' (संग्रहित दर)';
-    }
-    let lastGood = fallback;
-    let lastGoodIsLive = false;
-    let requestInFlight = false;
-    display(fallback, false);
-    // Network-first safety: never label yesterday's verified data as today's.
-    // One request at a time. The source timestamp, not our polling clock, owns freshness.
-    async function refreshRates() {
-      if (requestInFlight || !navigator.onLine) return;
-      requestInFlight = true;
-      try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 12000);
-        let res;
-        try { res = await fetch('./.netlify/functions/rates', {cache:'no-store',signal:controller.signal}); }
-        finally { clearTimeout(timeout); }
-        if (!res.ok) return;
-        const data = await res.json();
-        const stamp = new Date(data.updated);
-        if (data.date !== today() || !Number.isFinite(stamp.getTime()) || dayFormat.format(stamp) !== today() ||
-            stamp.getTime() > Date.now()+300000 ||
-            !['gold24','gold22','gold18','silver999'].every(k => /^₹[0-9,]+$/.test(data[k]))) return;
-        if (lastGoodIsLive && lastGood.updated === data.updated && lastGood.date === data.date) return;
-        if (lastGoodIsLive && stamp.getTime() < new Date(lastGood.updated).getTime()) return;
-        lastGood = data;
-        lastGoodIsLive = true;
-        display(data, true);
-      } catch (_) { /* keep the last verified rate, already dated on screen */ }
-      finally { requestInFlight = false; }
-    }
-    refreshRates();
-    setInterval(refreshRates, 5 * 60 * 1000);
-    addEventListener('online', refreshRates);
-    addEventListener('visibilitychange', () => { if (!document.hidden) refreshRates(); });
+    // Do not auto-display the old feed. A vetted reference feed must replace it.
     const offline = document.getElementById('offline');
     function showConnection() { offline.classList.toggle('is-visible', !navigator.onLine); }
     addEventListener('online', showConnection); addEventListener('offline', showConnection); showConnection();
-    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+    if ('serviceWorker' in navigator && location.protocol.startsWith('http'))
+      addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
   })();
 </script>
 </body>
