@@ -54,6 +54,7 @@
   const shell=document.querySelector('.shell'), holding=document.querySelector('.holding'), updated=document.getElementById('updated');
   const fields={gold24_10g:'gold24',gold22_10g:'gold22',gold18_10g:'gold18',silver999_kg:'silver999'};
   const ist={timeZone:'Asia/Kolkata'};
+  let lastGood=null;
   function unavailable(){shell.classList.add('is-unavailable');document.getElementById('rate-date').textContent='';holding.setAttribute('role','status');}
   function render(data){
     if(!data || !Object.keys(fields).every(k=>Number.isInteger(data[k]) && data[k]>0))return unavailable();
@@ -65,9 +66,9 @@
     document.getElementById('rate-date').textContent=date;
     const exact=new Intl.DateTimeFormat('en-IN',{...ist,hour:'2-digit',minute:'2-digit',hour12:false}).format(t);
     updated.textContent=(age>7200000?'जुने दर - ':'अपडेट: ')+exact+' IST'+(age>7200000?' · '+Math.floor(age/3600000)+' तास जुने':'');
-    shell.classList.toggle('is-stale',age>7200000);shell.classList.remove('is-unavailable');
+    shell.classList.toggle('is-stale',age>7200000);shell.classList.remove('is-unavailable');lastGood=data;
   }
-  async function refresh(){try{const r=await fetch('./1-rates.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('rates unavailable');render(await r.json())}catch(_){unavailable()}}
+  async function refresh(){try{const r=await fetch('./1-rates.json?ts='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('rates unavailable');const data=await r.json();if(lastGood && new Date(data.quote_timestamp)<new Date(lastGood.quote_timestamp))throw Error('older snapshot');render(data)}catch(_){if(lastGood)render(lastGood);else unavailable()}}
   refresh();setInterval(refresh,60000);
   const offline=document.getElementById('offline');
   function connection(){offline.classList.toggle('is-visible',!navigator.onLine)}
