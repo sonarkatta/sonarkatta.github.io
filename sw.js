@@ -1,4 +1,4 @@
-const CACHE = 'sonar-katta-pages-20260929-3';
+const CACHE = 'sonar-katta-pages-20260929-4';
 const STATIC = ['./', './index.html', './1-card-template.png', './2-brand-original.png', './3-icon-original-512.png', './manifest.json', './icon-512.png', './4-crystal-clean-v2.webp', './logo-card.webp', './1-logo-approved.png', './gold-bars.webp', './silver-bars.webp', './1-footer-glow.webp', './2-arrow-ornament.png', './3-bill-ornament.png', './4-gst-star.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(STATIC)).then(() => self.skipWaiting()));
@@ -10,7 +10,7 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   if (event.request.mode === 'navigate') {
     event.respondWith(fetch(event.request).then(response => {
-      if (response.ok) { const copy = response.clone(); caches.open(CACHE).then(cache => cache.put('./index.html', './1-card-template.png', './2-brand-original.png', './3-icon-original-512.png', copy)); }
+      if (response.ok) { const copy = response.clone(); caches.open(CACHE).then(cache => cache.put('./index.html', copy)); }
       return response;
     }).catch(() => caches.match('./index.html')));
   } else if (new URL(event.request.url).origin === self.location.origin) {
