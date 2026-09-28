@@ -29,7 +29,7 @@ function parsePage(html, now = new Date()) {
     const cells = [...row[0].matchAll(/<td\b[^>]*>([\s\S]*?)<\/td>/gi)].map(x=>x[1].replace(/<[^>]*>/g,'').trim());
     const value = cells[column];
     if (!/^\d{1,3}(?:,\d{3})+$/.test(value) || Number(value.replace(/,/g,'')) < 1000) throw Error('Invalid price');
-    return '₹'+value;
+    return '₹'+Number(value.replace(/,/g,'')).toLocaleString('en-IN');
   }
   return {date:sourceDay, updated:updated.toISOString(), gold24:price('Gold 24 Karat',2),gold22:price('Gold 22 Karat',2),gold18:price('Gold 18 Karat',2),silver999:price('Silver 999 Fine',4)};
 }
