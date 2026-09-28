@@ -1,156 +1,23 @@
-<!doctype html>
-<html lang="mr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#100e0b">
-  <meta name="description" content="सोनार कट्टा: महाराष्ट्रातील सोने आणि चांदीचे दर, मराठीत.">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="सोनार कट्टा">
-  <link rel="manifest" href="./manifest.json">
-  <link rel="icon" type="image/png" href="./icon-512.png">
-  <link rel="apple-touch-icon" href="./icon-512.png">
-  <title>सोनार कट्टा - आजचे दर</title>
-
-  <style>
-    :root{color-scheme:dark;--gold:#f0bf68;--cream:#fff3df}
-    *{box-sizing:border-box}html{background:#080604}body{margin:0;color:var(--cream);font-family:system-ui,"Noto Sans Devanagari",sans-serif;background:#080604;-webkit-font-smoothing:antialiased}
-    .shell{position:relative;isolation:isolate;max-width:600px;min-height:100vh;margin:auto;padding:34px 28px max(40px,env(safe-area-inset-bottom));text-align:center;background:linear-gradient(90deg,#09060317 0%,#09060308 30%,#09060308 70%,#09060317 100%),url('./4-crystal-clean-v2.webp') center / 100% 100% no-repeat,radial-gradient(ellipse at top,#513414,#080604 55%);overflow:hidden}
-    .shell:before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(circle,#ffd883 1px,transparent 2px),radial-gradient(circle,#fbd487 2px,transparent 4px),radial-gradient(circle,#c2822b 1px,transparent 3px);background-size:79px 103px,153px 181px,113px 151px;background-position:15px 13px,44px 51px,73px 24px;opacity:.35;mask-image:linear-gradient(#000,transparent 85%)}
-    .shell:after{content:"";position:absolute;pointer-events:none;inset:0;z-index:-1;background:radial-gradient(ellipse 70% 22% at 50% -6%,#dc9f3940,transparent 76%),radial-gradient(ellipse 60% 15% at 50% 100%,#c580342d,transparent 82%)}
-    .brand{position:relative}.brand-top{font:700 13px/1.4 system-ui,sans-serif;letter-spacing:.04em;color:#fff2d4}.mark{margin:17px auto 13px;width:88px;height:88px;border-radius:50%;box-shadow:0 0 24px #d29d4c5a;background:#080604;display:grid;place-items:center;overflow:hidden}.mark img{width:100%;height:100%;object-fit:cover;border-radius:50%}.brand-line{display:none}.heading{display:block;margin:10px 0 0;color:#f5c67d;font-size:24px;font-weight:750;line-height:1.4}.date{margin:13px 0 0;color:#f9dfaf;font-size:18px;font-weight:700}.date b{font-weight:400;padding:0 5px}
-    .rates{margin:29px 0 0}.rate{position:relative;padding:16px 0 29px;min-height:182px}.rate+.rate:before{content:"";position:absolute;top:0;left:17%;right:17%;height:1px;background:linear-gradient(90deg,transparent,#e9b858 13%,#f4d68a 50%,#e9b858 87%,transparent)}.rate+.rate:after{content:"";position:absolute;top:-4px;left:calc(50% - 4px);width:8px;height:8px;border-radius:50%;background:#f8cb76;box-shadow:0 0 10px #f4c568}.rate-title{display:block;color:var(--gold);font-size:27px;font-weight:800;line-height:1.4;text-shadow:0 2px 11px #dd972b56}.unit{display:block;color:#f1dfc2;font-size:14px;font-weight:650}.figure{position:relative;display:flex;align-items:center;justify-content:flex-start;padding-left:26%;margin:15px auto 0}.metal{position:absolute;left:3%;top:50%;transform:translateY(-50%);display:block;width:52px;height:48px;filter:drop-shadow(0 0 6px #b985446e)}.metal.gold{background:url("./gold-bars.webp") center/contain no-repeat}.metal.silver{background:url("./silver-bars.webp") center/contain no-repeat}.value{font:800 clamp(37px,10vw,56px)/1.12 system-ui,sans-serif;letter-spacing:-.04em;color:#fffaf0;white-space:nowrap;text-shadow:0 2px 8px #000}
-    .rates{margin:25px 0 0}.shell:not(.is-unavailable) .heading{display:none}.shell.is-unavailable .rate,.shell.is-unavailable .updated{display:none}.shell.is-unavailable .holding{display:block}.shell.is-unavailable .rates{margin:36px 0 0}.holding{display:none;padding:32px 21px;margin:0 auto 20px;max-width:360px;border:1px solid #c3934e;border-radius:14px;background:#170f08c9;box-shadow:0 0 24px #bd823b40}.holding h2{margin:0 0 12px;color:#f1c578;font-size:22px}.holding p{margin:0;color:#f8e7c7;font-size:15px;line-height:1.7}.holding small{display:block;margin-top:14px;color:#d2b781;line-height:1.5}.updated{margin:1px 0 19px;color:#ffdb95;font-size:12px;line-height:1.45}.offline{display:none;margin:14px 0;padding:10px;color:#ffe3a6;background:#493719;border-radius:8px;font-size:12px}.offline.is-visible{display:block}
-    .notice{margin:14px 0 0}.is-stale .updated{color:#ffd18a;font-weight:700}.gst{display:flex;align-items:center;justify-content:center;gap:10px;font:800 15px/1.4 system-ui,sans-serif;letter-spacing:.09em;color:#ffe2a4}.gst:before,.gst:after{content:"";display:block;flex:1;max-width:88px;height:44px;background:url("./4-gst-star.png") center/44px 44px no-repeat;position:relative}.gst:before{background-position:center}.gst:after{background-position:center}.gst:before,.gst:after{border:0}.notice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.notice-card{min-height:105px;padding:10px 7px;border:1px solid #e1ad62;border-radius:13px;background:linear-gradient(#160e0675,#0c0804a3),url("./1-footer-glow.webp") center/cover;box-shadow:inset 0 0 16px #e4a5442f,0 0 12px #d9a7424f;font-size:13px;font-weight:650;line-height:1.55;color:#fff1d4}.notice-card span{display:block;width:48px;height:48px;margin:0 auto 4px;background-position:center;background-size:contain;background-repeat:no-repeat;font-size:0}.notice-card:first-child span{background-image:url("./2-arrow-ornament.png")}.notice-card:last-child span{background-image:url("./3-bill-ornament.png")}.notice-card strong{display:block;font:700 10px/1.35 system-ui,sans-serif;letter-spacing:.015em;color:#fff3dc}.notice-card small{display:block;margin-top:5px;font-size:10px;color:#f1ddb8}
-    .brand-top{background:linear-gradient(90deg,transparent,#9b67212b,transparent)}footer{margin-top:28px}.follow-label{color:#ecd4a9;font-size:12px}.socials{display:flex;gap:8px;margin-top:12px}.socials a{display:flex;justify-content:center;align-items:center;flex:1;min-height:44px;padding:0 5px;border:1px solid #b68644;border-radius:8px;color:#f9e4ba;background:#221608da;text-decoration:none;font:600 12px system-ui,sans-serif}.socials a:focus-visible,.socials a:hover{outline:2px solid #f0c06b;background:#382714}
-    .socials a{gap:6px;border:1px solid #d8a65d;background:linear-gradient(155deg,#5a3919 0%,#231509 49%,#120a05 100%);box-shadow:inset 0 1px 0 #fbd6959c,inset 0 -1px 0 #9f6829,0 0 12px #db9d3c38;color:#ffebc2;text-shadow:0 1px 3px #000}.socials svg{width:17px;height:17px;flex:none;fill:none;stroke:#ffd18b;stroke-width:1.7;stroke-linejoin:round;stroke-linecap:round;filter:drop-shadow(0 0 3px #e9a3408c)}.socials svg .solid{fill:#ffd18b;stroke:none}.follow-label{text-shadow:0 0 10px #e1a24574}
-    .notice-card{border-color:#efc37b;background:linear-gradient(180deg,#170b03a8,#09050174 68%,#23110580),url('./1-footer-glow.webp') center/cover;box-shadow:inset 0 0 19px #ffce7657,inset 0 1px 0 #ffe1a17d,0 0 15px #dba14e69;text-shadow:0 1px 4px #000,0 0 8px #f5b66157}.notice-card span{filter:drop-shadow(0 0 5px #f7c268a8)}
-    html,body{max-width:100%;overflow-x:hidden}.shell{width:100%;max-width:600px}.figure{width:100%;max-width:100%;justify-content:center;padding:0 0 0 30px}.metal{left:0}.value{max-width:100%;font-size:clamp(27px,8.2vw,48px);letter-spacing:-.055em;font-variant-numeric:tabular-nums}.rate{overflow:hidden}
-    @media(max-width:380px){.shell{padding-left:16px;padding-right:16px}.figure{padding-left:27px}.value{font-size:clamp(25px,8vw,34px)}.rate-title{font-size:clamp(15px,5vw,19px)}.metal{width:28px;height:27px}.socials a{gap:3px;padding:0 1px;font-size:clamp(7px,2.35vw,9px)}.socials svg{width:12px;height:12px}}
-    @media(max-width:430px) and (max-height:950px){
-      .shell{padding-top:14px;padding-bottom:10px;min-height:100svh}.brand-top{font-size:11px}.mark{width:62px;height:62px;margin:5px auto}.date{font-size:14px;margin:4px 0 0}.rates{margin:8px 0 0}.rate{min-height:clamp(76px,calc((100svh - 340px)/4),130px);padding:5px 0 10px}.rate-title{font-size:20px;line-height:1.25}.unit{font-size:11px}.figure{margin:2px auto 0;padding-left:26%;min-height:38px}.metal{width:38px;height:35px}.value{font-size:clamp(30px,8.5vw,38px)}.updated{margin:2px 0 3px;font-size:10px}.notice{margin:2px 0 0}.gst{font-size:12px;gap:4px}.gst:before,.gst:after{height:27px;background-size:27px 27px}.notice-grid{margin-top:5px;gap:7px}.notice-card{min-height:72px;padding:3px}.notice-card span{width:35px;height:35px;margin-bottom:0}.notice-card strong{font-size:8px}footer{margin-top:6px}.follow-label{font-size:10px}.socials{margin-top:3px;gap:5px}.socials a{min-height:30px;font-size:9px}.socials svg{width:15px;height:15px}.shell.is-unavailable .holding{padding:22px 16px}
-    }
-    @media(max-width:430px) and (max-height:700px){.rate{min-height:81px;padding:4px 0 8px}.rate-title{font-size:17px}.figure{min-height:30px}.metal{width:31px;height:29px}.value{font-size:29px}.mark{width:52px;height:52px}.notice-card{min-height:64px}.notice-card span{width:29px;height:29px}.gst{font-size:10px}.gst:before,.gst:after{height:23px;background-size:23px 23px}.socials a{min-height:25px}}
-    @media(max-width:430px) and (max-height:600px){.shell{padding-top:5px;padding-bottom:4px}.mark{width:38px;height:38px;margin:1px auto}.date{font-size:11px;margin:2px 0 0}.rates{margin:2px 0 0}.rate{min-height:clamp(47px,calc((100svh - 250px)/4),76px);padding:1px 0 3px}.rate-title{font-size:clamp(12px,3.7vw,17px);line-height:1.05}.unit{font-size:8px}.figure{min-height:24px;margin:0 auto}.metal{width:24px;height:22px}.value{font-size:clamp(21px,6vw,28px)}.updated{font-size:8px;margin:1px 0}.notice{margin:0}.gst{font-size:9px}.gst:before,.gst:after{height:19px;background-size:19px 19px}.notice-grid{margin-top:2px}.notice-card{min-height:46px;padding:1px}.notice-card span{width:21px;height:21px}.notice-card strong{font-size:7px;line-height:1.15}footer{margin-top:2px}.follow-label{font-size:9px}.socials{margin-top:1px}.socials a{min-height:22px;font-size:8px}.socials svg{width:12px;height:12px}}
-    @media(max-width:360px){.shell{padding-left:20px;padding-right:20px}.rate-title{font-size:22px}.value{font-size:32px}.metal{width:39px;height:39px;right:calc(100% - 35px)}.socials a{font-size:8px}.notice-card{font-size:11px}}
-    @media(max-width:430px) and (min-height:701px){.mark{width:76px;height:76px;margin:2px auto 4px}.rates{margin:4px 0 0}.rate{min-height:clamp(74px,calc((100svh - 350px)/4),124px)}}
-    @media(max-width:430px) and (max-height:700px) and (min-height:601px){.mark{width:63px;height:63px;margin:1px auto 3px}.rates{margin:3px 0 0}}
-    .shell{background-image:linear-gradient(90deg,#09060308 0%,#09060300 30%,#09060300 70%,#09060308 100%),url('./4-crystal-clean-v2.webp') center/100% 100% no-repeat,radial-gradient(ellipse at 50% 0%,#74501f,#080604 58%)}.shell:before{opacity:.45}
-    @media(max-width:430px){.notice-grid{margin-top:3px}.metal{width:clamp(35px,11.5vw,49px);height:clamp(32px,10.6vw,45px);left:0;filter:drop-shadow(0 0 7px #efbe6a8a)}.figure{padding-left:clamp(29px,8vw,37px)}}
-    @media(max-width:430px) and (max-height:700px){.notice-grid{margin-top:2px}.metal{width:clamp(30px,10vw,40px);height:clamp(29px,9vw,37px)}}
-    @media(max-width:430px) and (max-height:600px){.metal{width:clamp(27px,9vw,34px);height:clamp(25px,8vw,31px)}.notice-grid{margin-top:1px}}
-    @media(max-width:430px){.figure{padding-left:clamp(22px,6vw,30px);justify-content:center}.value{font-size:clamp(24px,8vw,37px);max-width:calc(100% - 23px)}}
-    @media(max-width:360px){.value{font-size:clamp(23px,7.9vw,29px)}.figure{padding-left:27px}.metal{width:30px;height:28px}}
-    @media(max-width:430px){.metal{width:clamp(39px,12vw,49px);height:clamp(36px,11vw,45px)}.figure{padding-left:clamp(26px,7vw,32px)}}
-    @media(max-width:430px) and (max-height:700px){.notice-grid{margin-top:2px}.metal{width:clamp(35px,10.5vw,41px);height:clamp(32px,9.8vw,38px)}}
-    @media(max-width:430px) and (max-height:600px){.metal{width:31px;height:29px}}
-    @media(max-width:430px){.mark{width:96px;height:96px;margin:5px auto 3px}.date{margin-top:1px}}
-    @media(max-width:430px) and (max-height:700px){.mark{width:76px;height:76px;margin:1px auto 2px}.rates{margin-top:1px}}
-    @media(max-width:430px) and (max-height:600px){.mark{width:55px;height:55px;margin:0 auto 1px}}
-    /* Live HTML rate layout with a single full-page crystal backdrop. */
-    :root{--gold:#f2bc64;--cream:#fff8e8}
-    .rate-title{color:#f2bd68;text-shadow:0 1px 7px #d995316e;font-weight:800;letter-spacing:.005em}
-    .value{color:#fff9e9;font-weight:850;letter-spacing:-.042em;text-shadow:0 1px 3px #000b}
-    .rate+.rate:before{left:19%;right:19%;height:2px;background:linear-gradient(90deg,transparent 0%,#efbd6a 12%,#efbd6a 88%,transparent 100%)}
-    .rate+.rate:after{width:7px;height:7px;top:-3px;left:calc(50% - 3.5px);border-radius:1px;transform:rotate(45deg);background:#ffdc8c;box-shadow:0 0 3px #f3bd69}
-    .shell{background-image:radial-gradient(ellipse 54% 23% at 49% -3%,#b886362d,transparent 90%),linear-gradient(90deg,#4a270514 0%,transparent 26%,transparent 74%,#4a270514 100%),url('./4-crystal-clean-v2.webp'),radial-gradient(ellipse at 50% 0%,#74501f,#080604 58%);background-position:center;background-size:100% 100%;background-repeat:no-repeat}
-    .shell:before{opacity:.64;background-image:radial-gradient(circle,#ffeab1 1px,transparent 2px),radial-gradient(circle,#fbd487 2px,transparent 4px),radial-gradient(circle,#d99c45 1px,transparent 3px)}
-    .notice-grid{margin-top:7px;gap:8px;aspect-ratio:auto;background:none;filter:none}
-    .notice-card{position:relative;display:flex;flex-direction:column;justify-content:center;min-height:80px;padding:4px 3px;border:1px solid #f4c27b;border-radius:10px;background:linear-gradient(110deg,#41210850,#20100448 42%,#381b0955),url('./1-footer-glow.webp') center/cover;box-shadow:inset 0 0 18px #f6c87665,inset 0 1px #ffde967d,0 0 12px #e1a34f74;overflow:hidden}
-    .notice-card .skyline{position:absolute;inset:0 0 auto;width:100%;height:48%;opacity:.5;fill:#311a0d;stroke:#df9f5a;stroke-width:.55;filter:drop-shadow(0 1px 2px #0c0804);pointer-events:none}
-    .notice-card span,.notice-card strong{position:relative;z-index:1;opacity:1}.notice-card span{width:31px;height:31px;margin:0 auto 1px;filter:drop-shadow(0 0 5px #ffc773c7)}.notice-card strong{font-size:clamp(6px,1.8vw,9px);line-height:1.3;color:#fff4dc;text-shadow:0 1px 3px #000,0 0 5px #f5ba76a1}
-    @media(max-width:430px) and (max-height:700px){.notice-grid{gap:6px;margin-top:4px}.notice-card{min-height:66px;padding:3px 2px}.notice-card span{width:24px;height:24px;margin-bottom:1px}}
-    @media(max-width:430px) and (max-height:600px){.notice-card{min-height:43px}.notice-card span{width:17px;height:17px}.notice-card strong{font-size:6px}.notice-grid{margin-top:2px}}
-    /* The installed iOS web app uses the full device viewport, including the status
-       bar. Keep the artwork edge-to-edge while fitting all content inside safe areas. */
-    html,body{height:100%;overflow:hidden}
-    .shell{height:100vh;height:100dvh;min-height:0;display:flex;align-items:center;justify-content:center;
-      padding-top:max(8px,env(safe-area-inset-top));
-      padding-bottom:max(8px,env(safe-area-inset-bottom));overflow:hidden}
-    .content-wrap{width:100%;flex:none;transform-origin:center center}
-  </style>
-</head>
-<body>
-<main class="shell">
-<div class="content-wrap">
-  <header class="brand">
-    
-    <div class="mark"><img src="./1-logo-approved.png" alt="सोनार कट्टा लोगो" width="88" height="88"></div>
-    <div class="brand-line" aria-hidden="true"></div>
-    <p class="date"><span id="rate-date"></span><b aria-hidden="true">|</b> महाराष्ट्र</p>
-    <h1 class="heading">सोनार कट्टा - आजचे दर</h1>
-  </header>
-  <section class="rates" aria-label="सोने आणि चांदीचे दर">
-    <div class="holding" role="status"><h2>दर तात्पुरते उपलब्ध नाहीत</h2><p>पडताळलेले दर मिळाल्यावर इथे दाखवू. कृपया खरेदीपूर्वी दुकानात आजचे दर तपासा.</p><small>चुकीचे किंवा जुने दर दाखवण्यापेक्षा आम्ही थांबलो आहोत.</small></div>
-    <div class="rate"><span class="rate-title">सोने २४ कॅरेट</span><span class="unit">१० ग्रॅम</span><div class="figure"><span class="metal gold" aria-hidden="true"></span><span class="value" id="gold24"></span></div></div>
-    <div class="rate"><span class="rate-title">सोने २२ कॅरेट</span><span class="unit">१० ग्रॅम</span><div class="figure"><span class="metal gold" aria-hidden="true"></span><span class="value" id="gold22"></span></div></div>
-    <div class="rate"><span class="rate-title">सोने १८ कॅरेट</span><span class="unit">१० ग्रॅम</span><div class="figure"><span class="metal gold" aria-hidden="true"></span><span class="value" id="gold18"></span></div></div>
-    <div class="rate"><span class="rate-title">चांदी ९९९</span><span class="unit">१ किलो</span><div class="figure"><span class="metal silver" aria-hidden="true"></span><span class="value" id="silver999"></span></div></div>
-  </section>
-  <p class="updated" id="updated"></p>
-  <p class="offline" id="offline" role="status">ऑफलाइन आहात. दिसणारे दर शेवटचे जतन झालेले असू शकतात.</p>
-  <aside class="notice"><div class="gst">GST CHARGES EXTRA</div><div class="notice-grid"><div class="notice-card"><svg class="skyline" viewBox="0 0 160 42" preserveAspectRatio="none" aria-hidden="true"><path d="M0 35h11V23h5v-8h4v8h5v12h5V21h5v-7h5v7h4v14h6V18h5V9h4v9h6v17h7V24h5v-9h6v9h4v11h6V19h4V6h3v13h5v16h5V23h5v-8h5v8h4v12h6V20h6v-9h4v9h5v15h5V25h5v-6h5v6h5v10h9v7H0z"/></svg><span aria-hidden="true">⟳</span><strong>GOLD RATES<br>KEEP ON CHANGING</strong></div><div class="notice-card"><svg class="skyline" viewBox="0 0 160 42" preserveAspectRatio="none" aria-hidden="true"><path d="M0 35h11V23h5v-8h4v8h5v12h5V21h5v-7h5v7h4v14h6V18h5V9h4v9h6v17h7V24h5v-9h6v9h4v11h6V19h4V6h3v13h5v16h5V23h5v-8h5v8h4v12h6V20h6v-9h4v9h5v15h5V25h5v-6h5v6h5v10h9v7H0z"/></svg><span aria-hidden="true">▤</span><strong>LIVE RATE APPLICABLE<br>AT TIME OF BILLING</strong></div></div></aside>
-  <footer><div class="follow-label">आम्हाला फॉलो करा</div><nav class="socials" aria-label="आमची सोशल पेजेस">
-    <a href="https://www.youtube.com/@sonarkatta" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="m10 8 6 4-6 4z" class="solid"/></svg><span>YouTube</span></a>
-    <a href="https://www.instagram.com/sonarkatta/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.7" r=".9" class="solid"/></svg><span>Instagram</span></a>
-    <a href="https://www.facebook.com/SonarKatta/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path class="solid" d="M13.9 21v-8h2.7l.4-3.1h-3.1V8c0-.9.3-1.3 1.5-1.3H17V4a22 22 0 0 0-2.4-.1c-2.4 0-4 1.5-4 4.1v1.9H8V13h2.6v8z"/></svg><span>Facebook</span></a>
-  </nav></footer>
-</div>
-</main>
-<script>
-(() => {
-  const shell=document.querySelector('.shell'), content=document.querySelector('.content-wrap'), holding=document.querySelector('.holding'), updated=document.getElementById('updated');
-  const fields={gold24_10g:'gold24',gold22_10g:'gold22',gold18_10g:'gold18',silver999_kg:'silver999'};
-  const ist={timeZone:'Asia/Kolkata'};
-  let lastGood=null;
-  function fit(){
-    content.style.transform='none';
-    const cs=getComputedStyle(shell);
-    const available=shell.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom);
-    const natural=content.getBoundingClientRect().height;
-    const scale=Math.min(1,available/natural);
-    content.style.transform=`scale(${scale})`;
-  }
-  function unavailable(){shell.classList.add('is-unavailable');document.getElementById('rate-date').textContent='';holding.setAttribute('role','status');requestAnimationFrame(fit);}
-  function valid(data){
-    if(!data || !Object.keys(fields).every(k=>Number.isInteger(data[k]) && data[k]>0))return false;
-    const t=new Date(data.quote_timestamp),age=Date.now()-t;
-    return Number.isFinite(t.valueOf()) && age>=-300000 && age<=21600000 &&
-      Math.abs(data.gold22_10g/data.gold24_10g-.916)<=.004 &&
-      Math.abs(data.gold18_10g/data.gold24_10g-.75)<=.004;
-  }
-  function render(data){
-    if(!valid(data))return unavailable();
-    const t=new Date(data.quote_timestamp),age=Date.now()-t;
-    for(const [key,id] of Object.entries(fields))document.getElementById(id).textContent='₹'+new Intl.NumberFormat('en-IN').format(data[key]);
-    const parts=new Intl.DateTimeFormat('mr-IN-u-nu-deva',{...ist,day:'numeric',month:'long',year:'numeric'}).formatToParts(t);
-    const date=['day','month','year'].map(type=>parts.find(part=>part.type===type)?.value||'').join(' ');
-    document.getElementById('rate-date').textContent=date;
-    const exact=new Intl.DateTimeFormat('en-IN',{...ist,hour:'2-digit',minute:'2-digit',hour12:false}).format(t);
-    updated.textContent=(age>7200000?'जुने दर - ':'अपडेट: ')+exact+' IST'+(age>7200000?' · '+Math.floor(age/3600000)+' तास जुने':'');
-    shell.classList.toggle('is-stale',age>7200000);shell.classList.remove('is-unavailable');lastGood=data;requestAnimationFrame(fit);
-  }
-  async function refresh(){
-    const urls=['https://raw.githubusercontent.com/sonarkatta/sonarkatta.github.io/main/1-rates.json','./1-rates.json'];
-    let freshest=valid(lastGood)?lastGood:null;
-    for(const url of urls){
-      try{
-        const r=await fetch(url+'?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(6500)});
-        if(!r.ok)continue;
-        const candidate=await r.json();
-        if(valid(candidate) && (!freshest || new Date(candidate.quote_timestamp)>new Date(freshest.quote_timestamp)))freshest=candidate;
-      }catch(_){}
-    }
-    if(freshest)render(freshest);else unavailable();
-  }
-  addEventListener('resize',fit);document.fonts.ready.then(fit);requestAnimationFrame(fit);
-  refresh();setInterval(refresh,60000);
-  const offline=document.getElementById('offline');
-  function connection(){offline.classList.toggle('is-visible',!navigator.onLine)}
-  addEventListener('online',connection);addEventListener('offline',connection);connection();
-  if('serviceWorker' in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-})();
-</script>
-</body>
-</html>
+<!doctype html><html lang="mr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#100e0b"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="सोनार कट्टा"><link rel="manifest" href="./manifest.json"><link rel="icon" href="./3-icon-original-512.png"><link rel="apple-touch-icon" href="./3-icon-original-512.png"><title>सोनार कट्टा - आजचे दर</title><style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#100e0b}body{font-family:system-ui,'Noto Sans Devanagari',sans-serif}main{position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;background:#100e0b}canvas{display:block;width:100%;height:100%;object-fit:fill}nav{position:absolute;left:9.6%;right:9.6%;top:91.2%;height:3.4%;display:flex;gap:1.2%;}nav a{flex:1;display:block;text-indent:-9999px;overflow:hidden;border-radius:12px}nav a:focus-visible{outline:3px solid #fff;outline-offset:2px}.sr-only{position:absolute;left:-9999px}
+</style></head><body><main><canvas id="card" width="941" height="1672" role="img" aria-label="सोनार कट्टा: सोने व चांदीचे दर"></canvas><nav aria-label="आम्हाला फॉलो करा"><a href="https://www.youtube.com/@sonarkatta" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YouTube</a><a href="https://www.instagram.com/sonarkatta/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a><a href="https://www.facebook.com/SonarKatta/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a></nav><div class="sr-only" id="description" role="status"></div></main><script>
+(()=>{
+const c=document.getElementById('card'),ctx=c.getContext('2d'),status=document.getElementById('description');
+const bg=new Image();bg.src='./1-card-template.png';const logo=new Image();logo.src='./2-brand-original.png';
+const fields=['gold24_10g','gold22_10g','gold18_10g','silver999_kg'];const titles=['सोने २४ कॅरेट','सोने २२ कॅरेट','सोने १८ कॅरेट','चांदी ९९९'];
+const W=941,H=1672,center=470;
+function valid(d){if(!d||!fields.every(k=>Number.isInteger(d[k])&&d[k]>0))return false;const t=new Date(d.quote_timestamp),age=Date.now()-t;return Number.isFinite(t.valueOf())&&age>=-300000&&age<=21600000&&Math.abs(d.gold22_10g/d.gold24_10g-.916)<=.004&&Math.abs(d.gold18_10g/d.gold24_10g-.75)<=.004}
+function line(text,x,y,size,color,weight=700,latin=false){ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=color;ctx.shadowColor='#0009';ctx.shadowBlur=5;ctx.font=`${weight} ${size}px ${latin?'system-ui':'"Noto Sans Devanagari",system-ui'}`;ctx.fillText(text,x,y);ctx.restore()}
+function draw(data){if(!bg.complete||!bg.naturalWidth)return;ctx.clearRect(0,0,W,H);ctx.drawImage(bg,0,0,W,H);
+// Exact owner logo is drawn as a separate asset so replacement does not redraw the card.
+if(logo.complete&&logo.naturalWidth){ctx.save();ctx.beginPath();ctx.arc(470,143,100,0,Math.PI*2);ctx.clip();ctx.drawImage(logo,370,43,200,200);ctx.restore()}
+if(!valid(data)){ctx.fillStyle='#130c08e8';ctx.fillRect(277,470,465,560);line('दर तात्पुरते उपलब्ध नाहीत',center,685,35,'#f2bc64');line('कृपया नंतर पुन्हा तपासा',center,765,28,'#fff3df');status.textContent='पडताळलेले दर सध्या उपलब्ध नाहीत';return}
+const time=new Date(data.quote_timestamp),dateparts=new Intl.DateTimeFormat('mr-IN-u-nu-deva',{timeZone:'Asia/Kolkata',day:'numeric',month:'long',year:'numeric'}).formatToParts(time);const date=['day','month','year'].map(k=>dateparts.find(p=>p.type===k)?.value||'').join(' ');
+line(date+'  |  महाराष्ट्र',center,269,32,'#f8e4bf',750);
+const ys=[359,610,853,1089],unitYs=[417,668,911,1147],valueYs=[478,729,972,1208];
+for(let i=0;i<4;i++){line(titles[i],center,ys[i],43,'#f2bd68',800);line(i===3?'१ किलो':'१० ग्रॅम',center,unitYs[i],25,'#fff7e7',650);line('₹'+new Intl.NumberFormat('en-IN').format(data[fields[i]]),525,valueYs[i],62,'#fffaf0',850,true)}
+const tt=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).format(time);
+line('अपडेट: '+tt+' IST',center,1268,23,'#fff0cc',650);status.textContent=`${date}: ${titles.map((t,i)=>t+' '+data[fields[i]]).join(', ')}. अपडेट ${tt} IST.`}
+let best=null;async function refresh(){let candidate=null;for(const url of ['https://raw.githubusercontent.com/sonarkatta/sonarkatta.github.io/main/1-rates.json','./1-rates.json']){try{const r=await fetch(url+'?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(6500)});if(r.ok){const d=await r.json();if(valid(d)&&(!candidate||new Date(d.quote_timestamp)>new Date(candidate.quote_timestamp)))candidate=d}}catch(_){}}best=candidate;draw(best)}
+Promise.all([bg.decode(),logo.decode().catch(()=>{}),document.fonts.ready]).then(()=>{draw(null);refresh()});setInterval(refresh,60000);addEventListener('online',refresh);if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+})();</script></body></html>
