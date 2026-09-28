@@ -1,5 +1,5 @@
-const CACHE = 'sonar-katta-v6';
-const STATIC = ['./', './index.html', './manifest.json', './icon-512.png', './crystal-frame.webp', './logo-card.webp', './gold-bars.webp', './silver-bars.webp'];
+const CACHE = 'sonar-katta-design-20260928-2';
+const STATIC = ['./', './index.html', './manifest.json', './icon-512.png', './crystal-frame.webp', './logo-card.webp', './1-logo-approved.png', './gold-bars.webp', './silver-bars.webp'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(STATIC)).then(() => self.skipWaiting()));
 });
