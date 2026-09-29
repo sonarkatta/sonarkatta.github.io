@@ -1,4 +1,4 @@
-const CACHE = 'sonar-katta-pages-20260929-12';
+const CACHE = 'sonar-katta-pages-20260929-guide-en-14';
 const STATIC = ['./', './index.html', './1-card-template.png', './2-brand-original.png', './3-icon-original-512.png', './manifest.json', './icon-512.png', './4-crystal-clean-v2.webp', './logo-card.webp', './1-logo-approved.png', './gold-bars.webp', './silver-bars.webp', './1-footer-glow.webp', './2-arrow-ornament.png', './3-bill-ornament.png', './4-gst-star.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(STATIC)).then(() => self.skipWaiting()));
@@ -9,7 +9,7 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') return;
   // Live bullion rates are never served from the offline/static cache.
-  if (new URL(event.request.url).pathname.endsWith('/1-rates.json')) {
+  if (new URL(event.request.url).pathname.endsWith('/1-rates.json') || new URL(event.request.url).pathname.endsWith('/2-news.json')) {
     event.respondWith(fetch(event.request, {cache: 'no-store'}));
     return;
   }
