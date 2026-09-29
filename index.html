@@ -83,18 +83,25 @@ status.textContent=`${date}: ${titles.map((t,i)=>t+' '+data[fields[i]]).join(', 
 function frame(now){if(now-lastDraw>=33){lastDraw=now;draw(best,now);if(glowStarted&&now-glowStarted>=850){changed.clear();previous=null;glowStarted=0;draw(best,now)}}rafId=requestAnimationFrame(frame)}
 function startLoop(){if(motionOK){if(!rafId)rafId=requestAnimationFrame(frame)}else if(!clockTimer)clockTimer=setInterval(()=>draw(best,performance.now()),1000)}
 function stopLoop(){cancelAnimationFrame(rafId);rafId=0;clearInterval(clockTimer);clockTimer=0}
-async function refresh(){if(fetching)return "busy";fetching=true;try{const r=await fetch('./1-rates.json?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(6500)});if(!r.ok)return "error";const next=await r.json();if(!valid(next)||best&&new Date(next.quote_timestamp)<new Date(best.quote_timestamp))return "error";
-const differences=best?fields.filter(k=>best[k]!==next[k]):[];const timeChanged=!best||best.quote_timestamp!==next.quote_timestamp;previous=differences.length?best:null;best=next;
+// Save only a verified current quote. Storage is a display fallback, never a source of new rates.
+const savedKey='sonar-katta-verified-rates-v1';
+function keepVerified(d){try{localStorage.setItem(savedKey,JSON.stringify(d))}catch(_){}}
+function restoreVerified(){try{const d=JSON.parse(localStorage.getItem(savedKey));if(valid(d)){best=d;draw(best,performance.now())}}catch(_){}}
+async function requestRates(){const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),9000);try{const r=await fetch('./1-rates.json?ts='+Date.now(),{cache:'no-store',signal:controller.signal});if(!r.ok)throw Error('rates HTTP '+r.status);return await r.json()}finally{clearTimeout(timer)}}
+async function refresh(){if(fetching)return "busy";fetching=true;try{
+let next;try{next=await requestRates()}catch(_){next=await requestRates()}
+if(!valid(next)||best&&new Date(next.quote_timestamp)<new Date(best.quote_timestamp))return "error";
+const differences=best?fields.filter(k=>best[k]!==next[k]):[];const timeChanged=!best||best.quote_timestamp!==next.quote_timestamp;previous=differences.length?best:null;best=next;keepVerified(next);
 if(differences.length){changed=new Set(differences);glowStarted=performance.now();if(!motionOK){changed.clear();previous=null;glowStarted=0}draw(best,performance.now())}
 else if(timeChanged)draw(best,performance.now());return differences.length?"changed":"unchanged"
-}catch(_){return "error" /* Keep the last verified snapshot and its actual update time. */}finally{fetching=false}}
+}catch(_){return "error"}finally{fetching=false}}
 
 const media={videos:[['9ggmrbUI2Lw','सोनं-चांदीत गुंतवणूक करावी का? | नफा, खर्च आणि धोके']],shorts:[['Ey35MJtja7c','आजचे दर: २९ सप्टेंबर'],['6pqMCzQ6PY4','आजचे दर: २८ सप्टेंबर'],['Wr-FEVW_HV0','सोनं-चांदी खरेदी करावी का?'],['_2s_7Ycyv1w','सोनार कट्टा मध्ये स्वागत!']]};
 for(const [kind,items] of Object.entries(media)){const host=document.getElementById(kind);for(const [id,title] of items){const button=document.createElement('button');button.type='button';button.className='media-card';button.setAttribute('aria-label',title+' व्हिडिओ प्ले करा');const img=document.createElement('img');img.src='https://i.ytimg.com/vi/'+id+'/hqdefault.jpg';img.alt='';img.loading='lazy';const text=document.createElement('span');text.textContent='▶  '+title;button.append(img,text);button.addEventListener('click',()=>{document.querySelectorAll('.player').forEach(n=>n.remove());const wrap=document.createElement('div');wrap.className='player';const player=document.createElement('iframe');player.src='https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1';player.title=title;player.allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share';player.allowFullscreen=true;const link=document.createElement('a');link.href=kind==='shorts'?'https://www.youtube.com/shorts/'+id:'https://www.youtube.com/watch?v='+id;link.target='_blank';link.rel='noopener noreferrer';link.textContent='YouTube वर पाहा ↗';wrap.append(player,link);button.after(wrap);wrap.scrollIntoView({block:'nearest',behavior:motionOK?'smooth':'instant'})});host.append(button)}}
 function menu(show){panel.hidden=!show;opener.setAttribute('aria-expanded',String(show));if(!show){document.querySelectorAll('.player').forEach(n=>n.remove());opener.focus()}else document.getElementById('menu-close').focus()}
 opener.addEventListener('click',()=>menu(true));document.getElementById('menu-close').addEventListener('click',()=>menu(false));addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)menu(false)});
-let pullTimer;function notice(text){pull.textContent=text;pull.classList.add('show');clearTimeout(pullTimer);pullTimer=setTimeout(()=>pull.classList.remove('show'),2600)}
-async function manual(){notice('दर तपासत आहे...');const state=await refresh();notice(state==='changed'?'नवीन दर मिळाले':state==='unchanged'?'दर अद्याप तेच आहेत':state==='busy'?'दर तपासले जात आहेत':'नवीन दर मिळाले नाहीत; आधीचेच दर दाखवत आहोत')}
+let pullTimer;function notice(text){clearTimeout(pullTimer);pull.textContent=text;pull.classList.add('show');pullTimer=setTimeout(()=>{pull.classList.remove('show');pull.textContent=''},2800)}
+async function manual(){notice('दर तपासत आहे...');const state=await refresh();notice(state==='changed'?'नवीन दर मिळाले':state==='unchanged'?'दर अद्याप तेच आहेत':state==='busy'?'दर तपासले जात आहेत':best?'नवे दर मिळाले नाहीत; शेवटचे पडताळलेले दर दाखवत आहोत':'दर मिळाले नाहीत; पुन्हा तपासा')}
 document.getElementById('manual-refresh').addEventListener('click',manual);document.getElementById('quick-refresh').addEventListener('click',manual);
 let startY=null,lastTouch=0;const main=document.querySelector('main');
 function pullStart(y){startY=panel.hidden&&y<innerHeight*.35?y:null}
@@ -106,5 +113,5 @@ main.addEventListener('touchcancel',()=>{startY=null},{passive:true});
 main.addEventListener('pointerdown',e=>{if(Date.now()-lastTouch>500)pullStart(e.clientY)});
 main.addEventListener('pointerup',e=>{if(Date.now()-lastTouch>500)pullEnd(e.clientY)});
 main.addEventListener('pointercancel',()=>{startY=null});
-sizeCanvas();Promise.all([bg.decode(),logo.decode().catch(()=>{}),document.fonts.ready]).then(()=>{draw(null,performance.now());refresh();startLoop()});setInterval(refresh,60000);addEventListener('online',refresh);addEventListener('visibilitychange',()=>{if(document.hidden)stopLoop();else{startLoop();refresh()}});if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+sizeCanvas();Promise.all([bg.decode(),logo.decode().catch(()=>{}),document.fonts.ready]).then(()=>{draw(null,performance.now());restoreVerified();refresh();startLoop()});setInterval(refresh,60000);addEventListener('online',refresh);addEventListener('visibilitychange',()=>{if(document.hidden)stopLoop();else{startLoop();refresh()}});if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 })();</script></body></html>
