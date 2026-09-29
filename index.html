@@ -23,7 +23,7 @@ function rollValue(oldValue,newValue,x,y,now){
   const oldText=rateText(oldValue),newText=rateText(newValue);
   const elapsed=Math.max(0,now-glowStarted);
   ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='left';ctx.textBaseline='middle';
-  ctx.fillStyle='#fffaf0';ctx.shadowColor='#0009';ctx.shadowBlur=5;
+  ctx.fillStyle='#fffaf0';ctx.shadowColor='#ffd778';ctx.shadowBlur=12*Math.sin(Math.min(1,elapsed/850)*Math.PI)+5;
   if(oldText.length!==newText.length){
     // A change of magnitude is rare: crossfade only the two true full rates.
     const p=Math.min(1,elapsed/850);
@@ -36,8 +36,8 @@ function rollValue(oldValue,newValue,x,y,now){
     const ch=newText[j],w=widths[j];
     if(ch===oldText[j])ctx.fillText(ch,left,y);
     else{
-      // Stagger the changed places, with each real digit sliding past the other.
-      const p=Math.max(0,Math.min(1,(elapsed-j*45)/480));
+      // All changed digits move together so no composite fake rate appears.
+      const p=Math.max(0,Math.min(1,elapsed/480));
       const eased=1-Math.pow(1-p,3);
       ctx.save();ctx.beginPath();ctx.rect(left-2,y-39,w+4,78);ctx.clip();
       if(p<1){ctx.globalAlpha=1-p;ctx.fillText(oldText[j],left,y-53*eased)}
@@ -61,7 +61,7 @@ const clock=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-dig
 line(clock+' IST',center,313,20,'#d9c193',600,true);
 const ys=[359,610,853,1089],unitYs=[417,668,911,1147],valueYs=[478,729,972,1208];
 for(let i=0;i<4;i++){line(titles[i],center,ys[i],43,'#f2bd68',800);line(i===3?'१ किलो':'१० ग्रॅम',center,unitYs[i],25,'#fff7e7',650);const value=rateText(data[fields[i]]);if(motionOK&&previous&&changed.has(fields[i])&&glowStarted)rollValue(previous[fields[i]],data[fields[i]],525,valueYs[i],now);else line(value,525,valueYs[i],62,'#fffaf0',850,true);
-if(changed.has(fields[i])&&glowStarted){const progress=Math.min(1,(now-glowStarted)/850),strength=Math.sin(progress*Math.PI)*.8;if(strength>0){ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#ffd778';ctx.shadowBlur=25*strength;ctx.fillStyle=`rgba(255,222,148,${.38*strength})`;ctx.fillText(value,525,valueYs[i]);ctx.restore()}}}
+if(changed.has(fields[i])&&glowStarted&&!(motionOK&&previous)){const progress=Math.min(1,(now-glowStarted)/850),strength=Math.sin(progress*Math.PI)*.8;if(strength>0){ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#ffd778';ctx.shadowBlur=25*strength;ctx.fillStyle=`rgba(255,222,148,${.38*strength})`;ctx.fillText(value,525,valueYs[i]);ctx.restore()}}}
 const tt=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).format(time);
 const upd='अपडेट: '+tt+' IST';line(upd,center,1268,23,'#fff0cc',650);
 // LIVE indicator with a softly pulsing dot beside the last-update time.
