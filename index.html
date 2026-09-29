@@ -5,30 +5,46 @@
 const c=document.getElementById('card'),ctx=c.getContext('2d'),status=document.getElementById('description');
 const bg=new Image();bg.src='./1-card-template.png';const logo=new Image();logo.src='./2-brand-original.png';
 const fields=['gold24_10g','gold22_10g','gold18_10g','silver999_kg'];const titles=['सोने २४ कॅरेट','सोने २२ कॅरेट','सोने १८ कॅरेट','चांदी ९९९'];
-const W=941,H=1672,center=470;let best=null,glowStarted=0,changed=new Set(),animFrame=0,fetching=false;
+const W=941,H=1672,center=470;let best=null,glowStarted=0,changed=new Set(),fetching=false;
+// Ambient life: shimmer sweep, pulsing LIVE dot and a ticking IST clock keep
+// the card feeling live between genuine rate updates. Rate values never move
+// except on a real snapshot change. Motion effects honor reduced-motion.
+const motionOK=!matchMedia('(prefers-reduced-motion: reduce)').matches;let rafId=0,lastDraw=0,clockTimer=0;
 // Rebuild the bitmap at physical display resolution, while retaining the
 // approved card's 941x1672 drawing coordinates and aligned social hit regions.
-function sizeCanvas(){const box=c.getBoundingClientRect(),ratio=Math.min(devicePixelRatio||1,4),w=Math.round(box.width*ratio),h=Math.round(box.height*ratio);if(w&&h&&(c.width!==w||c.height!==h)){c.width=w;c.height=h;ctx.setTransform(w/W,0,0,h/H,0,0);draw(best)}}
+function sizeCanvas(){const box=c.getBoundingClientRect(),ratio=Math.min(devicePixelRatio||1,4),w=Math.round(box.width*ratio),h=Math.round(box.height*ratio);if(w&&h&&(c.width!==w||c.height!==h)){c.width=w;c.height=h;ctx.setTransform(w/W,0,0,h/H,0,0);draw(best,performance.now())}}
 new ResizeObserver(sizeCanvas).observe(c);addEventListener('resize',sizeCanvas);
 function valid(d){if(!d||!fields.every(k=>Number.isInteger(d[k])&&d[k]>0))return false;const t=new Date(d.quote_timestamp),age=Date.now()-t;return Number.isFinite(t.valueOf())&&age>=-300000&&age<=21600000&&Math.abs(d.gold22_10g/d.gold24_10g-.916)<=.004&&Math.abs(d.gold18_10g/d.gold24_10g-.75)<=.004}
 function line(text,x,y,size,color,weight=700,latin=false){ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=color;ctx.shadowColor='#0009';ctx.shadowBlur=5;ctx.font=`${weight} ${size}px ${latin?'system-ui':'"Noto Sans Devanagari",system-ui'}`;ctx.fillText(text,x,y);ctx.restore()}
-function draw(data){if(!bg.complete||!bg.naturalWidth)return;ctx.clearRect(0,0,W,H);ctx.drawImage(bg,0,0,W,H);
+function draw(data,now){if(!bg.complete||!bg.naturalWidth)return;now=now||performance.now();ctx.clearRect(0,0,W,H);ctx.drawImage(bg,0,0,W,H);
 // Exact owner logo is drawn as a separate asset so replacement does not redraw the card.
 if(logo.complete&&logo.naturalWidth){ctx.save();ctx.beginPath();ctx.arc(470,143,100,0,Math.PI*2);ctx.clip();ctx.drawImage(logo,370,43,200,200);ctx.restore()}
 if(!valid(data)){ctx.fillStyle='#130c08e8';ctx.fillRect(277,470,465,560);line('दर तात्पुरते उपलब्ध नाहीत',center,685,35,'#f2bc64');line('कृपया नंतर पुन्हा तपासा',center,765,28,'#fff3df');status.textContent='पडताळलेले दर सध्या उपलब्ध नाहीत';return}
+// Slow golden light sweep across the card, like a showroom screen.
+if(motionOK){const p=(now%7000)/7000,cx=-280+p*(W+560);ctx.save();ctx.globalCompositeOperation='screen';const g=ctx.createLinearGradient(cx-170,0,cx+170,H);g.addColorStop(0,'rgba(255,214,130,0)');g.addColorStop(.5,'rgba(255,214,130,.10)');g.addColorStop(1,'rgba(255,214,130,0)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);ctx.restore()}
 const time=new Date(data.quote_timestamp),dateparts=new Intl.DateTimeFormat('mr-IN-u-nu-deva',{timeZone:'Asia/Kolkata',day:'numeric',month:'long',year:'numeric'}).formatToParts(time);const date=['day','month','year'].map(k=>dateparts.find(p=>p.type===k)?.value||'').join(' ');
 line(date+'  |  महाराष्ट्र',center,269,32,'#f8e4bf',750);
+// Ticking IST clock under the date: the page is alive right now.
+const clock=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
+line(clock+' IST',center,313,20,'#d9c193',600,true);
 const ys=[359,610,853,1089],unitYs=[417,668,911,1147],valueYs=[478,729,972,1208];
 for(let i=0;i<4;i++){line(titles[i],center,ys[i],43,'#f2bd68',800);line(i===3?'१ किलो':'१० ग्रॅम',center,unitYs[i],25,'#fff7e7',650);const value='₹'+new Intl.NumberFormat('en-IN').format(data[fields[i]]);line(value,525,valueYs[i],62,'#fffaf0',850,true);
-if(changed.has(fields[i])&&glowStarted){const progress=Math.min(1,(performance.now()-glowStarted)/850),strength=Math.sin(progress*Math.PI)*.8;if(strength>0){ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#ffd778';ctx.shadowBlur=25*strength;ctx.fillStyle=`rgba(255,222,148,${.38*strength})`;ctx.fillText(value,525,valueYs[i]);ctx.restore()}}}
+if(changed.has(fields[i])&&glowStarted){const progress=Math.min(1,(now-glowStarted)/850),strength=Math.sin(progress*Math.PI)*.8;if(strength>0){ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#ffd778';ctx.shadowBlur=25*strength;ctx.fillStyle=`rgba(255,222,148,${.38*strength})`;ctx.fillText(value,525,valueYs[i]);ctx.restore()}}}
 const tt=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).format(time);
-line('अपडेट: '+tt+' IST',center,1268,23,'#fff0cc',650);status.textContent=`${date}: ${titles.map((t,i)=>t+' '+data[fields[i]]).join(', ')}. अपडेट ${tt} IST.`}
-function animate(){draw(best);if(performance.now()-glowStarted<850)animFrame=requestAnimationFrame(animate);else{changed.clear();glowStarted=0;draw(best)}}
+const upd='अपडेट: '+tt+' IST';line(upd,center,1268,23,'#fff0cc',650);
+// LIVE indicator with a softly pulsing dot beside the last-update time.
+ctx.save();ctx.font='650 23px "Noto Sans Devanagari",system-ui';const uw=ctx.measureText(upd).width;const pulse=motionOK?(Math.sin(now/1600*Math.PI*2)+1)/2:.5;const dotX=center-uw/2-64,dotR=4.5+1.6*pulse;
+ctx.shadowColor='#4be38a';ctx.shadowBlur=6+12*pulse;ctx.fillStyle=`rgba(86,227,138,${.72+.28*pulse})`;ctx.beginPath();ctx.arc(dotX,1268,dotR,0,Math.PI*2);ctx.fill();
+ctx.shadowColor='#0009';ctx.shadowBlur=5;ctx.fillStyle='#8fe9b2';ctx.font='800 19px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('LIVE',dotX+34,1269);ctx.restore();
+status.textContent=`${date}: ${titles.map((t,i)=>t+' '+data[fields[i]]).join(', ')}. अपडेट ${tt} IST.`}
+function frame(now){if(now-lastDraw>=33){lastDraw=now;draw(best,now);if(glowStarted&&now-glowStarted>=850){changed.clear();glowStarted=0;draw(best,now)}}rafId=requestAnimationFrame(frame)}
+function startLoop(){if(motionOK){if(!rafId)rafId=requestAnimationFrame(frame)}else if(!clockTimer)clockTimer=setInterval(()=>draw(best,performance.now()),1000)}
+function stopLoop(){cancelAnimationFrame(rafId);rafId=0;clearInterval(clockTimer);clockTimer=0}
 async function refresh(){if(fetching)return;fetching=true;try{const r=await fetch('./1-rates.json?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(6500)});if(!r.ok)return;const next=await r.json();if(!valid(next)||best&&new Date(next.quote_timestamp)<new Date(best.quote_timestamp))return;
 const differences=best?fields.filter(k=>best[k]!==next[k]):[];const timeChanged=!best||best.quote_timestamp!==next.quote_timestamp;best=next;
-if(differences.length){cancelAnimationFrame(animFrame);changed=new Set(differences);glowStarted=performance.now();if(matchMedia('(prefers-reduced-motion: reduce)').matches){changed.clear();glowStarted=0;draw(best)}else animate()}
-else if(timeChanged)draw(best)
+if(differences.length){changed=new Set(differences);glowStarted=performance.now();if(!motionOK){changed.clear();glowStarted=0}draw(best,performance.now())}
+else if(timeChanged)draw(best,performance.now())
 }catch(_){/* Keep the last verified snapshot and its actual update time. */}finally{fetching=false}}
 
-sizeCanvas();Promise.all([bg.decode(),logo.decode().catch(()=>{}),document.fonts.ready]).then(()=>{draw(null);refresh()});setInterval(refresh,60000);addEventListener('online',refresh);addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()});if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+sizeCanvas();Promise.all([bg.decode(),logo.decode().catch(()=>{}),document.fonts.ready]).then(()=>{draw(null,performance.now());refresh();startLoop()});setInterval(refresh,60000);addEventListener('online',refresh);addEventListener('visibilitychange',()=>{if(document.hidden)stopLoop();else{startLoop();refresh()}});if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 })();</script></body></html>
