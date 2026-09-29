@@ -108,6 +108,15 @@ function cardNumber(n,i,quoteTime,now){
 function sizeCanvas(){const box=c.getBoundingClientRect(),ratio=Math.min(devicePixelRatio||1,4),w=Math.round(box.width*ratio),h=Math.round(box.height*ratio);if(w&&h&&(c.width!==w||c.height!==h)){c.width=w;c.height=h;ctx.setTransform(w/W,0,0,h/H,0,0);draw(best,performance.now())}}
 new ResizeObserver(sizeCanvas).observe(c);addEventListener('resize',sizeCanvas);
 function valid(d){if(!d||!fields.every(k=>Number.isInteger(d[k])&&d[k]>0))return false;const t=new Date(d.quote_timestamp),age=Date.now()-t;return Number.isFinite(t.valueOf())&&age>=-300000&&age<=21600000&&Math.abs(d.gold22_10g/d.gold24_10g-.916)<=.004&&Math.abs(d.gold18_10g/d.gold24_10g-.75)<=.004}
+function dayChange(data){
+  const b=data?.baseline,t=new Date(data?.quote_timestamp),bt=new Date(b?.quote_timestamp);
+  if(!b||!Number.isFinite(bt.valueOf())||bt>t||!fields.every(k=>Number.isInteger(b[k])&&b[k]>0))return null;
+  const day=d=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'}).format(d);
+  if(day(bt)!==day(t)||day(bt)!==day(new Date()))return null;
+  const h=Number(new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Kolkata',hour:'numeric',hour12:false}).format(bt));
+  const tm=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Kolkata',hour:'numeric',minute:'2-digit',hour12:false}).format(bt);
+  return {baseline:b,label:lang==='en'?`Since ${tm} IST`:`${h<12?'सकाळी ':h<17?'दुपारी ':'सायंकाळी '}${tm} पासून`};
+}
 function line(text,x,y,size,color,weight=700,latin=false){ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=color;ctx.shadowColor='#0009';ctx.shadowBlur=5;ctx.font=`${weight} ${size}px ${latin?'system-ui':'"Noto Sans Devanagari",system-ui'}`;ctx.fillText(text,x,y);ctx.restore()}
 // Roll only between two verified snapshots. Each glyph is either the old or
 // new real digit; no invented intermediate rate is ever drawn.
@@ -152,15 +161,17 @@ line(date+'  |  '+(lang==='en'?'Maharashtra':'महाराष्ट्र'),c
 // Ticking IST clock under the date: the page is alive right now.
 const clock=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
 if(innerHeight>=700)line(clock+' IST',center,322,18,'#d9c193',600,true);
-const ys=[359,610,853,1089],unitYs=[417,668,911,1147],valueYs=[478,729,972,1208];
+const ys=[359,610,853,1089],unitYs=[417,668,911,1147],valueYs=[478,729,972,1208],delta=dayChange(data);
 for(let i=0;i<4;i++){line(activeTitles()[i],center,ys[i],43,'#f2bd68',800);line(lang==='en'?(i===3?'1 kg':'10 g'):(i===3?'१ किलो':'१० ग्रॅम'),center,unitYs[i],25,'#fff7e7',650);const value=rateText(data[fields[i]]);line(cardNumber(data[fields[i]],i,time.getTime(),now),525,valueYs[i],62,'#fffaf0',850,true);
+if(delta){const d=data[fields[i]]-delta.baseline[fields[i]],sign=d>0?'+':d<0?'−':'±';
+  line(`${sign}₹${new Intl.NumberFormat('en-IN').format(Math.abs(d))}  ·  ${delta.label}`,525,valueYs[i]+43,21,d>0?'#84efa9':d<0?'#ff8981':'#e0cba3',750,true)}
 if(changed.has(fields[i])&&glowStarted&&!(motionOK&&previous)){const progress=Math.min(1,(now-glowStarted)/850),strength=Math.sin(progress*Math.PI)*.8;if(strength>0){ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#ffd778';ctx.shadowBlur=25*strength;ctx.fillStyle=`rgba(255,222,148,${.38*strength})`;ctx.fillText(value,525,valueYs[i]);ctx.restore()}}}
 const tt=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).format(time);
-const upd=(lang==='en'?'Updated: ':'अपडेट: ')+tt+' IST';line(upd,center,1268,23,'#fff0cc',650);
+const upd=(lang==='en'?'Updated: ':'अपडेट: ')+tt+' IST',updY=delta?1296:1268;line(upd,center,updY,23,'#fff0cc',650);
 // LIVE indicator with a softly pulsing dot beside the last-update time.
 ctx.save();ctx.font='650 23px "Noto Sans Devanagari",system-ui';const uw=ctx.measureText(upd).width;const pulse=motionOK?(Math.sin(now/1600*Math.PI*2)+1)/2:.5;const dotX=center-uw/2-64,dotR=4.5+1.6*pulse;
-ctx.shadowColor='#4be38a';ctx.shadowBlur=6+12*pulse;ctx.fillStyle=`rgba(86,227,138,${.72+.28*pulse})`;ctx.beginPath();ctx.arc(dotX,1268,dotR,0,Math.PI*2);ctx.fill();
-ctx.shadowColor='#0009';ctx.shadowBlur=5;ctx.fillStyle='#8fe9b2';ctx.font='800 19px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('LIVE',dotX+34,1269);ctx.restore();
+ctx.shadowColor='#4be38a';ctx.shadowBlur=6+12*pulse;ctx.fillStyle=`rgba(86,227,138,${.72+.28*pulse})`;ctx.beginPath();ctx.arc(dotX,updY,dotR,0,Math.PI*2);ctx.fill();
+ctx.shadowColor='#0009';ctx.shadowBlur=5;ctx.fillStyle='#8fe9b2';ctx.font='800 19px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('LIVE',dotX+34,updY+1);ctx.restore();
 status.textContent=`${date}: ${activeTitles().map((t,i)=>t+' '+data[fields[i]]).join(', ')}. ${lang==='en'?'Updated':'अपडेट'} ${tt} IST.`}
 function frame(now){if(now-lastDraw>=33){lastDraw=now;draw(best,now);if(glowStarted&&now-glowStarted>=850){changed.clear();previous=null;glowStarted=0;draw(best,now)}}rafId=requestAnimationFrame(frame)}
 function startLoop(){if(motionOK){if(!rafId)rafId=requestAnimationFrame(frame)}else if(!clockTimer)clockTimer=setInterval(()=>draw(best,performance.now()),1000)}
