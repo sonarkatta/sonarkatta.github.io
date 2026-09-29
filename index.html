@@ -160,14 +160,16 @@ const time=new Date(data.quote_timestamp),dateparts=new Intl.DateTimeFormat('mr-
 line(date+'  |  '+(lang==='en'?'Maharashtra':'महाराष्ट्र'),center,282,lang==='en'?27:30,'#f8e4bf',750);
 // Ticking IST clock under the date: the page is alive right now.
 const clock=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
-if(innerHeight>=700)line(clock+' IST',center,322,18,'#d9c193',600,true);
-const ys=[359,610,853,1089],unitYs=[417,668,911,1147],valueYs=[478,729,972,1208],delta=dayChange(data);
-for(let i=0;i<4;i++){line(activeTitles()[i],center,ys[i],43,'#f2bd68',800);line(lang==='en'?(i===3?'1 kg':'10 g'):(i===3?'१ किलो':'१० ग्रॅम'),center,unitYs[i],25,'#fff7e7',650);const value=rateText(data[fields[i]]);line(cardNumber(data[fields[i]],i,time.getTime(),now),525,valueYs[i],62,'#fffaf0',850,true);
-if(delta){const d=data[fields[i]]-delta.baseline[fields[i]],sign=d>0?'+':d<0?'−':'±';
-  line(`${sign}₹${new Intl.NumberFormat('en-IN').format(Math.abs(d))}  ·  ${delta.label}`,525,valueYs[i]+43,21,d>0?'#84efa9':d<0?'#ff8981':'#e0cba3',750,true)}
+// Clock omitted on the denser day-change card; update time remains below rates.
+const ys=[333,595,840,1085],unitYs=[382,636,881,1126],valueYs=[435,682,927,1180],delta=dayChange(data);
+for(let i=0;i<4;i++){line(activeTitles()[i],center,ys[i],40,'#f2bd68',800);line(lang==='en'?(i===3?'1 kg':'10 g'):(i===3?'१ किलो':'१० ग्रॅम'),center,unitYs[i],25,'#fff7e7',650);const value=rateText(data[fields[i]]),shown=cardNumber(data[fields[i]],i,time.getTime(),now),shownNumber=Number(shown.replace(/[^0-9]/g,'')),shade=shown===value?'#fffaf0':shownNumber>data[fields[i]]?'#a4f4b9':'#ffaaa4';line(shown,525,valueYs[i],59,shade,850,true);
+if(delta){const d=data[fields[i]]-delta.baseline[fields[i]],arrow=d>0?'▲':d<0?'▼':'●';
+  const color=d>0?'#84efa9':d<0?'#ff8981':'#e0cba3';
+  line(`${arrow} ₹${new Intl.NumberFormat('en-IN').format(Math.abs(d))}`,525,valueYs[i]+(i===3?43:48),30,color,800,true);
+  line(delta.label,525,valueYs[i]+(i===3?65:75),19,'#d6bd8c',650,lang==='en') }
 if(changed.has(fields[i])&&glowStarted&&!(motionOK&&previous)){const progress=Math.min(1,(now-glowStarted)/850),strength=Math.sin(progress*Math.PI)*.8;if(strength>0){ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#ffd778';ctx.shadowBlur=25*strength;ctx.fillStyle=`rgba(255,222,148,${.38*strength})`;ctx.fillText(value,525,valueYs[i]);ctx.restore()}}}
 const tt=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).format(time);
-const upd=(lang==='en'?'Updated: ':'अपडेट: ')+tt+' IST',updY=delta?1296:1268;line(upd,center,updY,23,'#fff0cc',650);
+const upd=(lang==='en'?'Updated: ':'अपडेट: ')+tt+' IST',updY=delta?1290:1268;line(upd,center,updY,23,'#fff0cc',650);
 // LIVE indicator with a softly pulsing dot beside the last-update time.
 ctx.save();ctx.font='650 23px "Noto Sans Devanagari",system-ui';const uw=ctx.measureText(upd).width;const pulse=motionOK?(Math.sin(now/1600*Math.PI*2)+1)/2:.5;const dotX=center-uw/2-64,dotR=4.5+1.6*pulse;
 ctx.shadowColor='#4be38a';ctx.shadowBlur=6+12*pulse;ctx.fillStyle=`rgba(86,227,138,${.72+.28*pulse})`;ctx.beginPath();ctx.arc(dotX,updY,dotR,0,Math.PI*2);ctx.fill();
