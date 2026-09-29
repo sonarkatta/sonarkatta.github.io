@@ -5,7 +5,7 @@
 const c=document.getElementById('card'),ctx=c.getContext('2d'),status=document.getElementById('description');
 const bg=new Image();bg.src='./1-card-template.png';const logo=new Image();logo.src='./2-brand-original.png';
 const fields=['gold24_10g','gold22_10g','gold18_10g','silver999_kg'];const titles=['सोने २४ कॅरेट','सोने २२ कॅरेट','सोने १८ कॅरेट','चांदी ९९९'];
-const W=941,H=1672,center=470;let best=null,glowStarted=0,changed=new Set(),fetching=false;
+const W=941,H=1672,center=470;let best=null,previous=null,glowStarted=0,changed=new Set(),fetching=false;
 // Ambient life: shimmer sweep, pulsing LIVE dot and a ticking IST clock keep
 // the card feeling live between genuine rate updates. Rate values never move
 // except on a real snapshot change. Motion effects honor reduced-motion.
@@ -16,6 +16,38 @@ function sizeCanvas(){const box=c.getBoundingClientRect(),ratio=Math.min(deviceP
 new ResizeObserver(sizeCanvas).observe(c);addEventListener('resize',sizeCanvas);
 function valid(d){if(!d||!fields.every(k=>Number.isInteger(d[k])&&d[k]>0))return false;const t=new Date(d.quote_timestamp),age=Date.now()-t;return Number.isFinite(t.valueOf())&&age>=-300000&&age<=21600000&&Math.abs(d.gold22_10g/d.gold24_10g-.916)<=.004&&Math.abs(d.gold18_10g/d.gold24_10g-.75)<=.004}
 function line(text,x,y,size,color,weight=700,latin=false){ctx.save();ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle=color;ctx.shadowColor='#0009';ctx.shadowBlur=5;ctx.font=`${weight} ${size}px ${latin?'system-ui':'"Noto Sans Devanagari",system-ui'}`;ctx.fillText(text,x,y);ctx.restore()}
+// Roll only between two verified snapshots. Each glyph is either the old or
+// new real digit; no invented intermediate rate is ever drawn.
+function rateText(n){return '₹'+new Intl.NumberFormat('en-IN').format(n)}
+function rollValue(oldValue,newValue,x,y,now){
+  const oldText=rateText(oldValue),newText=rateText(newValue);
+  const elapsed=Math.max(0,now-glowStarted);
+  ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='left';ctx.textBaseline='middle';
+  ctx.fillStyle='#fffaf0';ctx.shadowColor='#0009';ctx.shadowBlur=5;
+  if(oldText.length!==newText.length){
+    // A change of magnitude is rare: crossfade only the two true full rates.
+    const p=Math.min(1,elapsed/850);
+    ctx.textAlign='center';ctx.globalAlpha=1-p;ctx.fillText(oldText,x,y);
+    ctx.globalAlpha=p;ctx.fillText(newText,x,y);ctx.restore();return;
+  }
+  const widths=Array.from(newText,ch=>ctx.measureText(ch).width);
+  let left=x-widths.reduce((a,b)=>a+b,0)/2;
+  for(let j=0;j<newText.length;j++){
+    const ch=newText[j],w=widths[j];
+    if(ch===oldText[j])ctx.fillText(ch,left,y);
+    else{
+      // Stagger the changed places, with each real digit sliding past the other.
+      const p=Math.max(0,Math.min(1,(elapsed-j*45)/480));
+      const eased=1-Math.pow(1-p,3);
+      ctx.save();ctx.beginPath();ctx.rect(left-2,y-39,w+4,78);ctx.clip();
+      if(p<1){ctx.globalAlpha=1-p;ctx.fillText(oldText[j],left,y-53*eased)}
+      if(p>0){ctx.globalAlpha=p;ctx.fillText(ch,left,y+53*(1-eased))}
+      ctx.restore();
+    }
+    left+=w;
+  }
+  ctx.restore();
+}
 function draw(data,now){if(!bg.complete||!bg.naturalWidth)return;now=now||performance.now();ctx.clearRect(0,0,W,H);ctx.drawImage(bg,0,0,W,H);
 // Exact owner logo is drawn as a separate asset so replacement does not redraw the card.
 if(logo.complete&&logo.naturalWidth){ctx.save();ctx.beginPath();ctx.arc(470,143,100,0,Math.PI*2);ctx.clip();ctx.drawImage(logo,370,43,200,200);ctx.restore()}
@@ -28,7 +60,7 @@ line(date+'  |  महाराष्ट्र',center,269,32,'#f8e4bf',750);
 const clock=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
 line(clock+' IST',center,313,20,'#d9c193',600,true);
 const ys=[359,610,853,1089],unitYs=[417,668,911,1147],valueYs=[478,729,972,1208];
-for(let i=0;i<4;i++){line(titles[i],center,ys[i],43,'#f2bd68',800);line(i===3?'१ किलो':'१० ग्रॅम',center,unitYs[i],25,'#fff7e7',650);const value='₹'+new Intl.NumberFormat('en-IN').format(data[fields[i]]);line(value,525,valueYs[i],62,'#fffaf0',850,true);
+for(let i=0;i<4;i++){line(titles[i],center,ys[i],43,'#f2bd68',800);line(i===3?'१ किलो':'१० ग्रॅम',center,unitYs[i],25,'#fff7e7',650);const value=rateText(data[fields[i]]);if(motionOK&&previous&&changed.has(fields[i])&&glowStarted)rollValue(previous[fields[i]],data[fields[i]],525,valueYs[i],now);else line(value,525,valueYs[i],62,'#fffaf0',850,true);
 if(changed.has(fields[i])&&glowStarted){const progress=Math.min(1,(now-glowStarted)/850),strength=Math.sin(progress*Math.PI)*.8;if(strength>0){ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#ffd778';ctx.shadowBlur=25*strength;ctx.fillStyle=`rgba(255,222,148,${.38*strength})`;ctx.fillText(value,525,valueYs[i]);ctx.restore()}}}
 const tt=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).format(time);
 const upd='अपडेट: '+tt+' IST';line(upd,center,1268,23,'#fff0cc',650);
@@ -37,12 +69,12 @@ ctx.save();ctx.font='650 23px "Noto Sans Devanagari",system-ui';const uw=ctx.mea
 ctx.shadowColor='#4be38a';ctx.shadowBlur=6+12*pulse;ctx.fillStyle=`rgba(86,227,138,${.72+.28*pulse})`;ctx.beginPath();ctx.arc(dotX,1268,dotR,0,Math.PI*2);ctx.fill();
 ctx.shadowColor='#0009';ctx.shadowBlur=5;ctx.fillStyle='#8fe9b2';ctx.font='800 19px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('LIVE',dotX+34,1269);ctx.restore();
 status.textContent=`${date}: ${titles.map((t,i)=>t+' '+data[fields[i]]).join(', ')}. अपडेट ${tt} IST.`}
-function frame(now){if(now-lastDraw>=33){lastDraw=now;draw(best,now);if(glowStarted&&now-glowStarted>=850){changed.clear();glowStarted=0;draw(best,now)}}rafId=requestAnimationFrame(frame)}
+function frame(now){if(now-lastDraw>=33){lastDraw=now;draw(best,now);if(glowStarted&&now-glowStarted>=850){changed.clear();previous=null;glowStarted=0;draw(best,now)}}rafId=requestAnimationFrame(frame)}
 function startLoop(){if(motionOK){if(!rafId)rafId=requestAnimationFrame(frame)}else if(!clockTimer)clockTimer=setInterval(()=>draw(best,performance.now()),1000)}
 function stopLoop(){cancelAnimationFrame(rafId);rafId=0;clearInterval(clockTimer);clockTimer=0}
 async function refresh(){if(fetching)return;fetching=true;try{const r=await fetch('./1-rates.json?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(6500)});if(!r.ok)return;const next=await r.json();if(!valid(next)||best&&new Date(next.quote_timestamp)<new Date(best.quote_timestamp))return;
-const differences=best?fields.filter(k=>best[k]!==next[k]):[];const timeChanged=!best||best.quote_timestamp!==next.quote_timestamp;best=next;
-if(differences.length){changed=new Set(differences);glowStarted=performance.now();if(!motionOK){changed.clear();glowStarted=0}draw(best,performance.now())}
+const differences=best?fields.filter(k=>best[k]!==next[k]):[];const timeChanged=!best||best.quote_timestamp!==next.quote_timestamp;previous=differences.length?best:null;best=next;
+if(differences.length){changed=new Set(differences);glowStarted=performance.now();if(!motionOK){changed.clear();previous=null;glowStarted=0}draw(best,performance.now())}
 else if(timeChanged)draw(best,performance.now())
 }catch(_){/* Keep the last verified snapshot and its actual update time. */}finally{fetching=false}}
 
