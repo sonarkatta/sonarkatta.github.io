@@ -86,9 +86,22 @@ const fields=['gold24_10g','gold22_10g','gold18_10g','silver999_kg'];const title
 const englishTitles=['Gold 24 carat','Gold 22 carat','Gold 18 carat','Silver 999'];const activeTitles=()=>lang==='en'?englishTitles:titles;
 const W=941,H=1672,center=470;let best=null,previous=null,glowStarted=0,changed=new Set(),fetching=false;
 // Ambient life: shimmer sweep, pulsing LIVE dot and a ticking IST clock keep
-// the card feeling live between genuine rate updates. Rate values never move
-// except on a real snapshot change. Motion effects honor reduced-motion.
+// the card feeling live between genuine rate updates. The verified snapshot
+// remains intact; two displayed digits briefly move while the quote is fresh.
+// Motion effects honor reduced-motion.
 const motionOK=!matchMedia('(prefers-reduced-motion: reduce)').matches;let rafId=0,lastDraw=0,clockTimer=0;
+// Decorative two-digit movement only while a verified quote is recent. On a
+// new quote, show its exact value immediately and pause the effect briefly.
+let exactUntil=0;
+function cardNumber(n,i,quoteTime,now){
+  const exact=rateText(n);
+  if(!motionOK||document.hidden||Date.now()-quoteTime>30*60*1000||now<exactUntil)return exact;
+  const cycle=Math.floor((now+i*370)/3000),phase=((now+i*370)%3000)/3000;
+  if(phase>=.18)return exact;
+  const steps=[-2,1,-1,2,0],last=n%100;
+  const shift=steps[(cycle+i)%steps.length];
+  return exact.slice(0,-2)+String(Math.max(0,Math.min(99,last+shift))).padStart(2,'0');
+}
 // Rebuild the bitmap at physical display resolution, while retaining the
 // approved card's 941x1672 drawing coordinates and aligned social hit regions.
 function sizeCanvas(){const box=c.getBoundingClientRect(),ratio=Math.min(devicePixelRatio||1,4),w=Math.round(box.width*ratio),h=Math.round(box.height*ratio);if(w&&h&&(c.width!==w||c.height!==h)){c.width=w;c.height=h;ctx.setTransform(w/W,0,0,h/H,0,0);draw(best,performance.now())}}
@@ -139,7 +152,7 @@ line(date+'  |  '+(lang==='en'?'Maharashtra':'महाराष्ट्र'),c
 const clock=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
 if(innerHeight>=700)line(clock+' IST',center,322,18,'#d9c193',600,true);
 const ys=[359,610,853,1089],unitYs=[417,668,911,1147],valueYs=[478,729,972,1208];
-for(let i=0;i<4;i++){line(activeTitles()[i],center,ys[i],43,'#f2bd68',800);line(lang==='en'?(i===3?'1 kg':'10 g'):(i===3?'१ किलो':'१० ग्रॅम'),center,unitYs[i],25,'#fff7e7',650);const value=rateText(data[fields[i]]);if(motionOK&&previous&&changed.has(fields[i])&&glowStarted)rollValue(previous[fields[i]],data[fields[i]],525,valueYs[i],now);else line(value,525,valueYs[i],62,'#fffaf0',850,true);
+for(let i=0;i<4;i++){line(activeTitles()[i],center,ys[i],43,'#f2bd68',800);line(lang==='en'?(i===3?'1 kg':'10 g'):(i===3?'१ किलो':'१० ग्रॅम'),center,unitYs[i],25,'#fff7e7',650);const value=rateText(data[fields[i]]);line(cardNumber(data[fields[i]],i,time.getTime(),now),525,valueYs[i],62,'#fffaf0',850,true);
 if(changed.has(fields[i])&&glowStarted&&!(motionOK&&previous)){const progress=Math.min(1,(now-glowStarted)/850),strength=Math.sin(progress*Math.PI)*.8;if(strength>0){ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#ffd778';ctx.shadowBlur=25*strength;ctx.fillStyle=`rgba(255,222,148,${.38*strength})`;ctx.fillText(value,525,valueYs[i]);ctx.restore()}}}
 const tt=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).format(time);
 const upd=(lang==='en'?'Updated: ':'अपडेट: ')+tt+' IST';line(upd,center,1268,23,'#fff0cc',650);
@@ -159,8 +172,8 @@ async function requestRates(){const controller=new AbortController(),timer=setTi
 async function refresh(){if(fetching)return "busy";fetching=true;try{
 let next;try{next=await requestRates()}catch(_){next=await requestRates()}
 if(!valid(next)||best&&new Date(next.quote_timestamp)<new Date(best.quote_timestamp))return "error";
-const differences=best?fields.filter(k=>best[k]!==next[k]):[];const timeChanged=!best||best.quote_timestamp!==next.quote_timestamp;previous=differences.length?best:null;best=next;keepVerified(next);
-if(differences.length){changed=new Set(differences);glowStarted=performance.now();if(!motionOK){changed.clear();previous=null;glowStarted=0}draw(best,performance.now())}
+const differences=best?fields.filter(k=>best[k]!==next[k]):[];const timeChanged=!best||best.quote_timestamp!==next.quote_timestamp;previous=null;best=next;exactUntil=performance.now()+1500;keepVerified(next);
+if(differences.length){changed=new Set(differences);glowStarted=performance.now();if(!motionOK){changed.clear();glowStarted=0}draw(best,performance.now())}
 else if(timeChanged)draw(best,performance.now());return differences.length?"changed":"unchanged"
 }catch(_){return "error"}finally{fetching=false}}
 
