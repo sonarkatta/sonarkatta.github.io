@@ -5,7 +5,7 @@
 const c=document.getElementById('card'),ctx=c.getContext('2d'),status=document.getElementById('description');
 const bg=new Image();bg.src='./1-card-template.png';const logo=new Image();logo.src='./2-brand-original.png';
 const fields=['gold24_10g','gold22_10g','gold18_10g','silver999_kg'];const titles=['सोने २४ कॅरेट','सोने २२ कॅरेट','सोने १८ कॅरेट','चांदी ९९९'];
-const W=941,H=1672,center=470;let best=null;
+const W=941,H=1672,center=470;let best=null,glowStarted=0,changed=new Set(),animFrame=0,fetching=false;
 // Rebuild the bitmap at physical display resolution, while retaining the
 // approved card's 941x1672 drawing coordinates and aligned social hit regions.
 function sizeCanvas(){const box=c.getBoundingClientRect(),ratio=Math.min(devicePixelRatio||1,4),w=Math.round(box.width*ratio),h=Math.round(box.height*ratio);if(w&&h&&(c.width!==w||c.height!==h)){c.width=w;c.height=h;ctx.setTransform(w/W,0,0,h/H,0,0);draw(best)}}
@@ -19,9 +19,16 @@ if(!valid(data)){ctx.fillStyle='#130c08e8';ctx.fillRect(277,470,465,560);line('�
 const time=new Date(data.quote_timestamp),dateparts=new Intl.DateTimeFormat('mr-IN-u-nu-deva',{timeZone:'Asia/Kolkata',day:'numeric',month:'long',year:'numeric'}).formatToParts(time);const date=['day','month','year'].map(k=>dateparts.find(p=>p.type===k)?.value||'').join(' ');
 line(date+'  |  महाराष्ट्र',center,269,32,'#f8e4bf',750);
 const ys=[359,610,853,1089],unitYs=[417,668,911,1147],valueYs=[478,729,972,1208];
-for(let i=0;i<4;i++){line(titles[i],center,ys[i],43,'#f2bd68',800);line(i===3?'१ किलो':'१० ग्रॅम',center,unitYs[i],25,'#fff7e7',650);line('₹'+new Intl.NumberFormat('en-IN').format(data[fields[i]]),525,valueYs[i],62,'#fffaf0',850,true)}
+for(let i=0;i<4;i++){line(titles[i],center,ys[i],43,'#f2bd68',800);line(i===3?'१ किलो':'१० ग्रॅम',center,unitYs[i],25,'#fff7e7',650);const value='₹'+new Intl.NumberFormat('en-IN').format(data[fields[i]]);line(value,525,valueYs[i],62,'#fffaf0',850,true);
+if(changed.has(fields[i])&&glowStarted){const progress=Math.min(1,(performance.now()-glowStarted)/850),strength=Math.sin(progress*Math.PI)*.8;if(strength>0){ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#ffd778';ctx.shadowBlur=25*strength;ctx.fillStyle=`rgba(255,222,148,${.38*strength})`;ctx.fillText(value,525,valueYs[i]);ctx.restore()}}}
 const tt=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',hour12:false}).format(time);
 line('अपडेट: '+tt+' IST',center,1268,23,'#fff0cc',650);status.textContent=`${date}: ${titles.map((t,i)=>t+' '+data[fields[i]]).join(', ')}. अपडेट ${tt} IST.`}
-async function refresh(){let candidate=null;for(const url of ['https://raw.githubusercontent.com/sonarkatta/sonarkatta.github.io/main/1-rates.json','./1-rates.json']){try{const r=await fetch(url+'?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(6500)});if(r.ok){const d=await r.json();if(valid(d)&&(!candidate||new Date(d.quote_timestamp)>new Date(candidate.quote_timestamp)))candidate=d}}catch(_){}}best=candidate;draw(best)}
-sizeCanvas();Promise.all([bg.decode(),logo.decode().catch(()=>{}),document.fonts.ready]).then(()=>{draw(null);refresh()});setInterval(refresh,60000);addEventListener('online',refresh);if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
+function animate(){draw(best);if(performance.now()-glowStarted<850)animFrame=requestAnimationFrame(animate);else{changed.clear();glowStarted=0;draw(best)}}
+async function refresh(){if(fetching)return;fetching=true;try{const r=await fetch('./1-rates.json?ts='+Date.now(),{cache:'no-store',signal:AbortSignal.timeout(6500)});if(!r.ok)return;const next=await r.json();if(!valid(next)||best&&new Date(next.quote_timestamp)<new Date(best.quote_timestamp))return;
+const differences=best?fields.filter(k=>best[k]!==next[k]):[];const timeChanged=!best||best.quote_timestamp!==next.quote_timestamp;best=next;
+if(differences.length){cancelAnimationFrame(animFrame);changed=new Set(differences);glowStarted=performance.now();if(matchMedia('(prefers-reduced-motion: reduce)').matches){changed.clear();glowStarted=0;draw(best)}else animate()}
+else if(timeChanged)draw(best)
+}catch(_){/* Keep the last verified snapshot and its actual update time. */}finally{fetching=false}}
+
+sizeCanvas();Promise.all([bg.decode(),logo.decode().catch(()=>{}),document.fonts.ready]).then(()=>{draw(null);refresh()});setInterval(refresh,60000);addEventListener('online',refresh);addEventListener('visibilitychange',()=>{if(!document.hidden)refresh()});if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
 })();</script></body></html>
