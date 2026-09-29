@@ -135,7 +135,7 @@ const time=new Date(data.quote_timestamp),dateparts=new Intl.DateTimeFormat('mr-
 line(date+'  |  '+(lang==='en'?'Maharashtra':'महाराष्ट्र'),center,282,lang==='en'?27:30,'#f8e4bf',750);
 // Ticking IST clock under the date: the page is alive right now.
 const clock=new Intl.DateTimeFormat('en-IN',{timeZone:'Asia/Kolkata',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date());
-line(clock+' IST',center,322,18,'#d9c193',600,true);
+if(innerHeight>=700)line(clock+' IST',center,322,18,'#d9c193',600,true);
 const ys=[359,610,853,1089],unitYs=[417,668,911,1147],valueYs=[478,729,972,1208];
 for(let i=0;i<4;i++){line(activeTitles()[i],center,ys[i],43,'#f2bd68',800);line(lang==='en'?(i===3?'1 kg':'10 g'):(i===3?'१ किलो':'१० ग्रॅम'),center,unitYs[i],25,'#fff7e7',650);const value=rateText(data[fields[i]]);if(motionOK&&previous&&changed.has(fields[i])&&glowStarted)rollValue(previous[fields[i]],data[fields[i]],525,valueYs[i],now);else line(value,525,valueYs[i],62,'#fffaf0',850,true);
 if(changed.has(fields[i])&&glowStarted&&!(motionOK&&previous)){const progress=Math.min(1,(now-glowStarted)/850),strength=Math.sin(progress*Math.PI)*.8;if(strength>0){ctx.save();ctx.font='850 62px system-ui';ctx.textAlign='center';ctx.textBaseline='middle';ctx.shadowColor='#ffd778';ctx.shadowBlur=25*strength;ctx.fillStyle=`rgba(255,222,148,${.38*strength})`;ctx.fillText(value,525,valueYs[i]);ctx.restore()}}}
