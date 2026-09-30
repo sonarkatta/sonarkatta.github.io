@@ -1,19 +1,19 @@
 {
-  "gold24_10g": 150775,
-  "gold22_10g": 138110,
-  "gold18_10g": 113080,
-  "silver999_kg": 225577,
+  "gold24_10g": 150811,
+  "gold22_10g": 138143,
+  "gold18_10g": 113110,
+  "silver999_kg": 225669,
   "gold995": 149624,
   "retail_995": 149624,
   "retail_999": 150624,
   "gold_995_with_gst": 150820,
   "gold_999_with_gst": 151747,
   "silver_999_with_gst": 226631,
-  "quote_timestamp": "2026-09-30T18:18:46Z",
-  "gold24_10g_captured_at": "2026-09-30T18:18:46Z",
-  "gold22_10g_captured_at": "2026-09-30T18:18:46Z",
-  "gold18_10g_captured_at": "2026-09-30T18:18:46Z",
-  "silver999_kg_captured_at": "2026-09-30T18:18:46Z",
+  "quote_timestamp": "2026-09-30T18:33:59Z",
+  "gold24_10g_captured_at": "2026-09-30T18:33:59Z",
+  "gold22_10g_captured_at": "2026-09-30T18:33:59Z",
+  "gold18_10g_captured_at": "2026-09-30T18:33:59Z",
+  "silver999_kg_captured_at": "2026-09-30T18:33:59Z",
   "gold995_captured_at": "2026-09-30T18:18:46Z",
   "retail_995_captured_at": "2026-09-30T18:18:46Z",
   "retail_999_captured_at": "2026-09-30T18:18:46Z",
@@ -21,24 +21,24 @@
   "gold_999_with_gst_captured_at": "2026-09-30T18:18:46Z",
   "silver_999_with_gst_captured_at": "2026-09-30T15:12:14Z",
   "baseline": {
-    "label": "सकाळी 8:59 पासून",
-    "quote_timestamp": "2026-09-30T03:29:19Z",
-    "gold24_10g": 150415,
-    "gold22_10g": 137780,
-    "gold18_10g": 112812,
-    "silver999_kg": 228092
+    "label": "रात्री 12:03 पासून",
+    "quote_timestamp": "2026-09-30T18:33:59Z",
+    "gold24_10g": 150811,
+    "gold22_10g": 138143,
+    "gold18_10g": 113110,
+    "silver999_kg": 225669
   },
   "opening": {
     "gold995": 150197,
     "quote_timestamp": "2026-09-30T08:56:00Z"
   },
   "previous_recorded_day": {
-    "date": "2026-09-29",
-    "quote_timestamp": "2026-09-29T10:37:57Z",
-    "gold24_10g": 149613,
-    "gold22_10g": 137046,
-    "gold18_10g": 112209,
-    "silver999_kg": 227505
+    "date": "2026-09-30",
+    "quote_timestamp": "2026-09-30T18:18:46Z",
+    "gold24_10g": 150775,
+    "gold22_10g": 138110,
+    "gold18_10g": 113080,
+    "silver999_kg": 225577
   },
   "cities": [
     {
