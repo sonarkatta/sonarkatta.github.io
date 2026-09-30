@@ -1,6 +1,33 @@
 {
-  "updated_at": "2026-09-30T09:30:00+05:30",
+  "updated_at": "2026-09-30T18:30:00+05:30",
   "items": [
+    {
+      "date": "2026-09-30",
+      "title_mr": "तीन दिवसांच्या घसरणीनंतर सोने-चांदी वाढली",
+      "body_mr": "बुधवारी MCX वर सोने-चांदी तीन दिवसांच्या घसरणीनंतर वाढली. ऑक्टोबर सोन्याचे वायदे ₹१,११४ ने वाढून ₹१,४७,३४६ प्रति १० ग्रॅम, तर चांदीचे वायदे ₹१,०५० ने वाढून ₹२,२६,४८७ प्रति किलो झाले. अमेरिकेच्या महागाईच्या आकड्यांची वाट पाहत गुंतवणूकदारांनी खरेदी केली. व्याजदर वाढण्याची शक्यता मात्र सोन्यावर दबाव ठेवत आहे.",
+      "title_en": "Gold, silver rise after three-day fall",
+      "body_en": "Gold and silver rose on MCX on Wednesday after a three-day fall. October gold futures gained Rs 1,114 to Rs 1,47,346 per 10 grams, while silver futures rose Rs 1,050 to Rs 2,26,487 per kg. Investors bought ahead of US inflation data due later in the day. The chance of higher interest rates still keeps pressure on gold.",
+      "source": "Economic Times",
+      "url": "https://economictimes.indiatimes.com/markets/commodities/news/gold-prices-rise-rs-1100/10-gram-silver-up-rs-1050/kg-ahead-of-inflation-data-key-levels-to-track/articleshow/134581772.cms"
+    },
+    {
+      "date": "2026-09-30",
+      "title_mr": "तेल स्वस्त झाल्याने सोने-चांदीला आधार",
+      "body_mr": "कच्चे तेल स्वस्त झाल्याने आणि अमेरिकी केंद्रीय बँकेच्या अधिकाऱ्यांच्या वक्तव्याने बुधवारी सोने-चांदीला दिलासा मिळाला. न्यूयॉर्क फेडचे प्रमुख जॉन विल्यम्स म्हणाले की व्याजदर वाढवण्याची तातडी नाही; त्यानंतर ऑक्टोबरमध्ये दरवाढ होण्याची शक्यता ७०% वरून ५०% वर आली. MCX वर डिसेंबर सोन्याचे वायदे ₹१,०८७ ने वाढून ₹१,४९,९१० प्रति १० ग्रॅमवर उघडले, तर कॉमेक्सवर सोने $४,२१५ प्रति औंसजवळ होते.",
+      "title_en": "Cheaper oil, Fed comments lift gold and silver",
+      "body_en": "Falling crude oil prices and comments from a US Federal Reserve official helped gold and silver recover on Wednesday. New York Fed chief John Williams said there was no urgency for another rate hike, after which the chance of an October hike fell to 50% from about 70%. December gold futures on MCX opened Rs 1,087 higher at Rs 1,49,910 per 10 grams, while Comex gold traded near $4,215 an ounce.",
+      "source": "Business Standard",
+      "url": "https://www.business-standard.com/markets/commodities/gold-silver-prices-rebound-as-crude-oil-prices-fall-on-supply-boost-126093000340_1.html"
+    },
+    {
+      "date": "2026-09-30",
+      "title_mr": "सणासुदीआधी दर वाढले; खरेदीदार सावध",
+      "body_mr": "सणासुदीच्या हंगामाआधी बुधवारी सोने-चांदीचे दर वाढले. बुलियन्स.कॉ.इन नुसार २४ कॅरेट सोने ₹१,३९० ने वाढून ₹१,५०,२५० प्रति १० ग्रॅम झाले, तर चांदी ₹१,४५० ने वाढून ₹२,२६,७५० प्रति किलो झाली. पुण्यात २४ कॅरेट सोने ₹१,४९,५७० प्रति १० ग्रॅम होते. वर्ल्ड गोल्ड कौन्सिलनुसार महाग सोन्यामुळे ग्राहक सध्या थांबा-पहा वृत्तीत आहेत.",
+      "title_en": "Gold rates rise before festive season; buyers cautious",
+      "body_en": "Gold and silver rates rose on Wednesday ahead of the festive season. As per Bullions.co.in, 24 karat gold rose Rs 1,390 to Rs 1,50,250 per 10 grams, while silver rose Rs 1,450 to Rs 2,26,750 per kg. In Pune, 24 karat gold stood at Rs 1,49,570 per 10 grams. The World Gold Council says high prices have put buyers in wait-and-watch mode.",
+      "source": "Upstox",
+      "url": "https://upstox.com/news/personal-finance/commodities/gold-silver-rates-today-september-30-prices-rise-ahead-of-festive-wedding-season-check-city-wise-rates/article-201120/"
+    },
     {
       "date": "2026-09-30",
       "title_mr": "बुधवारी सकाळी सोने स्वस्त झाले",
@@ -27,24 +54,6 @@
       "body_en": "On Tuesday, December gold futures on MCX fell Rs 419 to Rs 1,46,385 per 10 grams, after Monday's fall of more than Rs 3,000. Weaker spot demand pulled prices down, while rising US bond yields and costlier crude oil kept the pressure on gold.",
       "source": "Business Upturn",
       "url": "https://businessupturn.com/sectors/commodities/why-is-gold-falling-mcx-futures-drop-to-rs-1-46-385-amid-weak-spot-demand/"
-    },
-    {
-      "date": "2026-09-29",
-      "title_mr": "दुसऱ्या दिवशीही MCX वर सोने-चांदीवर दबाव",
-      "body_mr": "मंगळवारी MCX वर सोने-चांदी सलग दुसऱ्या दिवशी दबावात राहिली. दुपारपर्यंत चांदीचे वायदे 0.48% ने घसरले होते, तर सोने मागील बंदभावाजवळ स्थिर होते. डॉलर निर्देशांक १०१ च्या जवळ राहिला आणि अमेरिकी १० वर्षांच्या रोख्यांचा परतावा ५.२०% च्या वर राहिला. रुपयाही ९६.०५ प्रति डॉलरवर कमकुवत उघडला.",
-      "title_en": "Gold, silver under pressure on MCX for second day",
-      "body_en": "Gold and silver stayed under pressure on MCX for a second straight day on Tuesday. By afternoon, silver futures were down 0.48% while gold was near its previous close. The dollar index moved closer to 101 and US 10-year bond yields stayed above 5.20%. The rupee also opened weaker at 96.05 per dollar.",
-      "source": "Zee Business",
-      "url": "https://www.zeebiz.com/markets/commodities/news-mcx-gold-silver-under-pressure-as-dollar-us-bond-yields-rise-check-outlook-403027"
-    },
-    {
-      "date": "2026-09-29",
-      "title_mr": "देशात सोन्याचा दर दुसऱ्या दिवशी घसरला; चांदी स्थिर",
-      "body_mr": "मंगळवारी भारतात २४ कॅरेट सोने ₹१३७ प्रति ग्रॅम ने घसरून ₹१४,८८० प्रति ग्रॅम झाले. २२ कॅरेट सोने ₹१२५ ने घसरून ₹१३,६४० प्रति ग्रॅम आणि १८ कॅरेट ₹१०३ ने घसरून ₹११,१६० प्रति ग्रॅम झाले. चांदी ₹२,४०,००० प्रति किलोवर स्थिर राहिली.",
-      "title_en": "Gold rate in India falls for second day; silver steady",
-      "body_en": "On Tuesday, 24 karat gold in India fell Rs 137 per gram to Rs 14,880 per gram. 22 karat gold dropped Rs 125 to Rs 13,640 per gram, and 18 karat fell Rs 103 to Rs 11,160 per gram. Silver stayed unchanged at Rs 2,40,000 per kg.",
-      "source": "Goodreturns",
-      "url": "https://www.goodreturns.in/news/drop-in-gold-rate-today-in-india-continues-in-2-days-check-latest-22k-24k-18k-gold-prices-1537935.html"
     }
   ]
 }
