@@ -1,5 +1,5 @@
-const CACHE='sonar-pearl-pwa-20260930-2';
+const CACHE='sonar-pearl-pwa-20260930-apple-display-1';
 const SHELL=['./index.html','./4-pearl-logo.png','./2-gold-supplied-cutout.png','./3-silver-supplied-cutout.png','./2-pearl-icon-192.png','./3-pearl-icon-180.png','./1-pearl-icon-512.png'];
-self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting())));
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>Promise.all(SHELL.map(async path=>{const r=await fetch(new Request(path,{cache:'reload'}));if(!r.ok)throw Error('Shell download failed');return c.put(path,r);}))).then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('sonar-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==location.origin)return;if(u.pathname.endsWith('/1-rates.json')||u.pathname.endsWith('/2-news.json')){e.respondWith(fetch(e.request,{cache:'no-store'}));return;}if(e.request.mode==='navigate'){e.respondWith(fetch(e.request,{cache:'no-store'}).then(r=>{if(r.ok){const copy=r.clone();caches.open(CACHE).then(c=>c.put('./index.html',copy));}return r;}).catch(()=>caches.match('./index.html')));return;}e.respondWith(caches.match(e.request).then(hit=>hit||fetch(e.request)));});
