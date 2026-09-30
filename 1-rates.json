@@ -3,8 +3,8 @@
   "gold22_10g": 138132,
   "gold18_10g": 113100,
   "silver999_kg": 225687,
-  "gold995": 149624,
-  "retail_995": 149624,
+  "gold995": 149648,
+  "retail_995": 149648,
   "retail_999": 150624,
   "gold_995_with_gst": 150820,
   "gold_999_with_gst": 151747,
@@ -14,8 +14,8 @@
   "gold22_10g_captured_at": "2026-09-30T18:49:12Z",
   "gold18_10g_captured_at": "2026-09-30T18:49:12Z",
   "silver999_kg_captured_at": "2026-09-30T18:49:12Z",
-  "gold995_captured_at": "2026-09-30T18:18:46Z",
-  "retail_995_captured_at": "2026-09-30T18:18:46Z",
+  "gold995_captured_at": "2026-09-30T18:49:12Z",
+  "retail_995_captured_at": "2026-09-30T18:49:12Z",
   "retail_999_captured_at": "2026-09-30T18:18:46Z",
   "gold_995_with_gst_captured_at": "2026-09-30T18:18:46Z",
   "gold_999_with_gst_captured_at": "2026-09-30T18:18:46Z",
@@ -38,7 +38,9 @@
     "gold24_10g": 150775,
     "gold22_10g": 138110,
     "gold18_10g": 113080,
-    "silver999_kg": 225577
+    "silver999_kg": 225577,
+    "gold995": 149624,
+    "gold995_captured_at": "2026-09-30T18:18:46Z"
   },
   "cities": [
     {
