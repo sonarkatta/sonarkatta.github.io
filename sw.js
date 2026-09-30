@@ -1,24 +1,5 @@
-const CACHE = 'sonar-katta-pages-20260929-refined-card-17';
-const STATIC = ['./', './index.html', './6-1-card-template-clean.png', './2-brand-original.png', './3-icon-original-512.png', './manifest.json', './icon-512.png', './4-crystal-clean-v2.webp', './logo-card.webp', './1-logo-approved.png', './gold-bars.webp', './silver-bars.webp', './1-footer-glow.webp', './2-arrow-ornament.png', './3-bill-ornament.png', './4-gst-star.png'];
-self.addEventListener('install', event => {
-  event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(STATIC)).then(() => self.skipWaiting()));
-});
-self.addEventListener('activate', event => {
-  event.waitUntil(Promise.all([caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))), self.clients.claim()]));
-});
-self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') return;
-  // Live bullion rates are never served from the offline/static cache.
-  if (new URL(event.request.url).pathname.endsWith('/1-rates.json') || new URL(event.request.url).pathname.endsWith('/2-news.json')) {
-    event.respondWith(fetch(event.request, {cache: 'no-store'}));
-    return;
-  }
-  if (event.request.mode === 'navigate') {
-    event.respondWith(fetch(event.request).then(response => {
-      if (response.ok) { const copy = response.clone(); caches.open(CACHE).then(cache => cache.put('./index.html', copy)); }
-      return response;
-    }).catch(() => caches.match('./index.html')));
-  } else if (new URL(event.request.url).origin === self.location.origin) {
-    event.respondWith(caches.match(event.request).then(hit => hit || fetch(event.request)));
-  }
-});
+const CACHE='sonar-pearl-pwa-20260930-2';
+const SHELL=['./index.html','./4-pearl-logo.png','./2-gold-supplied-cutout.png','./3-silver-supplied-cutout.png','./2-pearl-icon-192.png','./3-pearl-icon-180.png','./1-pearl-icon-512.png'];
+self.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting())));
+self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('sonar-')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;const u=new URL(e.request.url);if(u.origin!==location.origin)return;if(u.pathname.endsWith('/1-rates.json')||u.pathname.endsWith('/2-news.json')){e.respondWith(fetch(e.request,{cache:'no-store'}));return;}if(e.request.mode==='navigate'){e.respondWith(fetch(e.request,{cache:'no-store'}).then(r=>{if(r.ok){const copy=r.clone();caches.open(CACHE).then(c=>c.put('./index.html',copy));}return r;}).catch(()=>caches.match('./index.html')));return;}e.respondWith(caches.match(e.request).then(hit=>hit||fetch(e.request)));});
