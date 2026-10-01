@@ -1,0 +1,56 @@
+name: Comment rates (disabled until approved)
+on:
+  workflow_dispatch:
+# No schedule until credentials, final wording, trigger and live test are approved.
+permissions:
+  contents: write
+concurrency:
+  group: comment-rates
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run offline safety tests
+        run: python3 -m unittest discover -s automation/comment_rates -p 'test_*.py'
+  reply:
+    needs: verify
+    if: vars.COMMENT_RATES_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Initialize isolated dedupe branch if missing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git ls-remote --exit-code --heads origin comment-rates-state; then
+            exit 0
+          fi
+          git config user.name 'Sonar Katta rates automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git checkout --orphan comment-rates-state
+          git rm -rf .
+          printf '%s\n' '{"schema":1,"seen":{},"counts":{}}' > state.json
+          git add state.json
+          git commit -m 'Initialize rates reply dedupe ledger'
+          git push origin HEAD:comment-rates-state
+          git checkout main
+      - name: Reply to eligible public rate requests
+        env:
+          COMMENT_RATES_ENABLED: ${{ vars.COMMENT_RATES_ENABLED }}
+          COMMENT_RATES_PLATFORMS: ${{ vars.COMMENT_RATES_PLATFORMS }}
+          COMMENT_RATES_START_AT: ${{ vars.COMMENT_RATES_START_AT }}
+          YOUTUBE_CHANNEL_ID: ${{ vars.YOUTUBE_CHANNEL_ID }}
+          FACEBOOK_PAGE_ID: ${{ vars.FACEBOOK_PAGE_ID }}
+          INSTAGRAM_ACCOUNT_ID: ${{ vars.INSTAGRAM_ACCOUNT_ID }}
+          META_API_VERSION: ${{ vars.META_API_VERSION }}
+          YOUTUBE_CLIENT_ID: ${{ secrets.YOUTUBE_CLIENT_ID }}
+          YOUTUBE_CLIENT_SECRET: ${{ secrets.YOUTUBE_CLIENT_SECRET }}
+          YOUTUBE_REFRESH_TOKEN: ${{ secrets.YOUTUBE_REFRESH_TOKEN }}
+          META_PAGE_TOKEN: ${{ secrets.META_PAGE_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python3 automation/comment_rates/bot.py
