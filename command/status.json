@@ -1,0 +1,10 @@
+{
+  "_doc": "Edit tiles only. Fields: id (short key), title (Marathi label), headline (one line, what matters now), note (optional second line), state (ok = green, warn = amber, bad = red, anything else = grey), updated_at (UTC ISO time of the change), wide (optional true = full width). Keep each text short. Set updated_at to the real change time. No rate-source names.",
+  "tiles": [
+    {"id":"app","title":"Sonar Katta अ‍ॅप","headline":"लाइव्ह","note":"दर दर ५ मिनिटांनी अपडेट होतात (सकाळी ९ ते रात्री १०)","state":"ok","updated_at":"2026-10-02T15:31:14Z"},
+    {"id":"roop","title":"रूप","headline":"लाइव्ह, नवीन आवृत्ती","note":"फोनवर चाचणी सुरू आहे","state":"ok","updated_at":"2026-10-02T15:31:14Z"},
+    {"id":"short","title":"रोजचा शॉर्ट","headline":"ड्राफ्ट तयार","note":"३५ सेकंद. तुमच्या मंजुरीची वाट","state":"warn","updated_at":"2026-10-02T15:31:14Z"},
+    {"id":"salon","title":"Anu's Beauty Care","headline":"चॅनल सांभाळत आहे","note":"नवीन व्हिडिओची तयारी","state":"idle","updated_at":"2026-10-02T15:31:14Z"},
+    {"id":"posters","title":"पोस्टर्स","headline":"सॅम्पल तयार","note":"क्लायंट काम सुरू करायचे","state":"idle","updated_at":"2026-10-02T15:31:14Z","wide":true}
+  ]
+}
