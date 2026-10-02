@@ -277,16 +277,21 @@ if(!SR){
  showHint('आवाज: कीबोर्डचा माईक वापरा');
 }
 else{
- var langs=['mr-IN','hi-IN','en-IN'],li=0,gotText=false;
+ var langs=['mr-IN','hi-IN','en-IN'],li=0,gotText=false,heard=false;
  function startRec(){
    rec=new SR();rec.lang=langs[li];rec.interimResults=true;rec.continuous=false;
-   var base=$('cmd').value;gotText=false;var failed=false;
+   var base=$('cmd').value;gotText=false;heard=false;var failed=false;
    rec.onstart=function(){listening=true;micb.classList.add('on');rimOn(true);micst.textContent='ऐकत आहे… बोला ('+langs[li]+')'};
    rec.onresult=function(e){gotText=true;var t='';for(var i=0;i<e.results.length;i++)t+=e.results[i][0].transcript;$('cmd').value=(base?base+' ':'')+t};
    rec.onerror=function(ev){failed=true;var c=ev.error||'unknown';
      if((c==='language-not-supported'||c==='service-not-allowed'||c==='no-speech'&&false)&&li<langs.length-1){li++;micst.textContent='भाषा बदलत आहे ('+langs[li]+')…';setTimeout(startRec,300);return}
      micst.textContent=(c==='not-allowed'||c==='service-not-allowed'?'माईकची परवानगी द्या (Settings > Safari > Microphone, Siri आणि Dictation चालू ठेवा)':c==='no-speech'?'आवाज ऐकू आला नाही, पुन्हा बोला':'ऐकू शकलो नाही')+' ['+c+']'};
-   rec.onend=function(){if(failed&&micst.textContent.indexOf('भाषा')===0)return;listening=false;micb.classList.remove('on');rimOn(false);setTimeout(function(){if(micst.textContent.indexOf('ऐकत')===0)micst.textContent=''},1500)};
+   rec.onspeechstart=function(){heard=true;micst.textContent='आवाज ऐकू आला ['+langs[li]+']…'};
+   rec.onend=function(){if(failed&&micst.textContent.indexOf('भाषा')===0)return;
+     if(!failed&&!gotText){listening=false;micb.classList.remove('on');rimOn(false);
+       if(li<langs.length-1){li++;micst.textContent='मजकूर आला नाही, '+langs[li]+' वापरून पुन्हा… बोला';setTimeout(startRec,300);return}
+       micst.textContent='मजकूर आला नाही ['+(heard?'speech-no-result':'no-audio-result')+'] - कीबोर्डचा माईक वापरा (Settings > General > Keyboard > Dictation Languages मध्ये मराठी)';return}
+listening=false;micb.classList.remove('on');rimOn(false);setTimeout(function(){if(micst.textContent.indexOf('ऐकत')===0)micst.textContent=''},1500)};
    rec.onaudiostart=function(){micst.textContent='माईक चालू ['+langs[li]+'] बोला'};
    rec.onnomatch=function(){micst.textContent='समजले नाही [nomatch]'};
    micst.textContent='माईक सुरू करत आहे…';
