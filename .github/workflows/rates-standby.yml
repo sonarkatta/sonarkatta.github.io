@@ -1,0 +1,54 @@
+name: rates-standby
+
+# Hot standby for the rates file. It writes only when 1-rates.json is stale
+# (the main publisher missed several cycles) and both feed pages verify.
+on:
+  schedule:
+    - cron: '2-57/5 3-16 * * *'   # every 5 min, 08:32-22:27 IST; the script enforces 09:00-22:00 IST
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Ignore window and staleness (test)'
+        type: boolean
+        default: false
+      dry_run:
+        description: 'Verify only, never write'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+
+concurrency:
+  group: rates-standby
+  cancel-in-progress: false
+
+jobs:
+  standby:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Verify and update
+        env:
+          REF_URL_MUM: ${{ secrets.REF_URL_MUM }}
+          REF_URL_PUN: ${{ secrets.REF_URL_PUN }}
+          FORCE: ${{ github.event_name == 'workflow_dispatch' && inputs.force && '1' || '0' }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '0' }}
+          STALE_MIN: '12'
+        run: python3 scripts/rates_sync.py
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- 1-rates.json; then echo "no change"; exit 0; fi
+          git fetch origin main
+          if ! git diff --quiet HEAD origin/main -- 1-rates.json; then
+            echo "main publisher wrote meanwhile, dropping this update"; git checkout -- 1-rates.json; exit 0
+          fi
+          git config user.name "rates-standby"
+          git config user.email "rates-standby@users.noreply.github.com"
+          git add 1-rates.json
+          git commit -m "rates: standby update $(TZ=Asia/Kolkata date +%H:%M)"
+          git pull --rebase origin main
+          git push origin HEAD:main
