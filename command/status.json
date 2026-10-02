@@ -1,10 +1,15 @@
 {
-  "_doc": "Edit tiles only. Fields: id (short key), title (Marathi label), headline (one line, what matters now), note (optional second line), state (ok = green, warn = amber, bad = red, anything else = grey), updated_at (UTC ISO time of the change), wide (optional true = full width). Keep each text short. Set updated_at to the real change time. No rate-source names.",
+  "_doc": "Edit tiles and activity only. Tile fields: id, title (Marathi label), tag (tiny English caption, optional), icon (coins|smartphone|sprout|clapperboard|scissors|images|activity|shield-check|radio|clock-3|gem), accent (gold|teal|blue|pink|purple|orange|green), state (ok = LIVE green, warn = WAITING amber, bad = ALERT red, idle = IDLE grey), badge (optional text to replace the state label), headline (one short line), note (optional), updated_at (UTC ISO time of the change), wide (optional true = full width). Tile order is display order. activity: list of {at: UTC ISO time (optional), text}; newest six show, the rates publish line is added automatically. Keep text short. No rate-source names.",
   "tiles": [
-    {"id":"app","title":"Sonar Katta अ‍ॅप","headline":"लाइव्ह","note":"दर दर ५ मिनिटांनी अपडेट होतात (सकाळी ९ ते रात्री १०)","state":"ok","updated_at":"2026-10-02T15:31:14Z"},
-    {"id":"roop","title":"रूप","headline":"लाइव्ह, नवीन आवृत्ती","note":"फोनवर चाचणी सुरू आहे","state":"ok","updated_at":"2026-10-02T15:31:14Z"},
-    {"id":"short","title":"रोजचा शॉर्ट","headline":"ड्राफ्ट तयार","note":"३५ सेकंद. तुमच्या मंजुरीची वाट","state":"warn","updated_at":"2026-10-02T15:31:14Z"},
-    {"id":"salon","title":"Anu's Beauty Care","headline":"चॅनल सांभाळत आहे","note":"नवीन व्हिडिओची तयारी","state":"idle","updated_at":"2026-10-02T15:31:14Z"},
-    {"id":"posters","title":"पोस्टर्स","headline":"सॅम्पल तयार","note":"क्लायंट काम सुरू करायचे","state":"idle","updated_at":"2026-10-02T15:31:14Z","wide":true}
+    {"id":"app","title":"Sonar Katta अ‍ॅप","tag":"APP","icon":"smartphone","accent":"teal","state":"ok","headline":"लाइव्ह","note":"दर दर ५ मिनिटांनी अपडेट (सकाळी ९ ते रात्री १०)","updated_at":"2026-10-02T15:50:41Z"},
+    {"id":"roop","title":"रूप","tag":"ROOP","icon":"sprout","accent":"blue","state":"ok","headline":"लाइव्ह, नवीन आवृत्ती","note":"फोनवर AI चाचणी सुरू","updated_at":"2026-10-02T15:50:41Z"},
+    {"id":"short","title":"रोजचा शॉर्ट","tag":"DAILY SHORT","icon":"clapperboard","accent":"pink","state":"warn","badge":"APPROVAL","headline":"ड्राफ्ट तयार","note":"३५ सेकंद. तुमच्या मंजुरीची वाट","updated_at":"2026-10-02T15:50:41Z"},
+    {"id":"salon","title":"Anu's Beauty Care","tag":"SALON CHANNEL","icon":"scissors","accent":"purple","state":"idle","headline":"चॅनल सांभाळत आहे","note":"नवीन व्हिडिओची तयारी","updated_at":"2026-10-02T15:50:41Z"},
+    {"id":"posters","title":"पोस्टर्स","tag":"POSTERS","icon":"images","accent":"orange","state":"idle","headline":"सॅम्पल तयार","note":"क्लायंट काम सुरू करायचे","updated_at":"2026-10-02T15:50:41Z","wide":true}
+  ],
+  "activity": [
+    {"at":"2026-10-02T15:50:00Z","text":"कंट्रोल रूम नवीन रूपात लाइव्ह"},
+    {"at":"2026-10-02T14:21:00Z","text":"रूप: फोन चाचणी आवृत्ती तैनात"},
+    {"text":"रोजचा शॉर्ट: ३५ सेकंदाचा ड्राफ्ट मंजुरीसाठी पाठवला"}
   ]
 }
