@@ -1,15 +1,77 @@
 {
-  "_doc": "Edit tiles and activity only. Tile fields: id, title (Marathi label), tag (tiny English caption, optional), icon (coins|smartphone|sprout|clapperboard|scissors|images|activity|shield-check|radio|clock-3|gem), accent (gold|teal|blue|pink|purple|orange|green), state (ok = LIVE green, warn = WAITING amber, bad = ALERT red, idle = IDLE grey), badge (optional text to replace the state label), headline (one short line), note (optional), updated_at (UTC ISO time of the change), wide (optional true = full width). Tile order is display order. activity: list of {at: UTC ISO time (optional), text}; newest six show, the rates publish line is added automatically. Keep text short. No rate-source names.",
-  "tiles": [
-    {"id":"app","title":"Sonar Katta अ‍ॅप","tag":"APP","icon":"smartphone","accent":"teal","state":"ok","headline":"लाइव्ह","note":"दर दर ५ मिनिटांनी अपडेट (सकाळी ९ ते रात्री १०)","updated_at":"2026-10-02T15:50:41Z"},
-    {"id":"roop","title":"रूप","tag":"ROOP","icon":"sprout","accent":"blue","state":"ok","headline":"लाइव्ह, नवीन आवृत्ती","note":"फोनवर AI चाचणी सुरू","updated_at":"2026-10-02T15:50:41Z"},
-    {"id":"short","title":"रोजचा शॉर्ट","tag":"DAILY SHORT","icon":"clapperboard","accent":"pink","state":"warn","badge":"APPROVAL","headline":"ड्राफ्ट तयार","note":"३५ सेकंद. तुमच्या मंजुरीची वाट","updated_at":"2026-10-02T15:50:41Z"},
-    {"id":"salon","title":"Anu's Beauty Care","tag":"SALON CHANNEL","icon":"scissors","accent":"purple","state":"idle","headline":"चॅनल सांभाळत आहे","note":"नवीन व्हिडिओची तयारी","updated_at":"2026-10-02T15:50:41Z"},
-    {"id":"posters","title":"पोस्टर्स","tag":"POSTERS","icon":"images","accent":"orange","state":"idle","headline":"सॅम्पल तयार","note":"क्लायंट काम सुरू करायचे","updated_at":"2026-10-02T15:50:41Z","wide":true}
-  ],
-  "activity": [
-    {"at":"2026-10-02T15:50:00Z","text":"कंट्रोल रूम नवीन रूपात लाइव्ह"},
-    {"at":"2026-10-02T14:21:00Z","text":"रूप: फोन चाचणी आवृत्ती तैनात"},
-    {"text":"रोजचा शॉर्ट: ३५ सेकंदाचा ड्राफ्ट मंजुरीसाठी पाठवला"}
-  ]
+ "_doc": "Edit tiles, activity and replies only. Tile fields: id, title (Marathi label), tag (tiny caption, optional), icon (coins|smartphone|sprout|clapperboard|scissors|images|activity|shield-check|radio|clock-3|gem), state (ok = लाइव्ह, warn = वाट, bad = अडचण, idle = शांत, run = चालू आहे with optional progress 0-100, done = पूर्ण), badge (optional label override), headline (one short line), note (optional), updated_at (UTC ISO time of the change), wide (optional true = full width). Tile order is display order. activity: list of {at: UTC ISO (optional), text}; newest five show and the rates publish line is added automatically. replies: list of {at: UTC ISO, text} - the agents' answers to his commands, newest last; the page shows the last six mixed with the commands he sent from this phone. Keep text short. No rate-source names. line: the phone number the command bar texts (E.164, + and digits only); change it here without touching the page code.",
+ "tiles": [
+  {
+   "id": "app",
+   "title": "Sonar Katta अ‍ॅप",
+   "tag": "APP",
+   "icon": "smartphone",
+   "state": "ok",
+   "headline": "लाइव्ह",
+   "note": "दर दर ५ मिनिटांनी अपडेट (सकाळी ९ ते रात्री १०)",
+   "updated_at": "2026-10-02T15:50:41Z"
+  },
+  {
+   "id": "roop",
+   "title": "रूप",
+   "tag": "ROOP",
+   "icon": "sprout",
+   "state": "ok",
+   "headline": "लाइव्ह, नवीन आवृत्ती",
+   "note": "फोनवर AI चाचणी सुरू",
+   "updated_at": "2026-10-02T15:50:41Z"
+  },
+  {
+   "id": "short",
+   "title": "रोजचा शॉर्ट",
+   "tag": "DAILY SHORT",
+   "icon": "clapperboard",
+   "state": "warn",
+   "badge": "APPROVAL",
+   "headline": "ड्राफ्ट तयार",
+   "note": "३५ सेकंद. तुमच्या मंजुरीची वाट",
+   "updated_at": "2026-10-02T15:50:41Z"
+  },
+  {
+   "id": "salon",
+   "title": "Anu's Beauty Care",
+   "tag": "SALON CHANNEL",
+   "icon": "scissors",
+   "state": "idle",
+   "headline": "चॅनल सांभाळत आहे",
+   "note": "नवीन व्हिडिओची तयारी",
+   "updated_at": "2026-10-02T15:50:41Z"
+  },
+  {
+   "id": "posters",
+   "title": "पोस्टर्स",
+   "tag": "POSTERS",
+   "icon": "images",
+   "state": "idle",
+   "headline": "सॅम्पल तयार",
+   "note": "क्लायंट काम सुरू करायचे",
+   "updated_at": "2026-10-02T15:50:41Z",
+   "wide": true
+  }
+ ],
+ "activity": [
+  {
+   "at": "2026-10-02T15:50:00Z",
+   "text": "कंट्रोल रूम नवीन रूपात लाइव्ह"
+  },
+  {
+   "at": "2026-10-02T14:21:00Z",
+   "text": "रूप: फोन चाचणी आवृत्ती तैनात"
+  },
+  {
+   "text": "रोजचा शॉर्ट: ३५ सेकंदाचा ड्राफ्ट मंजुरीसाठी पाठवला"
+  }
+ ],
+ "replies": [
+  {
+   "at": "2026-10-02T16:15:00Z",
+   "text": "आदेश लिहा आणि पाठवा, तो मेसेज म्हणून जाईल. उत्तरे इथे दिसतील."
+  }
+ ],
+ "line": "+16503843719"
 }
