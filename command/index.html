@@ -287,7 +287,11 @@ else{
      if((c==='language-not-supported'||c==='service-not-allowed'||c==='no-speech'&&false)&&li<langs.length-1){li++;micst.textContent='भाषा बदलत आहे ('+langs[li]+')…';setTimeout(startRec,300);return}
      micst.textContent=(c==='not-allowed'||c==='service-not-allowed'?'माईकची परवानगी द्या (Settings > Safari > Microphone, Siri आणि Dictation चालू ठेवा)':c==='no-speech'?'आवाज ऐकू आला नाही, पुन्हा बोला':'ऐकू शकलो नाही')+' ['+c+']'};
    rec.onend=function(){if(failed&&micst.textContent.indexOf('भाषा')===0)return;listening=false;micb.classList.remove('on');rimOn(false);setTimeout(function(){if(micst.textContent.indexOf('ऐकत')===0)micst.textContent=''},1500)};
+   rec.onaudiostart=function(){micst.textContent='माईक चालू ['+langs[li]+'] बोला'};
+   rec.onnomatch=function(){micst.textContent='समजले नाही [nomatch]'};
+   micst.textContent='माईक सुरू करत आहे…';
    rec.start();
+   setTimeout(function(){if(!listening&&micst.textContent.indexOf('माईक सुरू')===0)micst.textContent='सुरू झाले नाही [no-start]: Settings > Siri मध्ये Dictation चालू करा / Safari मध्ये उघडा / कीबोर्डचा माईक वापरा'},2500);
  }
  micb.addEventListener('click',function(){
    if(listening){try{rec.stop()}catch(e){}return}
