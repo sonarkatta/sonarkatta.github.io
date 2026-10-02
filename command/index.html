@@ -81,6 +81,15 @@ h1{margin:0;font-size:34px;font-weight:700;letter-spacing:.2px}
 .msg:not(.me) .bub{border-bottom-left-radius:6px}
 .bub time{display:block;font-size:10px;opacity:.55;margin-top:3px}
 .hint{font-size:11.5px;color:var(--dim);text-align:center;margin:8px 0 2px;line-height:1.4}
+
+.micb{width:40px;height:40px;border-radius:50%;border:0;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.08);color:var(--gold);box-shadow:inset 0 0 0 .8px rgba(var(--g),.45)}
+.micb svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.micb.on{background:linear-gradient(160deg,#f1d79b,#c19a52);color:#1a1409;animation:micp 1.6s ease-in-out infinite}
+@keyframes micp{0%,100%{box-shadow:0 0 0 0 rgba(214,178,108,.5)}50%{box-shadow:0 0 0 9px rgba(214,178,108,0)}}
+.spk{width:30px;height:30px;border-radius:50%;border:0;display:grid;place-items:center;background:none;color:var(--dim)}
+.spk svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.spk.on{color:var(--gold)}
+.micst{text-align:center;font-size:12px;color:var(--gold);min-height:16px;margin:6px 0 2px}
 /* composer */
 .dock{position:fixed;left:0;right:0;bottom:0;z-index:20;padding:10px 14px calc(env(safe-area-inset-bottom) + 12px);
 background:linear-gradient(180deg,rgba(10,9,8,0),rgba(10,9,8,.78) 40%);}
@@ -131,7 +140,7 @@ body.on .rim{opacity:1;animation:rimb 3.2s ease-in-out infinite}
 
 <div class="lab"><span>संवाद</span></div>
 <section class="glass thread" id="thread">
-<div class="th"><b>आदेश आणि उत्तरे</b><span class="soon">LIVE CHAT · लवकरच</span></div>
+<div class="th"><b>आदेश आणि उत्तरे</b><span style="display:flex;align-items:center;gap:8px"><button type="button" class="spk" id="spk" aria-label="आवाज"></button><span class="soon">LIVE CHAT · लवकरच</span></span></div>
 <div id="msgs"></div>
 <p class="hint">आदेश मेसेज म्हणून जातो. उत्तर इथे दिसते. लवकरच इथेच थेट चॅट.</p>
 </section>
@@ -140,13 +149,14 @@ body.on .rim{opacity:1;animation:rimb 3.2s ease-in-out infinite}
 
 <div class="dock"><div class="in">
 <div class="chips" id="chips"><button>आजचा शॉर्ट बनव</button><button>उद्याचा शॉर्ट बनव</button><button>दर तपासा</button><button>रील पोस्ट करा</button><button>पोस्टर बनव</button></div>
-<form class="bar" id="form" autocomplete="off"><input id="cmd" type="text" placeholder="आदेश लिहा… उदा. उद्याचा शॉर्ट बनव" enterkeyhint="send" autocapitalize="off" autocorrect="off"><button type="submit" aria-label="पाठवा"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></form>
+<div class="micst" id="micst"></div>
+<form class="bar" id="form" autocomplete="off"><button type="button" class="micb" id="micb" aria-label="बोला"></button><input id="cmd" type="text" placeholder="आदेश लिहा… उदा. उद्याचा शॉर्ट बनव" enterkeyhint="send" autocapitalize="off" autocorrect="off"><button type="submit" aria-label="पाठवा"><svg viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></form>
 </div></div>
 <div class="rim" id="rim"></div>
 <div class="toast" id="toast"></div>
 
 <script>
-var ICONS={"coins": "<path d=\"M13.744 17.736a6 6 0 1 1-7.48-7.48\" /> <path d=\"M15 6h1v4\" /> <path d=\"m6.134 14.768.866-.5 2 3.464\" /> <circle cx=\"16\" cy=\"8\" r=\"6\" />", "smartphone": "<rect width=\"14\" height=\"20\" x=\"5\" y=\"2\" rx=\"2\" ry=\"2\" /> <path d=\"M12 18h.01\" />", "sprout": "<path d=\"M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3\" /> <path d=\"M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4\" /> <path d=\"M5 21h14\" />", "clapperboard": "<path d=\"m12.296 3.464 3.02 3.956\" /> <path d=\"M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z\" /> <path d=\"M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\" /> <path d=\"m6.18 5.276 3.1 3.899\" />", "scissors": "<circle cx=\"6\" cy=\"6\" r=\"3\" /> <path d=\"M8.12 8.12 12 12\" /> <path d=\"M20 4 8.12 15.88\" /> <circle cx=\"6\" cy=\"18\" r=\"3\" /> <path d=\"M14.8 14.8 20 20\" />", "images": "<path d=\"m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16\" /> <path d=\"M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2\" /> <circle cx=\"13\" cy=\"7\" r=\"1\" fill=\"currentColor\" /> <rect x=\"8\" y=\"2\" width=\"14\" height=\"14\" rx=\"2\" />", "activity": "<path d=\"M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2\" />", "shield-check": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"m9 12 2 2 4-4\" />", "radio": "<path d=\"M16.247 7.761a6 6 0 0 1 0 8.478\" /> <path d=\"M19.075 4.933a10 10 0 0 1 0 14.134\" /> <path d=\"M4.925 19.067a10 10 0 0 1 0-14.134\" /> <path d=\"M7.753 16.239a6 6 0 0 1 0-8.478\" /> <circle cx=\"12\" cy=\"12\" r=\"2\" />", "clock-3": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <path d=\"M12 6v6h4\" />", "gem": "<path d=\"M10.5 3 8 9l4 13 4-13-2.5-6\" /> <path d=\"M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z\" /> <path d=\"M2 9h20\" />"};
+var ICONS={"coins": "<path d=\"M13.744 17.736a6 6 0 1 1-7.48-7.48\" /> <path d=\"M15 6h1v4\" /> <path d=\"m6.134 14.768.866-.5 2 3.464\" /> <circle cx=\"16\" cy=\"8\" r=\"6\" />", "smartphone": "<rect width=\"14\" height=\"20\" x=\"5\" y=\"2\" rx=\"2\" ry=\"2\" /> <path d=\"M12 18h.01\" />", "sprout": "<path d=\"M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3\" /> <path d=\"M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4\" /> <path d=\"M5 21h14\" />", "clapperboard": "<path d=\"m12.296 3.464 3.02 3.956\" /> <path d=\"M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z\" /> <path d=\"M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\" /> <path d=\"m6.18 5.276 3.1 3.899\" />", "scissors": "<circle cx=\"6\" cy=\"6\" r=\"3\" /> <path d=\"M8.12 8.12 12 12\" /> <path d=\"M20 4 8.12 15.88\" /> <circle cx=\"6\" cy=\"18\" r=\"3\" /> <path d=\"M14.8 14.8 20 20\" />", "images": "<path d=\"m22 11-1.296-1.296a2.4 2.4 0 0 0-3.408 0L11 16\" /> <path d=\"M4 8a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2\" /> <circle cx=\"13\" cy=\"7\" r=\"1\" fill=\"currentColor\" /> <rect x=\"8\" y=\"2\" width=\"14\" height=\"14\" rx=\"2\" />", "activity": "<path d=\"M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2\" />", "shield-check": "<path d=\"M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z\" /> <path d=\"m9 12 2 2 4-4\" />", "radio": "<path d=\"M16.247 7.761a6 6 0 0 1 0 8.478\" /> <path d=\"M19.075 4.933a10 10 0 0 1 0 14.134\" /> <path d=\"M4.925 19.067a10 10 0 0 1 0-14.134\" /> <path d=\"M7.753 16.239a6 6 0 0 1 0-8.478\" /> <circle cx=\"12\" cy=\"12\" r=\"2\" />", "clock-3": "<circle cx=\"12\" cy=\"12\" r=\"10\" /> <path d=\"M12 6v6h4\" />", "gem": "<path d=\"M10.5 3 8 9l4 13 4-13-2.5-6\" /> <path d=\"M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z\" /> <path d=\"M2 9h20\" />", "mic": "<path d=\"M12 19v3\" /> <path d=\"M19 10v2a7 7 0 0 1-14 0v-2\" /> <rect x=\"9\" y=\"2\" width=\"6\" height=\"13\" rx=\"3\" />", "volume-2": "<path d=\"M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z\" /> <path d=\"M16 9a5 5 0 0 1 0 6\" /> <path d=\"M19.364 18.364a9 9 0 0 0 0-12.728\" />", "volume-x": "<path d=\"M11 4.702a.7.7 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.7.7 0 0 0 11 19.298z\" /> <path d=\"m16.5 14.5 5-5\" /> <path d=\"m16.5 9.5 5 5\" />"};
 (function(){
 var LINE='+16503843719';
 var MR='०१२३४५६७८९';
@@ -217,6 +227,7 @@ function paintThread(){
   sent().forEach(function(x){items.push({me:1,at:x.at,text:x.text})});
   replies.forEach(function(x){items.push({me:0,at:x.at,text:x.text})});
   items.sort(function(a,b){return new Date(a.at||0)-new Date(b.at||0)});
+  if(ttsOn&&replies.length){var r=replies[replies.length-1],k=r.at||r.text;if(k!==lastSpoken){lastSpoken=k;speak(r.text)}}
   items=items.slice(-6);
   var h='';items.forEach(function(m){h+='<div class="msg'+(m.me?' me':'')+'"><div class="bub">'+esc(m.text)+(m.at?'<time>'+hm(new Date(m.at))+'</time>':'')+'</div></div>'});
   $('msgs').innerHTML=h||'<div class="msg"><div class="bub">आदेश लिहा आणि पाठवा. उत्तरे इथे दिसतील.</div></div>';
@@ -252,6 +263,44 @@ function sendCmd(text){
 $('form').addEventListener('submit',function(e){e.preventDefault();sendCmd($('cmd').value)});
 $('cmd').addEventListener('focus',function(){document.body.classList.add('on')});$('cmd').addEventListener('blur',function(){document.body.classList.remove('on')});if(location.hash==='#listen')document.body.classList.add('on');
 $('chips').addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;$('cmd').value=b.textContent;$('cmd').focus()});
+
+/* --- voice: push-to-talk (STT) + read-aloud replies (TTS) --- */
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=null,listening=false;
+var micb=$('micb'),micst=$('micst');
+micb.innerHTML=svg('mic');
+function rimOn(v){document.body.classList.toggle('on',v)}
+if(!SR){micb.style.display='none'}
+else{
+ micb.addEventListener('click',function(){
+   if(listening){try{rec.stop()}catch(e){}return}
+   try{
+     rec=new SR();rec.lang='mr-IN';rec.interimResults=true;rec.continuous=false;
+     var base=$('cmd').value;
+     rec.onstart=function(){listening=true;micb.classList.add('on');rimOn(true);micst.textContent='ऐकत आहे… बोला'};
+     rec.onresult=function(e){var t='';for(var i=0;i<e.results.length;i++)t+=e.results[i][0].transcript;$('cmd').value=(base?base+' ':'')+t};
+     rec.onerror=function(ev){micst.textContent=ev.error==='not-allowed'?'माईकची परवानगी द्या':'ऐकू शकलो नाही, पुन्हा बोला'};
+     rec.onend=function(){listening=false;micb.classList.remove('on');rimOn(false);setTimeout(function(){if(micst.textContent.indexOf('ऐकत')===0)micst.textContent=''},1500)};
+     rec.start();
+   }catch(e){micst.textContent='आवाज चालू होऊ शकला नाही'}
+ });
+}
+/* read-aloud */
+var spk=$('spk'),ttsOn=false,lastSpoken='';
+function paintSpk(){spk.innerHTML=svg(ttsOn?'volume-2':'volume-x');spk.className='spk'+(ttsOn?' on':'')}
+try{ttsOn=localStorage.getItem('cmd.tts')==='1'}catch(e){}
+paintSpk();
+function pickVoice(){var vs=speechSynthesis.getVoices(),i,v;
+ for(i=0;i<vs.length;i++){v=vs[i];if(/^mr([-_]|$)/i.test(v.lang))return v}
+ for(i=0;i<vs.length;i++){v=vs[i];if(/^hi([-_]|$)/i.test(v.lang))return v}
+ for(i=0;i<vs.length;i++){v=vs[i];if(/^en-IN/i.test(v.lang))return v}
+ return null}
+function speak(t){if(!ttsOn||!('speechSynthesis' in window)||!t)return;
+ try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);var v=pickVoice();if(v){u.voice=v;u.lang=v.lang}else{u.lang='hi-IN'}u.rate=1;speechSynthesis.speak(u)}catch(e){}}
+spk.addEventListener('click',function(){ttsOn=!ttsOn;try{localStorage.setItem('cmd.tts',ttsOn?'1':'0')}catch(e){}paintSpk();
+ if(ttsOn){var r=replies[replies.length-1];speak(r?r.text:'आवाज चालू');lastSpoken=r?(r.at||r.text):''}
+ else try{speechSynthesis.cancel()}catch(e){}});
+if('speechSynthesis' in window)speechSynthesis.getVoices();
+
 tick();paintThread();loadRates();loadStatus();
 setInterval(tick,15000);setInterval(loadRates,60000);setInterval(loadStatus,300000);
 document.addEventListener('visibilitychange',function(){if(!document.hidden){loadRates();loadStatus();tick()}});
