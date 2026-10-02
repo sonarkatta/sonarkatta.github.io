@@ -82,7 +82,7 @@ h1{margin:0;font-size:34px;font-weight:700;letter-spacing:.2px}
 .bub time{display:block;font-size:10px;opacity:.55;margin-top:3px}
 .hint{font-size:11.5px;color:var(--dim);text-align:center;margin:8px 0 2px;line-height:1.4}
 
-.micb{width:40px;height:40px;border-radius:50%;border:0;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.08);color:var(--gold);box-shadow:inset 0 0 0 .8px rgba(var(--g),.45)}
+.micb.off{opacity:.45}.micb{width:40px;height:40px;border-radius:50%;border:0;flex:none;display:grid;place-items:center;background:rgba(255,255,255,.08);color:var(--gold);box-shadow:inset 0 0 0 .8px rgba(var(--g),.45)}
 .micb svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
 .micb.on{background:linear-gradient(160deg,#f1d79b,#c19a52);color:#1a1409;animation:micp 1.6s ease-in-out infinite}
 @keyframes micp{0%,100%{box-shadow:0 0 0 0 rgba(214,178,108,.5)}50%{box-shadow:0 0 0 9px rgba(214,178,108,0)}}
@@ -269,19 +269,29 @@ var SR=window.SpeechRecognition||window.webkitSpeechRecognition,rec=null,listeni
 var micb=$('micb'),micst=$('micst');
 micb.innerHTML=svg('mic');
 function rimOn(v){document.body.classList.toggle('on',v)}
-if(!SR){micb.style.display='none'}
+var standalone=(window.navigator.standalone===true)||(window.matchMedia&&matchMedia('(display-mode: standalone)').matches);
+function showHint(t){micst.textContent=t}
+if(!SR){
+ micb.classList.add('off');
+ micb.addEventListener('click',function(){showHint(standalone?'इथे आवाज चालत नाही. लिंक Safari मध्ये उघडा, किंवा कीबोर्डचा माईक वापरा':'इथे कीबोर्डचा माईक वापरा (कीबोर्डवरील 🎤). किंवा लिंक Safari मध्ये उघडा')});
+ showHint('आवाज: कीबोर्डचा माईक वापरा');
+}
 else{
+ var langs=['mr-IN','hi-IN','en-IN'],li=0,gotText=false;
+ function startRec(){
+   rec=new SR();rec.lang=langs[li];rec.interimResults=true;rec.continuous=false;
+   var base=$('cmd').value;gotText=false;var failed=false;
+   rec.onstart=function(){listening=true;micb.classList.add('on');rimOn(true);micst.textContent='ऐकत आहे… बोला ('+langs[li]+')'};
+   rec.onresult=function(e){gotText=true;var t='';for(var i=0;i<e.results.length;i++)t+=e.results[i][0].transcript;$('cmd').value=(base?base+' ':'')+t};
+   rec.onerror=function(ev){failed=true;var c=ev.error||'unknown';
+     if((c==='language-not-supported'||c==='service-not-allowed'||c==='no-speech'&&false)&&li<langs.length-1){li++;micst.textContent='भाषा बदलत आहे ('+langs[li]+')…';setTimeout(startRec,300);return}
+     micst.textContent=(c==='not-allowed'||c==='service-not-allowed'?'माईकची परवानगी द्या (Settings > Safari > Microphone, Siri आणि Dictation चालू ठेवा)':c==='no-speech'?'आवाज ऐकू आला नाही, पुन्हा बोला':'ऐकू शकलो नाही')+' ['+c+']'};
+   rec.onend=function(){if(failed&&micst.textContent.indexOf('भाषा')===0)return;listening=false;micb.classList.remove('on');rimOn(false);setTimeout(function(){if(micst.textContent.indexOf('ऐकत')===0)micst.textContent=''},1500)};
+   rec.start();
+ }
  micb.addEventListener('click',function(){
    if(listening){try{rec.stop()}catch(e){}return}
-   try{
-     rec=new SR();rec.lang='mr-IN';rec.interimResults=true;rec.continuous=false;
-     var base=$('cmd').value;
-     rec.onstart=function(){listening=true;micb.classList.add('on');rimOn(true);micst.textContent='ऐकत आहे… बोला'};
-     rec.onresult=function(e){var t='';for(var i=0;i<e.results.length;i++)t+=e.results[i][0].transcript;$('cmd').value=(base?base+' ':'')+t};
-     rec.onerror=function(ev){micst.textContent=ev.error==='not-allowed'?'माईकची परवानगी द्या':'ऐकू शकलो नाही, पुन्हा बोला'};
-     rec.onend=function(){listening=false;micb.classList.remove('on');rimOn(false);setTimeout(function(){if(micst.textContent.indexOf('ऐकत')===0)micst.textContent=''},1500)};
-     rec.start();
-   }catch(e){micst.textContent='आवाज चालू होऊ शकला नाही'}
+   try{li=0;startRec()}catch(e){micst.textContent='आवाज चालू होऊ शकला नाही ['+(e&&e.name||'err')+']'}
  });
 }
 /* read-aloud */
@@ -297,6 +307,7 @@ function pickVoice(){var vs=speechSynthesis.getVoices(),i,v;
 function speak(t){if(!ttsOn||!('speechSynthesis' in window)||!t)return;
  try{speechSynthesis.cancel();var u=new SpeechSynthesisUtterance(t);var v=pickVoice();if(v){u.voice=v;u.lang=v.lang}else{u.lang='hi-IN'}u.rate=1;speechSynthesis.speak(u)}catch(e){}}
 spk.addEventListener('click',function(){ttsOn=!ttsOn;try{localStorage.setItem('cmd.tts',ttsOn?'1':'0')}catch(e){}paintSpk();
+ micst.textContent=ttsOn?(('speechSynthesis' in window)?'उत्तरे वाचून दाखवली जातील':'या ब्राउझरमध्ये आवाज उपलब्ध नाही'):'आवाज बंद';setTimeout(function(){if(micst.textContent.indexOf('ऐकत')!==0)micst.textContent=''},2500);
  if(ttsOn){var r=replies[replies.length-1];speak(r?r.text:'आवाज चालू');lastSpoken=r?(r.at||r.text):''}
  else try{speechSynthesis.cancel()}catch(e){}});
 if('speechSynthesis' in window)speechSynthesis.getVoices();
