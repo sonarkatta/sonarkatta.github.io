@@ -136,7 +136,7 @@ def parse_page(h):
 
 
 def apply_city(cur, which, d):
-    if which == "Mumbai":
+    if which == "Maharashtra":
         stamp = iso(d["ts"])
         cur.update(gold24_10g=d["g24"], gold22_10g=d["g22"], gold18_10g=d["g18"], silver999_kg=d["silver"],
                    gold995=d["r995"], retail_995=d["r995"], retail_999=d["r999"],
@@ -145,7 +145,7 @@ def apply_city(cur, which, d):
             if k.endswith("_captured_at") and k != "silver_999_with_gst_captured_at":
                 cur[k] = stamp
         for c in cur["cities"]:
-            if c["name"] == "Mumbai":
+            if c["name"] == "Maharashtra":
                 c.update(gold24_10g=d["g24"], gold22_10g=d["g22"], gold995_10g=d["r995"], silver999_kg=d["silver"],
                          gold995_with_gst=d["gst995"], gold24_with_gst=d["gst999"], retail_995=d["r995"],
                          retail_999=d["r999"], captured_at=stamp)
@@ -178,7 +178,7 @@ def main():
         out_summary(["Standby: current file is %.1f min old, nothing written." % age])
         return 0
     res, problems = {}, []
-    for name, env in (("Mumbai", "REF_URL_MUM"), ("Pune", "REF_URL_PUN")):
+    for name, env in (("Maharashtra", "REF_URL_MUM"), ("Pune", "REF_URL_PUN")):
         try:
             url = os.environ.get(env, "") if not SRC_FILE else "x"
             if not url:
@@ -191,13 +191,13 @@ def main():
             log(name, "NOT verified:", e)
     # cross-city sanity
     if len(res) == 2:
-        gap = res["Pune"]["g24"] - res["Mumbai"]["g24"]
+        gap = res["Pune"]["g24"] - res["Maharashtra"]["g24"]
         if not (10 <= gap <= 90):
             problems.append("cross-city gap %s out of range" % gap)
             res = {}
     # no regress and jump guard
-    cur_ts = {"Mumbai": parse_iso(cur["quote_timestamp"]), "Pune": parse_iso(pune_cur["captured_at"])}
-    cur_g24 = {"Mumbai": cur["gold24_10g"], "Pune": pune_cur["gold24_10g"]}
+    cur_ts = {"Maharashtra": parse_iso(cur["quote_timestamp"]), "Pune": parse_iso(pune_cur["captured_at"])}
+    cur_g24 = {"Maharashtra": cur["gold24_10g"], "Pune": pune_cur["gold24_10g"]}
     for name in list(res):
         d = res[name]
         if d["ts"].astimezone(timezone.utc) <= cur_ts[name]:
