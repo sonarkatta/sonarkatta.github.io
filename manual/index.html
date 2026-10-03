@@ -51,31 +51,31 @@ a{color:var(--gold)}
 </div>
 
 <div id="cards"></div>
-<div class="foot">Marathi PDF copy: <a href="owner-manual.pdf">open</a></div>
+<div class="foot">Marathi PDF copy: <a href="7-owner-manual.pdf">open</a></div>
 </div>
 <script>
 var CARDS=[
-{t:"Rates are not updating",a:"card-1.mp3",s:[
+{t:"Rates are not updating",a:"1-card-1.mp3",s:[
 "Look at the app badge. Does it say <b>LIVE</b> or <b>Last Rates</b>?",
 "Open the rates file <code>sonarkatta.github.io/1-rates.json</code> and find the line <code>quote_timestamp</code>.",
 "That time is in UTC. Add <b>5 hours 30 minutes</b> to get Indian time. (The strip above already does this for you.)",
 "Between 9 AM and 10 PM: <b>under 15 minutes old is fine</b>. <b>Older than 30 minutes is a problem.</b>",
 "If it is a problem, tell the assistant: rates are not updating, and say when the last update was.",
 "Never edit the rates by hand."]},
-{t:"App shows Last Rates",a:"card-2.mp3",s:[
+{t:"App shows Last Rates",a:"2-card-2.mp3",s:[
 "Last Rates means no new rate has arrived for 6 hours. The cards keep the last known rates.",
 "Between 10 PM and 9 AM this is normal. Rates pause at night.",
 "In the daytime, check the rates file (card 1).",
 "If the file is fresh, close the app completely and open it again, or try a private window.",
 "If the file is old, tell the assistant."]},
-{t:"Site will not open",a:"card-3.mp3",s:[
+{t:"Site will not open",a:"3-card-3.mp3",s:[
 "Turn off Wi-Fi and try on mobile data.",
 "Try another phone.",
 "If it fails only for you, it is your internet.",
 "If it fails for everyone, open <code>githubstatus.com</code> and check that <b>Pages</b> is green.",
 "Yellow or red means GitHub has a problem. Wait half an hour and try again.",
 "If Pages is green and the site is still down, call the developer (card 6)."]},
-{t:"Login is stuck",a:"card-4.mp3",s:[
+{t:"Login is stuck",a:"4-card-4.mp3",s:[
 "Close the app fully and open it again.",
 "Check that your internet works.",
 "Check that your phone date and time are set to <b>automatic</b>.",
@@ -83,12 +83,12 @@ var CARDS=[
 "Clear the site's data in your browser and sign in again.",
 "Still stuck? Take a screenshot of the message. Do not keep trying again and again.",
 "Never send your password to anyone."]},
-{t:"Video problems",a:"card-5.mp3",s:[
+{t:"Video problems",a:"5-card-5.mp3",s:[
 "Old numbers in the video? Check that the rates file is fresh first. Do not make a video until it is.",
 "Voice and cards do not match? Ask the assistant to re-sync the voice.",
 "File too big? Ask for under 16 MB.",
 "Nothing is posted until you say yes."]},
-{t:"When to call a developer",a:"card-6.mp3",s:[
+{t:"When to call a developer",a:"6-card-6.mp3",s:[
 "The file is fresh but the app shows wrong rates.",
 "GitHub is green but the site is down for everyone.",
 "Everyone's login is stuck with the same message.",
