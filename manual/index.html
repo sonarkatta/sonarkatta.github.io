@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0a0806">
+<title>Owner Manual</title>
+<style>
+:root{--gold:#ecc978;--gold2:#c9951c;--ink:#f5f2ea;--mut:rgba(245,242,234,.62);--ok:#5fe08a;--warn:#ffc55a;--bad:#ff7a6e}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;min-height:100vh;background:radial-gradient(520px 380px at 8% -4%,rgba(236,201,120,.22),transparent 70%),radial-gradient(520px 480px at 100% 100%,rgba(236,201,120,.12),transparent 70%),#0a0806;background-attachment:fixed;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5}
+.wrap{max-width:600px;margin:0 auto;padding:calc(env(safe-area-inset-top) + 26px) 16px calc(env(safe-area-inset-bottom) + 40px)}
+h1{margin:0;font-size:30px;letter-spacing:-.4px}h1 span{color:var(--gold)}
+.sub{color:var(--mut);font-size:14px;margin:4px 0 18px}
+.card{position:relative;border-radius:26px;padding:18px 18px 16px;margin:0 0 14px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.03));border:1px solid rgba(236,201,120,.22);box-shadow:0 14px 34px rgba(0,0,0,.35)}
+.top{display:flex;align-items:center;gap:12px}
+.num{flex:none;margin-right:12px;width:34px;height:34px;border-radius:50%;background:var(--gold);color:#1a1206;font-weight:700;display:grid;place-items:center}
+.top h2{flex:1;margin:0;font-size:19px;line-height:1.25}
+.play{flex:none;margin-left:8px;display:flex;align-items:center;gap:8px;border:0;border-radius:99px;padding:10px 16px 10px 12px;font-size:14px;font-weight:700;color:#1a1206;background:linear-gradient(180deg,#f3d58c,#c9951c);cursor:pointer}
+.play svg{width:18px;height:18px}
+.play.on{background:linear-gradient(180deg,#ffd0c8,#ff7a6e)}
+.play[disabled]{opacity:.4;cursor:default}
+ol{margin:14px 0 2px;padding-left:22px}li{margin:8px 0}
+li b{color:var(--gold)}
+.bar{height:3px;border-radius:3px;background:rgba(255,255,255,.1);margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--gold)}
+code{background:rgba(255,255,255,.1);padding:1px 6px;border-radius:6px;font-size:13px;word-break:break-all}
+a{color:var(--gold)}
+.check{border-radius:26px;padding:16px 18px;margin:0 0 16px;background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(236,201,120,.3)}
+.check .row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.lab{font-size:12px;letter-spacing:.6px;text-transform:uppercase;color:var(--mut);font-weight:600}
+.big{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.chip{padding:7px 14px;border-radius:99px;font-weight:700;font-size:13px;background:rgba(255,255,255,.1)}
+.chip.ok{background:rgba(95,224,138,.18);color:var(--ok)}.chip.warn{background:rgba(255,197,90,.18);color:var(--warn)}.chip.bad{background:rgba(255,122,110,.18);color:var(--bad)}
+.hint{font-size:13px;color:var(--mut);margin-top:6px}
+.btn{margin-top:10px;border:1px solid rgba(236,201,120,.4);background:transparent;color:var(--gold);border-radius:99px;padding:8px 16px;font-weight:600;font-size:13px;cursor:pointer}
+.foot{margin-top:22px;font-size:12px;color:var(--mut);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Owner <span>Manual</span></h1>
+<div class="sub">Tap a card, read the steps or press Play to hear them.</div>
+
+<div class="check" id="check">
+  <div class="row"><div><div class="lab">Last rate update (Indian time)</div><div class="big" id="when">Checking...</div></div><span class="chip" id="chip">...</span></div>
+  <div class="hint" id="hint"></div>
+  <button class="btn" id="re">Check again</button>
+</div>
+
+<div id="cards"></div>
+<div class="foot">Marathi PDF copy: <a href="owner-manual.pdf">open</a></div>
+</div>
+<script>
+var CARDS=[
+{t:"Rates are not updating",a:"card-1.mp3",s:[
+"Look at the app badge. Does it say <b>LIVE</b> or <b>Last Rates</b>?",
+"Open the rates file <code>sonarkatta.github.io/1-rates.json</code> and find the line <code>quote_timestamp</code>.",
+"That time is in UTC. Add <b>5 hours 30 minutes</b> to get Indian time. (The strip above already does this for you.)",
+"Between 9 AM and 10 PM: <b>under 15 minutes old is fine</b>. <b>Older than 30 minutes is a problem.</b>",
+"If it is a problem, tell the assistant: rates are not updating, and say when the last update was.",
+"Never edit the rates by hand."]},
+{t:"App shows Last Rates",a:"card-2.mp3",s:[
+"Last Rates means no new rate has arrived for 6 hours. The cards keep the last known rates.",
+"Between 10 PM and 9 AM this is normal. Rates pause at night.",
+"In the daytime, check the rates file (card 1).",
+"If the file is fresh, close the app completely and open it again, or try a private window.",
+"If the file is old, tell the assistant."]},
+{t:"Site will not open",a:"card-3.mp3",s:[
+"Turn off Wi-Fi and try on mobile data.",
+"Try another phone.",
+"If it fails only for you, it is your internet.",
+"If it fails for everyone, open <code>githubstatus.com</code> and check that <b>Pages</b> is green.",
+"Yellow or red means GitHub has a problem. Wait half an hour and try again.",
+"If Pages is green and the site is still down, call the developer (card 6)."]},
+{t:"Login is stuck",a:"card-4.mp3",s:[
+"Close the app fully and open it again.",
+"Check that your internet works.",
+"Check that your phone date and time are set to <b>automatic</b>.",
+"Try another browser or a private window.",
+"Clear the site's data in your browser and sign in again.",
+"Still stuck? Take a screenshot of the message. Do not keep trying again and again.",
+"Never send your password to anyone."]},
+{t:"Video problems",a:"card-5.mp3",s:[
+"Old numbers in the video? Check that the rates file is fresh first. Do not make a video until it is.",
+"Voice and cards do not match? Ask the assistant to re-sync the voice.",
+"File too big? Ask for under 16 MB.",
+"Nothing is posted until you say yes."]},
+{t:"When to call a developer",a:"card-6.mp3",s:[
+"The file is fresh but the app shows wrong rates.",
+"GitHub is green but the site is down for everyone.",
+"Everyone's login is stuck with the same message.",
+"You told the assistant and rates did not resume in 2 hours.",
+"In your message write: <b>what is happening, since when, last time in the rates file, GitHub status, what you tried, a screenshot.</b>",
+"Never send a password."]}
+];
+var cur=null,curBtn=null;
+var PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg>',STOP='<svg viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="6" width="12" height="12" rx="2"/></svg>';
+function stop(){if(cur){cur.pause();cur.currentTime=0}if(curBtn){curBtn.classList.remove("on");curBtn.innerHTML=PLAY+"Play"}cur=null;curBtn=null}
+var host=document.getElementById("cards");
+CARDS.forEach(function(c,i){
+ var d=document.createElement("div");d.className="card";
+ d.innerHTML='<div class="top"><div class="num">'+(i+1)+'</div><h2>'+c.t+'</h2><button class="play">'+PLAY+'Play</button></div><ol>'+c.s.map(function(x){return"<li>"+x+"</li>"}).join("")+'</ol><div class="bar"><i></i></div>';
+ var b=d.querySelector(".play"),bar=d.querySelector(".bar i");
+ var au=new Audio();au.preload="none";au.src=c.a;
+ au.addEventListener("error",function(){b.disabled=true;b.innerHTML=PLAY+"No audio"});
+ au.addEventListener("timeupdate",function(){if(au.duration)bar.style.width=(au.currentTime/au.duration*100)+"%"});
+ au.addEventListener("ended",function(){stop();bar.style.width="0"});
+ b.onclick=function(){if(cur===au){stop();return}stop();cur=au;curBtn=b;b.classList.add("on");b.innerHTML=STOP+"Stop";au.play().catch(function(){stop()})};
+ host.appendChild(d)});
+function fmt(d){var ist=new Date(d.getTime()+19800000);var m=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];var h=ist.getUTCHours(),mi=ist.getUTCMinutes(),ap=h>=12?"PM":"AM";h=h%12||12;return ist.getUTCDate()+" "+m[ist.getUTCMonth()]+", "+h+":"+("0"+mi).slice(-2)+" "+ap}
+function chk(){
+ var w=document.getElementById("when"),c=document.getElementById("chip"),h=document.getElementById("hint");
+ w.textContent="Checking...";c.className="chip";c.textContent="...";
+ fetch("../1-rates.json?x="+Date.now(),{cache:"no-store"}).then(function(r){return r.json()}).then(function(j){
+  var t=new Date(j.quote_timestamp);if(isNaN(t))throw 0;var age=(Date.now()-t.getTime())/60000;
+  var ist=new Date(Date.now()+19800000),hr=ist.getUTCHours();var day=hr>=9&&hr<22;
+  w.textContent=fmt(t);
+  if(age<=15){c.className="chip ok";c.textContent="Fresh";h.textContent="Updated "+Math.round(age)+" min ago. All good."}
+  else if(!day){c.className="chip ok";c.textContent="Paused";h.textContent="Night pause (10 PM to 9 AM). Last update was "+Math.round(age/60*10)/10+" h ago. This is normal."}
+  else if(age<=30){c.className="chip warn";c.textContent="Slightly late";h.textContent="Updated "+Math.round(age)+" min ago. Check again in 5 minutes."}
+  else{c.className="chip bad";c.textContent="Stale";h.textContent="Last update was "+Math.round(age)+" min ago. Follow card 1, then tell the assistant."}
+ }).catch(function(){w.textContent="Cannot read";c.className="chip bad";c.textContent="Error";h.textContent="Could not load the rates file. Try card 3."})}
+document.getElementById("re").onclick=chk;chk();
+</script>
+</body></html>
