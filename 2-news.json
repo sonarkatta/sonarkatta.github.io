@@ -1,6 +1,15 @@
 {
-  "updated_at": "2026-10-04T18:30:00+05:30",
+  "updated_at": "2026-10-05T09:30:00+05:30",
   "items": [
+    {
+      "date": "2026-10-05",
+      "title_mr": "सोमवारी जागतिक बाजारात सोने-चांदी वाढली",
+      "body_mr": "सोमवारी सकाळी जागतिक बाजारात सोने ०.४% वाढून सुमारे $४,१५८.१७ प्रति औंस झाले. चांदी १.७% वाढून $६१.४० प्रति औंस झाली. अमेरिकेत सप्टेंबरमधील रोजगारवाढ अपेक्षेपेक्षा कमी राहिल्याने ऑक्टोबरमध्ये व्याजदर वाढण्याची शक्यता २२% वर आली आहे, एका आठवड्यापूर्वी ती ६४% होती. त्यामुळे सोन्याला आधार मिळाला.",
+      "title_en": "Gold and silver rise in global markets on Monday",
+      "body_en": "On Monday morning spot gold rose 0.4% to about $4,158.17 an ounce and spot silver gained 1.7% to $61.40. US job growth in September was weaker than expected, and the odds of a US rate hike in October have fallen to 22% from 64% a week ago. That gave gold some support.",
+      "source": "Mint (Reuters)",
+      "url": "https://www.livemint.com/market/gold-gains-as-october-fed-rate-hike-prospects-fade-11791166334138.html"
+    },
     {
       "date": "2026-10-04",
       "title_mr": "सुट्टीमुळे लहान आठवड्यात MCX वर सोने-चांदी घसरली",
@@ -9,33 +18,6 @@
       "body_en": "In the holiday-shortened week, MCX December gold futures fell Rs 2,887 (2%) to end around Rs 1.5 lakh per 10 grams, and silver fell Rs 8,819 (nearly 4%) to Rs 2.25 lakh per kg. In global markets, COMEX December gold fell 3.7% to $4,162.3 an ounce and silver fell 6.7% to $60.41. A stronger dollar and rising bond yields led to profit-booking.",
       "source": "Rediff Moneynews (PTI)",
       "url": "https://money.rediff.com/news/market/gold-silver-face-choppy-week-amid-dollar-iran-risks/55570520261004"
-    },
-    {
-      "date": "2026-10-03",
-      "title_mr": "शनिवारी MCX बंद, सोन्याचे भाव स्थिर",
-      "body_mr": "शनिवार-रविवारी MCX बंद असते आणि शुक्रवारी गांधी जयंतीची सुट्टी होती, त्यामुळे शनिवारी MCX वर थेट व्यवहार झाले नाहीत. गुरुवारच्या बंद भावानुसार सोने ₹१.४९ लाख प्रति १० ग्रॅमच्या वर राहिले, पण अलीकडच्या सत्रांपेक्षा थोडे खाली होते. किरकोळ बाजारात सोने-चांदीचे भाव जवळजवळ स्थिर राहिले. सणासुदीच्या हंगामापूर्वी बाजाराचे लक्ष मागणीकडे आहे.",
-      "title_en": "MCX shut on Saturday, gold rates steady",
-      "body_en": "MCX is closed on weekends and was shut on Friday for Gandhi Jayanti, so there was no live MCX trading on Saturday. Based on Thursday's close, gold stayed above Rs 1.49 lakh per 10 grams, though a little lower than recent sessions. Retail gold and silver rates were broadly steady. The market is watching demand ahead of the festive season.",
-      "source": "Mint",
-      "url": "https://www.livemint.com/money/personal-finance/gold-and-silver-price-today-oct-3-check-retail-rates-of-24k-22k-gold-and-999-silver-in-your-city-ahead-of-durga-puja-11791003646064.html"
-    },
-    {
-      "date": "2026-10-03",
-      "title_mr": "साप्ताहिक घसरणीसह जागतिक बाजारात सोने बंद",
-      "body_mr": "शुक्रवारी जागतिक बाजारात सोने ०.९% घसरून सुमारे $४,१४०.०६ प्रति औंस झाले आणि या आठवड्यात सुमारे ३.४% खाली राहिले. अमेरिकेत सप्टेंबरमध्ये फक्त २९,००० नोकऱ्या वाढल्या, अपेक्षा ९०,००० ची होती. या आकडेवारीनंतर सोने सुरुवातीला १% हून जास्त वाढले, पण मजबूत डॉलर आणि चढ्या बॉन्ड यील्डमुळे नंतर ते घसरले.",
-      "title_en": "Gold ends the week lower in global markets",
-      "body_en": "On Friday spot gold fell 0.9% to about $4,140.06 an ounce and was down about 3.4% for the week. US employers added only 29,000 jobs in September against forecasts of 90,000. Gold first rose more than 1% on the data, then fell back on a firm dollar and high bond yields.",
-      "source": "Kitco News (Reuters)",
-      "url": "http://www.kitco.com/news/off-the-wire/2026-10-02/gold-heads-weekly-drop-strong-dollar-elevated-treasury-yields-weigh"
-    },
-    {
-      "date": "2026-10-03",
-      "title_mr": "३ ऑक्टोबरला सोन्याचे भाव स्थिर",
-      "body_mr": "शनिवारी देशपातळीवर २४ कॅरेट सोने ₹१,४८,१४० आणि २२ कॅरेट सोने ₹१,३५,६९० प्रति १० ग्रॅम राहिले, २ ऑक्टोबरइतकेच. दिल्लीत २४ कॅरेट सोने ₹१,४९,३९० प्रति १० ग्रॅम नोंदले गेले. स्थानिक करांनुसार शहरांमध्ये किरकोळ फरक असू शकतो.",
-      "title_en": "Gold rates steady on October 3",
-      "body_en": "On Saturday, national-level 24-carat gold was Rs 1,48,140 and 22-carat Rs 1,35,690 per 10 grams, same as October 2. In Delhi, 24-carat gold was Rs 1,49,390 per 10 grams. Local taxes can cause small differences between cities.",
-      "source": "Goodreturns (Hindi)",
-      "url": "https://hindi.goodreturns.in/news/gold-rate-today-3-october-2026-gold-price-stability-check-22k-24k-rates-011-158217.html"
     }
   ]
 }
