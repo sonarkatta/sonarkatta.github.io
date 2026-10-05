@@ -1,6 +1,15 @@
 {
-  "updated_at": "2026-10-05T09:30:00+05:30",
+  "updated_at": "2026-10-05T18:30:00+05:30",
   "items": [
+    {
+      "date": "2026-10-05",
+      "title_mr": "MCX वर सोने सुरुवातीच्या वाढीनंतर घसरले, चांदी वाढली",
+      "body_mr": "सोमवारी सकाळी MCX वर डिसेंबर वायद्याचे सोने ₹१,५१,१९७ वर उघडले (मागील बंद ₹१,५०,३९०), पण नंतर ₹९६५ ने घसरून सुमारे ₹१,४९,४२५ प्रति १० ग्रॅमवर आले. चांदीचे डिसेंबर वायदे ₹९२३ ने वाढून सुमारे ₹२,२६,८०० प्रति किलो झाले. अमेरिकेतील कमकुवत रोजगार आकडेवारीमुळे जागतिक बाजारात दोन्ही धातू वाढले.",
+      "title_en": "Gold slips after firm start on MCX, silver gains",
+      "body_en": "On Monday morning MCX December gold opened at Rs 1,51,197 (previous close Rs 1,50,390) but then fell Rs 965 to about Rs 1,49,425 per 10 grams. December silver futures rose Rs 923 to about Rs 2,26,800 per kg. Weak US jobs data lifted both metals in global markets.",
+      "source": "Business Standard",
+      "url": "https://www.business-standard.com/markets/commodities/gold-falls-965-after-firm-start-silver-gains-923-as-global-prices-rise-126100500173_1.html"
+    },
     {
       "date": "2026-10-05",
       "title_mr": "सोमवारी जागतिक बाजारात सोने-चांदी वाढली",
@@ -9,15 +18,6 @@
       "body_en": "On Monday morning spot gold rose 0.4% to about $4,158.17 an ounce and spot silver gained 1.7% to $61.40. US job growth in September was weaker than expected, and the odds of a US rate hike in October have fallen to 22% from 64% a week ago. That gave gold some support.",
       "source": "Mint (Reuters)",
       "url": "https://www.livemint.com/market/gold-gains-as-october-fed-rate-hike-prospects-fade-11791166334138.html"
-    },
-    {
-      "date": "2026-10-04",
-      "title_mr": "सुट्टीमुळे लहान आठवड्यात MCX वर सोने-चांदी घसरली",
-      "body_mr": "गांधी जयंतीमुळे लहान झालेल्या आठवड्यात MCX वर डिसेंबर वायद्याचे सोने ₹२,८८७ (२%) घसरून सुमारे ₹१.५ लाख प्रति १० ग्रॅमवर बंद झाले. चांदी ₹८,८१९ (सुमारे ४%) घसरून ₹२.२५ लाख प्रति किलो झाली. जागतिक बाजारात COMEX डिसेंबर सोने ३.७% घसरून $४,१६२.३ प्रति औंस, तर चांदी ६.७% घसरून $६०.४१ प्रति औंसवर बंद झाली. मजबूत डॉलर आणि वाढत्या बॉन्ड यील्डमुळे नफावसुली झाली.",
-      "title_en": "Gold and silver fall on MCX in holiday-shortened week",
-      "body_en": "In the holiday-shortened week, MCX December gold futures fell Rs 2,887 (2%) to end around Rs 1.5 lakh per 10 grams, and silver fell Rs 8,819 (nearly 4%) to Rs 2.25 lakh per kg. In global markets, COMEX December gold fell 3.7% to $4,162.3 an ounce and silver fell 6.7% to $60.41. A stronger dollar and rising bond yields led to profit-booking.",
-      "source": "Rediff Moneynews (PTI)",
-      "url": "https://money.rediff.com/news/market/gold-silver-face-choppy-week-amid-dollar-iran-risks/55570520261004"
     }
   ]
 }
