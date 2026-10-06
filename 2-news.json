@@ -1,6 +1,15 @@
 {
-  "updated_at": "2026-10-06T09:30:00+05:30",
+  "updated_at": "2026-10-06T18:30:00+05:30",
   "items": [
+    {
+      "date": "2026-10-06",
+      "title_mr": "मंगळवारी MCX वर सोने-चांदी वायदे घसरले",
+      "body_mr": "मंगळवारी सकाळी ११:५० वाजेपर्यंत MCX वर ४ डिसेंबर २०२६ रोजी खतम होणारे सोन्याचे वायदे ०.२७% घसरून ₹१,४८,९२० प्रति १० ग्रॅमवर कारोबार करत होते. त्याच मुदतीचे चांदीचे वायदे ०.३०% घसरून ₹२,२५,४०४ प्रति किलोवर होते. मंगळवारी दोन्ही धातूंच्या वायद्यांवर दबाव होता.",
+      "title_en": "Gold, silver futures slip on MCX on Tuesday",
+      "body_en": "On Tuesday, MCX gold futures expiring on December 4, 2026 were trading at Rs 1,48,920 per 10 grams, down 0.27%, as of 11:50 am. Silver futures of the same expiry were at Rs 2,25,404 per kg, down 0.30%. Both precious metals were under pressure on the MCX on Tuesday.",
+      "source": "Zee Business",
+      "url": "https://www.zeebiz.com/markets/commodities/news-gold-silver-prices-today-october-6-precious-metals-slip-on-mcx-check-24k-22k-and-city-wise-rates-403406"
+    },
     {
       "date": "2026-10-06",
       "title_mr": "मंगळवारी सकाळी जागतिक बाजारात सोने स्थिर",
@@ -9,15 +18,6 @@
       "body_en": "Spot gold held steady at $4,141.81 an ounce on Tuesday morning. US December gold futures rose 0.3% to $4,169.10. A firm dollar and 10- and 30-year US Treasury yields hitting 24-year highs on Monday capped gold's rise. Friday's weak US jobs data has eased expectations of an October rate hike. Spot silver was flat at $61.04 an ounce.",
       "source": "The Economic Times (Reuters)",
       "url": "https://economictimes.indiatimes.com/markets/commodities/news/gold-steady-as-firm-dollar-counters-softer-us-rate-hike-bets/articleshow/134720923.cms"
-    },
-    {
-      "date": "2026-10-05",
-      "title_mr": "MCX वर सोने सुरुवातीच्या वाढीनंतर घसरले, चांदी वाढली",
-      "body_mr": "सोमवारी सकाळी MCX वर डिसेंबर वायद्याचे सोने ₹१,५१,१९७ वर उघडले (मागील बंद ₹१,५०,३९०), पण नंतर ₹९६५ ने घसरून सुमारे ₹१,४९,४२५ प्रति १० ग्रॅमवर आले. चांदीचे डिसेंबर वायदे ₹९२३ ने वाढून सुमारे ₹२,२६,८०० प्रति किलो झाले. अमेरिकेतील कमकुवत रोजगार आकडेवारीमुळे जागतिक बाजारात दोन्ही धातू वाढले.",
-      "title_en": "Gold slips after firm start on MCX, silver gains",
-      "body_en": "On Monday morning MCX December gold opened at Rs 1,51,197 (previous close Rs 1,50,390) but then fell Rs 965 to about Rs 1,49,425 per 10 grams. December silver futures rose Rs 923 to about Rs 2,26,800 per kg. Weak US jobs data lifted both metals in global markets.",
-      "source": "Business Standard",
-      "url": "https://www.business-standard.com/markets/commodities/gold-falls-965-after-firm-start-silver-gains-923-as-global-prices-rise-126100500173_1.html"
     }
   ]
 }
