@@ -1,14 +1,23 @@
 {
-  "updated_at": "2026-10-07T09:30:00+05:30",
+  "updated_at": "2026-10-07T18:30:00+05:30",
   "items": [
     {
       "date": "2026-10-07",
-      "title_mr": "मंगळवारी MCX वर सोने-चांदी वाढून बंद; आज सकाळी कॉमेक्सवर सौम्य बाजार",
-      "body_mr": "मंगळवारी MCX वर सोने ०.५५% वाढून ₹१,५०,१३० प्रति १० ग्रॅमवर, तर चांदी ०.५७% वाढून ₹२,२७,३६५ प्रति किलोवर बंद झाले. दिवसभर दोन्ही धातूंमध्ये मोठी उलाढाल होती. बुधवारी सकाळी ७:२५ वाजता कॉमेक्सवर सोने $४,१८१.२० प्रति औंसवर, तर चांदी किरकोळ घसरून $६१.५५ प्रति औंसवर होती. सध्या पितृपक्ष चालू असल्याने सोने-चांदीची खरेदी सामान्यतः कमी राहते.",
-      "title_en": "Gold, silver close higher on MCX on Tuesday; Comex quiet this morning",
-      "body_en": "On Tuesday, MCX gold closed up 0.55% at Rs 1,50,130 per 10 grams and silver closed up 0.57% at Rs 2,27,365 per kg after a volatile day. On Wednesday at 7:25 am, Comex gold was at $4,181.20 an ounce and silver was slightly lower at $61.55. The ongoing Pitru Paksha period usually keeps gold and silver buying on the lower side.",
-      "source": "The Economic Times (Hindi)",
-      "url": "https://hindi.economictimes.com/markets/gold-silver-rate/gold-silver-price-today-7-october-2026-check-city-wise-24-22-18-carat-10-gram-gold-1-kg-silver-rate-in-chennai-delhi-bengaluru-kolkata/articleshow/134753934.cms"
+      "title_mr": "RBI ने रेपो दर वाढवून ५.५०% केला",
+      "body_mr": "रिझर्व्ह बँकेच्या चलनविषयक धोरण समितीने बुधवारी एकमताने रेपो दर ०.२५% ने वाढवून ५.५०% केला. धोरणाचा सूर आता 'कॅलिब्रेटेड टायटनिंग' झाला आहे. ऑगस्टमध्ये किरकोळ महागाई ४.८% वर गेल्याने आणि पश्चिम आशियातील संघर्षामुळे कच्चे तेल चढ-उतारांत असल्याने हा निर्णय घेण्यात आला. पुढील बैठक डिसेंबरमध्ये होणार आहे.",
+      "title_en": "RBI raises repo rate to 5.50%",
+      "body_en": "The Reserve Bank of India's Monetary Policy Committee on Wednesday unanimously raised the repo rate by 0.25% to 5.50% and shifted its stance to 'calibrated tightening'. The decision comes as retail inflation rose to 4.8% in August and crude oil prices remain volatile because of the West Asia conflict. The next policy meeting is in December.",
+      "source": "Reserve Bank of India",
+      "url": "https://www.rbi.org.in/Scripts/BS_PressReleaseDisplay.aspx?prid=63742"
+    },
+    {
+      "date": "2026-10-07",
+      "title_mr": "बुधवारी MCX वर सोने-चांदी घसरले",
+      "body_mr": "बुधवारी दुपारी ३ वाजेपर्यंत MCX वर ४ डिसेंबरचे सोन्याचे वायदे ०.४% घसरून ₹१,४९,४५० प्रति १० ग्रॅमवर, तर चांदीचे वायदे १.१% घसरून ₹२,२४,७८२ प्रति किलोवर होते. जागतिक बाजारात हाजिर सोने १.१% घसरून सुमारे $४,१४५ प्रति औंस, तर चांदी १.७% घसरून $६०.४ प्रति औंसवर होती. मजबूत डॉलर आणि फेड मिनिट्सची वाट पाहणारा बाजार यामुळे दबाव होता.",
+      "title_en": "Gold, silver fall on MCX on Wednesday",
+      "body_en": "By 3 pm on Wednesday, MCX gold futures expiring December 4 were down 0.4% at Rs 1,49,450 per 10 grams and silver futures were down 1.1% at Rs 2,24,782 per kg. In global markets spot gold fell 1.1% to about $4,145 an ounce and spot silver fell 1.7% to $60.4. A stronger dollar and caution ahead of the Fed minutes weighed on prices.",
+      "source": "Upstox",
+      "url": "https://upstox.com/news/market-news/commodities/mcx-gold-trades-lower-around-1-49-lakh-crude-oil-jump-over-1-as-iranian-attack-on-tankers-continues-check-trade-setup-for-oct-7/article-201458/"
     },
     {
       "date": "2026-10-07",
