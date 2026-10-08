@@ -1,6 +1,15 @@
 {
-  "updated_at": "2026-10-08T09:30:00+05:30",
+  "updated_at": "2026-10-08T18:30:00+05:30",
   "items": [
+    {
+      "date": "2026-10-08",
+      "title_mr": "गुरुवारी MCX वर मिश्र बाजार: सोने थोडे वाढले, चांदी घसरली",
+      "body_mr": "गुरुवारी सकाळी ११:४० वाजेपर्यंत MCX वर ४ डिसेंबर २०२६ रोजी खतम होणारे सोन्याचे वायदे ०.१२% वाढून ₹१,४९,२८० प्रति १० ग्रॅमवर कारोबार करत होते. त्याच मुदतीचे चांदीचे वायदे मात्र ०.६५% घसरून ₹२,२२,१०६ प्रति किलोवर होते. गुरुवारी दोन्ही धातूंमध्ये मिश्र कसबा दिसला.",
+      "title_en": "Mixed trade on MCX on Thursday: gold up a little, silver down",
+      "body_en": "As of 11:40 am on Thursday, MCX gold futures expiring on December 4, 2026 were trading 0.12% higher at Rs 1,49,280 per 10 grams, while silver futures of the same expiry were down 0.65% at Rs 2,22,106 per kg. Trade in both metals was mixed on Thursday.",
+      "source": "Zee Business",
+      "url": "https://www.zeebiz.com/markets/commodities/news-gold-silver-prices-today-october-8-check-retail-rates-in-delhi-mumbai-kolkata-and-other-cities-403584"
+    },
     {
       "date": "2026-10-08",
       "title_mr": "फेड मिनिट्समध्ये वर्षाअखेरीस आणखी दरवाढीचा संकेत",
@@ -18,15 +27,6 @@
       "body_en": "Spot gold rose 0.4% to $4,127.40 an ounce on Thursday morning after falling to its lowest since August 5 on Wednesday. US gold futures gained 0.3% to $4,150.60 an ounce. Spot silver rose 0.4% to $60.39, platinum gained 1.4% to $1,653.88, and palladium climbed 1.4% to $1,141 an ounce.",
       "source": "The Times of India",
       "url": "https://timesofindia.indiatimes.com/business/india-business/gold-silver-rate-today-live-updates-18k-22-carat-24k-gold-price-10g-silver-cost-per-kg-mcx-comex-etf-stock-precious-metal-gold-prediction-city-wise-cost-latest-gold-news/liveblog/134777855.cms"
-    },
-    {
-      "date": "2026-10-08",
-      "title_mr": "गुरुवारी सकाळी MCX वर सोने-चांदी वाढले",
-      "body_mr": "गुरुवारी सकाळी MCX वर सोने ₹५३३ ने वाढून ₹१,४९,६३६ प्रति १० ग्रॅमवर, तर चांदी ₹३३९ ने वाढून ₹२,२३,९०० प्रति किलोवर कारोबार करत होती.",
-      "title_en": "Gold, silver rise on MCX on Thursday morning",
-      "body_en": "On Thursday morning, gold rose Rs 533 to Rs 1,49,636 per 10 grams on the MCX, while silver gained Rs 339 to trade at Rs 2,23,900 per kg.",
-      "source": "News18 Hindi",
-      "url": "https://hindi.news18.com/news/business/latest-gold-price-today-8-oct-18k-22k-24k-sone-ka-bhav-chandi-ka-latest-rate-10893778.html"
     }
   ]
 }
