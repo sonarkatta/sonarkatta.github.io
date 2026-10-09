@@ -1,6 +1,15 @@
 {
-  "updated_at": "2026-10-09T09:30:00+05:30",
+  "updated_at": "2026-10-09T18:30:00+05:30",
   "items": [
+    {
+      "date": "2026-10-09",
+      "title_mr": "शुक्रवारी MCX वर सोने-चांदी मजबूत",
+      "body_mr": "शुक्रवारी MCX वर डिसेंबर वायद्याचे सोने ₹१,६९० (१.१३%) वाढून सुमारे ₹१.५१ लाख प्रति १० ग्रॅमवर, तर चांदीचे वायदे ₹३,६२६ (१.६४%) वाढून सुमारे ₹२.२४ लाख प्रति किलोवर गेले. जागतिक बाजारात सोन्याचे वायदे १.४३% वाढून $४,१९१.५१ प्रति औंस, तर चांदीचे वायदे २.१६% वाढून $६०.४४ प्रति औंस झाले. अमेरिकेचे बाँड यील्ड कमी झाले, डॉलर सैल झाला आणि कच्चे तेल स्वस्त झाल्याने धातूंना आधार मिळाला. मध्यबैंकांची सातत्याने खरेदी आणि गोल्ड ईटीएफमधील गुंतवणुकीत वाढ याही कारणीभूत आहेत.",
+      "title_en": "Gold, silver firm up on MCX on Friday",
+      "body_en": "On Friday, MCX December gold futures rose Rs 1,690 (1.13%) to about Rs 1.51 lakh per 10 grams and December silver futures gained Rs 3,626 (1.64%) to about Rs 2.24 lakh per kg. In global markets gold futures rose 1.43% to $4,191.51 an ounce and silver futures gained 2.16% to $60.44. Easing US bond yields, a softer dollar and cheaper crude oil supported the metals, along with steady central bank buying and rising gold ETF holdings.",
+      "source": "CNBC TV18",
+      "url": "https://www.cnbctv18.com/market/commodities/gold-silver-prices-rebound-on-mcx-key-factors-to-watch-next-20008472.htm"
+    },
     {
       "date": "2026-10-09",
       "title_mr": "तेल स्वस्त झाल्याने जागतिक बाजारात सोने-चांदी वाढली; गुरुवारी MCX वर सोने वाढून बंद",
@@ -9,15 +18,6 @@
       "body_en": "By 7:30 am on Friday, Comex gold rose 0.90% to $4,198 an ounce and silver gained 1.60% to $60.38. Crude oil fell after US President Donald Trump said talks with Iran are continuing, and that supported the metals. On Thursday, MCX gold closed up 0.42% at Rs 1,49,735 per 10 grams, while silver closed slightly lower at Rs 2,21,211 per kg.",
       "source": "The Economic Times (Hindi)",
       "url": "https://hindi.economictimes.com/markets/gold-silver-rate/gold-silver-price-today-9-october-2026-hike-check-city-wise-24-22-18-carat-10-gram-gold-1-kg-silver-rate-in-chennai-delhi-mumbai-lucknow/articleshow/134804344.cms"
-    },
-    {
-      "date": "2026-10-08",
-      "title_mr": "फेड मिनिट्समध्ये वर्षाअखेरीस आणखी दरवाढीचा संकेत",
-      "body_mr": "बुधवारी रात्री प्रसिद्ध झालेल्या अमेरिकन फेडरल रिझर्व्हच्या सप्टेंबर बैठकीच्या मिनिट्सनुसार, सर्व सदस्यांनी सप्टेंबरमधील व्याजदरवाढीला पाठिंबा दिला होता. बहुतेक सदस्यांच्या मते वर्षाअखेरपर्यंत आणखी एक दरवाढ योग्य ठरू शकते. काही सदस्यांच्या मते सध्याचा व्याजदर फारसा कठोर नाही. पुढील निर्णय येणाऱ्या आकडेवारीवर अवलंबून असतील.",
-      "title_en": "Fed minutes signal another possible rate hike by year-end",
-      "body_en": "Minutes of the US Federal Reserve's September meeting, released on Wednesday night, show all participants backed the September rate hike. Most participants felt another increase in the policy rate would likely be appropriate by year-end, and some said the current rate was not restrictive enough. Future decisions will depend on incoming data.",
-      "source": "US Federal Reserve",
-      "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm"
     }
   ]
 }
