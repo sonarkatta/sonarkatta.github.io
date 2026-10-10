@@ -1,6 +1,15 @@
 {
-  "updated_at": "2026-10-10T09:30:00+05:30",
+  "updated_at": "2026-10-10T18:30:00+05:30",
   "items": [
+    {
+      "date": "2026-10-10",
+      "title_mr": "आठवड्याच्या अखेरीस जागतिक सोने $४,१९५.६० प्रति औंसवर; आठवड्यात १.३% वाढ",
+      "body_mr": "शुक्रवारी जागतिक बाजारात आठवड्याच्या अखेरीस सोने $४,१९५.६० प्रति औंसवर बंद झाले. आठवड्याच्या सुरुवातीला ते $४,१४१.८० प्रति औंसवर होते, म्हणजेच या आठवड्यात सोने १.३०% मजबूत झाले. चांदी $६०.९५ प्रति औंसवर बंद झाली.",
+      "title_en": "Gold ends the week at $4,195.60 an ounce, up 1.3% on the week",
+      "body_en": "Gold closed the week at $4,195.60 an ounce in global markets on Friday, up 1.30% from $4,141.80 a week earlier. Silver ended the week at $60.95 an ounce.",
+      "source": "GoldRatesDaily",
+      "url": "https://goldratesdaily.com/blog/weekly-precious-metals-wrap-10-oct-2026-gold-at-4-195-60-silver-at-60-95"
+    },
     {
       "date": "2026-10-10",
       "title_mr": "शुक्रवारी सर्राफा बाजारात सोने-चांदी मजबूत; आठवड्यात जागतिक सोने १.३% वाढले",
@@ -9,15 +18,6 @@
       "body_en": "On Friday, 99.9-purity gold rose Rs 1,900 and silver rose Rs 4,500 in Delhi's bullion market. On Saturday morning in Delhi, 24-carat gold was at Rs 1,50,870 per 10 grams and 22-carat at Rs 1,38,310 per 10 grams. Silver stood at Rs 2,34,900 per kg. Globally, spot gold was at $4,194.36 an ounce, up 1.3% this week, and spot silver at $60.77. A weaker dollar supported prices.",
       "source": "Moneycontrol Hindi",
       "url": "https://hindi.moneycontrol.com/news/your-money/gold-price-today-on-october-10-sone-ka-bhav-aaj-check-latest-gold-rates-in-delhi-mumbai-hyderabad-jaipur-lucknow-18-22-24-carat-rate-2446535.html"
-    },
-    {
-      "date": "2026-10-09",
-      "title_mr": "शुक्रवारी MCX वर सोने-चांदी मजबूत",
-      "body_mr": "शुक्रवारी MCX वर डिसेंबर वायद्याचे सोने ₹१,६९० (१.१३%) वाढून सुमारे ₹१.५१ लाख प्रति १० ग्रॅमवर, तर चांदीचे वायदे ₹३,६२६ (१.६४%) वाढून सुमारे ₹२.२४ लाख प्रति किलोवर गेले. जागतिक बाजारात सोन्याचे वायदे १.४३% वाढून $४,१९१.५१ प्रति औंस, तर चांदीचे वायदे २.१६% वाढून $६०.४४ प्रति औंस झाले. अमेरिकेचे बाँड यील्ड कमी झाले, डॉलर सैल झाला आणि कच्चे तेल स्वस्त झाल्याने धातूंना आधार मिळाला. मध्यबैंकांची सातत्याने खरेदी आणि गोल्ड ईटीएफमधील गुंतवणुकीत वाढ याही कारणीभूत आहेत.",
-      "title_en": "Gold, silver firm up on MCX on Friday",
-      "body_en": "On Friday, MCX December gold futures rose Rs 1,690 (1.13%) to about Rs 1.51 lakh per 10 grams and December silver futures gained Rs 3,626 (1.64%) to about Rs 2.24 lakh per kg. In global markets gold futures rose 1.43% to $4,191.51 an ounce and silver futures gained 2.16% to $60.44. Easing US bond yields, a softer dollar and cheaper crude oil supported the metals, along with steady central bank buying and rising gold ETF holdings.",
-      "source": "CNBC TV18",
-      "url": "https://www.cnbctv18.com/market/commodities/gold-silver-prices-rebound-on-mcx-key-factors-to-watch-next-20008472.htm"
     }
   ]
 }
