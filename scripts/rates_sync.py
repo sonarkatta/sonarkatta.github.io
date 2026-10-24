@@ -124,7 +124,7 @@ def parse_page(h):
     # coherence
     ok = []
     ok.append(d["r999"] - d["r995"] == 1000)
-    ok.append(148 <= d["g24"] - d["r999"] <= 156)
+    ok.append(abs(d["g24"] - round(d["r999"] * 1.001)) <= 2)
     ok.append(abs(d["g22"] - round(d["g24"] * 0.916)) <= 3)
     ok.append(abs(d["g18"] - round(d["g24"] * 0.75)) <= 3)
     ok.append(abs(d["gst995"] - round(rtgs995 * 1.03)) <= 2)
