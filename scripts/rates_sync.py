@@ -89,6 +89,50 @@ def fetch(url, tag):
     raise RuntimeError("fetch failed (%s): %s" % (tag, type(last).__name__))
 
 
+def extract_g18(tokens, expected_g24):
+    """Read coherent same-page 18K table; retain initial snapshot clock."""
+    normalized = []
+    i = 0
+    while i < len(tokens):
+        if i + 1 < len(tokens) and tokens[i] in ("24", "18") and tokens[i + 1] == "K":
+            normalized.append(tokens[i] + "K")
+            i += 2
+        elif i + 1 < len(tokens) and tokens[i] == "10 Grams" and tokens[i + 1] == "· karat prices":
+            normalized.append("10 Grams · karat prices")
+            i += 2
+        else:
+            normalized.append(tokens[i])
+            i += 1
+    tokens = normalized
+    legacy = re.search(r"18K \(750 fineness\) gold in [A-Za-z ]+ is ₹([\d,]+) per 10 grams", " ".join(tokens))
+    if legacy:
+        value = int(legacy.group(1).replace(",", ""))
+        if abs(value - round(expected_g24 * 0.75)) > 3:
+            raise ValueError("18K legacy/headline mismatch")
+        return value
+    try:
+        start = tokens.index("10 Grams · karat prices") + 1
+        end = next(i for i in range(start, len(tokens)) if tokens[i].startswith("AIB reference rate."))
+    except (ValueError, StopIteration):
+        return None
+    table = tokens[start:end]
+    values = {}
+    for purity in ("24K", "18K"):
+        positions = [i for i, text in enumerate(table) if text == purity]
+        if len(positions) != 1:
+            raise ValueError("Ambiguous purity row")
+        i = positions[0]
+        if i + 2 >= len(table) or table[i + 2] != "per 10 g":
+            raise ValueError("Invalid purity unit")
+        value = rupees(table[i + 1])
+        if not value:
+            raise ValueError("Missing purity value")
+        values[purity] = value
+    if values["24K"] != expected_g24 or abs(values["18K"] - round(expected_g24 * 0.75)) > 3:
+        raise ValueError("18K table/headline mismatch")
+    return values["18K"]
+
+
 def parse_page(h):
     """Return dict of verified numbers, or raise ValueError."""
     i = h.find("tokenEndpoint")
@@ -114,8 +158,7 @@ def parse_page(h):
         return None
 
     g24, g22, silver = after("24K Gold"), after("22K Gold"), after("Silver")
-    m = re.search(r"18K \(750 fineness\) gold in [A-Za-z ]+ is ₹([\d,]+) per 10 grams", " ".join(t))
-    g18 = int(m.group(1).replace(",", "")) if m else None
+    g18 = extract_g18(t, g24) if g24 is not None else None
     d = dict(g24=g24, g22=g22, g18=g18, silver=silver, r995=ref.get("GL995"), gst995=ref.get("GR995WG"),
              r999=ref.get("GL999"), gst999=ref.get("GR999WG"), ts=ts)
     rtgs995, rtgs999, silver_tile = ref.get("GR995"), ref.get("GR999"), ref.get("SL999")
