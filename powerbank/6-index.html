@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Power Bank Comparison</title>
+<style>
+ body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0b0b0f;color:#f2f2f7;display:flex;justify-content:center;min-height:100vh}
+ .wrap{max-width:640px;width:100%;padding:24px 16px 60px}
+ h1{font-size:24px;margin:24px 0 4px}
+ .sub{color:#9a9aa5;margin:0 0 20px;font-size:14px}
+ .card{background:#1a1a22;border:1px solid #2c2c38;border-radius:16px;padding:18px;margin-bottom:16px}
+ .card.pick{border-color:#30d158}
+ .badge{display:inline-block;background:#30d158;color:#062b12;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px}
+ .badge.alt{background:#3a3a46;color:#c9c9d4}
+ h2{font-size:19px;margin:10px 0 4px}
+ .price{font-size:22px;font-weight:700;color:#30d158}
+ .fee{font-size:12px;color:#9a9aa5;font-weight:400}
+ ul{padding-left:18px;margin:12px 0;font-size:14px;line-height:1.55;color:#d8d8e0}
+ .btn{display:inline-block;background:#0a84ff;color:#fff;text-decoration:none;padding:10px 18px;border-radius:12px;font-weight:600;font-size:14px;margin-top:6px}
+ .altbtn{background:#3a3a46}
+ .note{background:#1c1c14;border:1px solid #4a4420;border-radius:12px;padding:14px;font-size:14px;line-height:1.6;color:#f0e6b8}
+ .src{font-size:12px;color:#6a6a75;margin-top:18px}
+ #gate{text-align:center;margin-top:25vh}
+ #gate input{padding:12px 14px;font-size:16px;border-radius:10px;border:1px solid #3a3a46;background:#1a1a22;color:#fff;width:220px;text-align:center}
+ #gate button{padding:12px 20px;font-size:16px;border-radius:10px;border:0;background:#0a84ff;color:#fff;font-weight:600;margin-left:8px}
+ #err{color:#ff6961;font-size:13px;margin-top:10px;display:none}
+ #content{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div id="gate">
+   <h1>&#128274; Locked</h1>
+   <p class="sub">Enter the password to view</p>
+   <input id="pw" type="password" placeholder="Password" autocomplete="off">
+   <button onclick="unlock()">Open</button>
+   <div id="err">Wrong password, try again</div>
+ </div>
+ <div id="content"></div>
+</div>
+<script>
+const BLOB="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";
+async function unlock(){
+  const pw=document.getElementById('pw').value;
+  try{
+    const raw=Uint8Array.from(atob(BLOB),c=>c.charCodeAt(0));
+    const salt=raw.slice(0,16),iv=raw.slice(16,28),tag=raw.slice(28,44),data=raw.slice(44);
+    const keyMat=await crypto.subtle.importKey('raw',new TextEncoder().encode(pw),'PBKDF2',false,['deriveKey']);
+    const key=await crypto.subtle.deriveKey({name:'PBKDF2',salt,iterations:100000,hash:'SHA-256'},keyMat,{name:'AES-GCM',length:256},false,['decrypt']);
+    const full=new Uint8Array(data.length+tag.length);full.set(data);full.set(tag,data.length);const plain=await crypto.subtle.decrypt({name:'AES-GCM',iv},key,full);
+    document.getElementById('content').innerHTML=new TextDecoder().decode(plain);
+    document.getElementById('gate').style.display='none';
+    document.getElementById('content').style.display='block';
+  }catch(e){document.getElementById('err').style.display='block';}
+}
+document.getElementById('pw').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
+</script>
+</body>
+</html>
