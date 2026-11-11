@@ -9,7 +9,7 @@ Env: REF_URL_MUM, REF_URL_PUN (feed page URLs, kept in repository secrets)
      STALE_MIN (default 12)  FORCE=1 ignores window and staleness (for dry runs)
      DRY_RUN=1 never writes
 """
-import html, json, os, re, sys, time, urllib.request
+import html, json, os, re, sys, time, urllib.request, urllib.error
 from datetime import datetime, timezone, timedelta
 from html.parser import HTMLParser
 
@@ -83,10 +83,46 @@ def fetch(url, tag):
             req = urllib.request.Request(url + sep + "t=" + str(int(time.time())), headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/124 Safari/537.36", "Accept-Language": "en-IN,en;q=0.9"})
             with urllib.request.urlopen(req, timeout=25) as r:
                 return r.read().decode("utf-8", "replace")
+        except urllib.error.HTTPError as e:
+            import hashlib
+            # Diagnostic bytes remain local; never echo arbitrary response text.
+            sample = b""
+            sample_state = "read"
+            close_state = "closed"
+            try:
+                sample = e.read(2048)
+            except Exception:
+                # The status remains useful even when the error body is unreadable.
+                sample_state = "unavailable"
+            finally:
+                try:
+                    e.close()
+                except Exception:
+                    close_state = "failed"
+            low = sample.lower()
+            category = ("rate_limited" if e.code == 429 else
+                        "challenge" if any(x in low for x in (b"captcha", b"just a moment", b"verify you are human")) else
+                        "access_denied" if e.code in (401, 403) else "other")
+            raw_type = (e.headers.get("Content-Type", "") if e.headers else "").split(";", 1)[0].lower()
+            mime = raw_type if raw_type in ("text/html", "application/json", "text/plain") else "other"
+            retry = e.headers.get("Retry-After", "") if e.headers else ""
+            # Emit bounded numeric cooldown only. Never echo an untrusted header.
+            retry = str(int(retry)) if retry.isascii() and retry.isdigit() and len(retry) <= 7 else "present-nonnumeric" if retry else "absent"
+            length = e.headers.get("Content-Length", "") if e.headers else ""
+            length = str(int(length)) if length.isascii() and length.isdigit() and len(length) <= 12 else "unknown"
+            label = tag if tag in ("maharashtra", "pune") else "source"
+            detail = ("fetch failed (%s): HTTPError status=%d mime=%s category=%s "
+                      "retry_after=%s content_length=%s sample_state=%s stream_close=%s sample_bytes=%d sample_sha256=%s" %
+                      (label, e.code, mime, category, retry, length, sample_state, close_state,
+                       len(sample), hashlib.sha256(sample).hexdigest() if sample_state == "read" else "unavailable"))
+            if e.code in (401, 403, 429):
+                raise RuntimeError(detail) from None
+            last = detail
         except Exception as e:  # noqa
-            last = e
+            last = "fetch failed (%s): %s" % (tag if tag in ("maharashtra", "pune") else "source", type(e).__name__)
+        if i < 2:
             time.sleep(4)
-    raise RuntimeError("fetch failed (%s): %s" % (tag, type(last).__name__))
+    raise RuntimeError(last)
 
 
 def extract_g18(tokens, expected_g24):
