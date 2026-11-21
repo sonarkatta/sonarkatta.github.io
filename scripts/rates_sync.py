@@ -248,6 +248,10 @@ def main():
         log("outside 09:00-22:00 IST, nothing to do")
         return 0
     cur = json.load(open(TARGET, encoding="utf-8"))
+    if cur.get("publisher_mode") == "dealer-public-v1":
+        log("scoped publisher active, original standby source held")
+        out_summary(["Scoped publisher active. No alternate-source fetch or write."])
+        return 0
     pune_cur = next(c for c in cur["cities"] if c["name"] == "Pune")
     newest = max(parse_iso(cur["quote_timestamp"]), parse_iso(pune_cur["captured_at"]))
     age = (now - newest).total_seconds() / 60
