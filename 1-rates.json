@@ -1,19 +1,19 @@
 {
-  "gold24_10g": 128160,
-  "gold22_10g": 117395,
-  "gold18_10g": 96120,
-  "silver999_kg": 153473,
+  "gold24_10g": 127961,
+  "gold22_10g": 117212,
+  "gold18_10g": 95971,
+  "silver999_kg": 155158,
   "gold995": 144337,
   "retail_995": 144337,
   "retail_999": 145337,
   "gold_995_with_gst": 144107,
   "gold_999_with_gst": 144828,
   "silver_999_with_gst": 189811,
-  "quote_timestamp": "2026-11-20T05:21:11Z",
-  "gold24_10g_captured_at": "2026-11-20T05:21:11Z",
-  "gold22_10g_captured_at": "2026-11-20T05:21:11Z",
-  "gold18_10g_captured_at": "2026-11-20T05:21:11Z",
-  "silver999_kg_captured_at": "2026-11-20T05:21:11Z",
+  "quote_timestamp": "2026-11-21T05:25:17Z",
+  "gold24_10g_captured_at": "2026-11-21T05:25:17Z",
+  "gold22_10g_captured_at": "2026-11-21T05:25:17Z",
+  "gold18_10g_captured_at": "2026-11-21T05:25:17Z",
+  "silver999_kg_captured_at": "2026-11-21T05:25:17Z",
   "gold995_captured_at": "2026-11-11T03:33:21Z",
   "retail_995_captured_at": "2026-11-11T03:33:21Z",
   "retail_999_captured_at": "2026-11-11T03:33:21Z",
@@ -137,5 +137,6 @@
       "retail_995": 149837,
       "retail_999": 150837
     }
-  ]
+  ],
+  "publisher_mode": "dealer-public-v1"
 }
