@@ -103,12 +103,12 @@
       "silver999_kg": 227030
     }
   ],
-  "gold18_10g": 97529,
-  "gold18_10g_captured_at": "2026-11-27T08:39:07Z",
-  "gold22_10g": 119116,
-  "gold22_10g_captured_at": "2026-11-27T08:39:07Z",
-  "gold24_10g": 130039,
-  "gold24_10g_captured_at": "2026-11-27T08:39:07Z",
+  "gold18_10g": 97748,
+  "gold18_10g_captured_at": "2026-11-27T08:51:01Z",
+  "gold22_10g": 119383,
+  "gold22_10g_captured_at": "2026-11-27T08:51:01Z",
+  "gold24_10g": 130331,
+  "gold24_10g_captured_at": "2026-11-27T08:51:01Z",
   "gold995": 144337,
   "gold995_captured_at": "2026-11-11T03:33:21Z",
   "gold_995_with_gst": 144107,
@@ -130,13 +130,13 @@
     "silver999_kg": 201072
   },
   "publisher_mode": "dealer-public-v1",
-  "quote_timestamp": "2026-11-27T08:39:07Z",
+  "quote_timestamp": "2026-11-27T08:51:01Z",
   "retail_995": 144337,
   "retail_995_captured_at": "2026-11-11T03:33:21Z",
   "retail_999": 145337,
   "retail_999_captured_at": "2026-11-11T03:33:21Z",
-  "silver999_kg": 158046,
-  "silver999_kg_captured_at": "2026-11-27T08:39:07Z",
+  "silver999_kg": 158677,
+  "silver999_kg_captured_at": "2026-11-27T08:51:01Z",
   "silver_999_with_gst": 189811,
   "silver_999_with_gst_captured_at": "2026-10-30T06:34:02Z"
 }
