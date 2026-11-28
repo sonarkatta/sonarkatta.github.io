@@ -1,6 +1,15 @@
 {
-  "updated_at": "2026-11-28T09:28:23+05:30",
+  "updated_at": "2026-11-28T18:29:34+05:30",
   "items": [
+    {
+      "date": "2026-11-28",
+      "title_mr": "आठवड्याचा आढावा: आधी ९.४% घसरण, नंतर शेवटच्या दोन सत्रांत जोरदार पुनर्प्राप्ती",
+      "body_mr": "एचडीएफसी स्कायच्या साप्ताहिक आढाव्यानुसार (शनिवार, २८ नोव्हेंबर): २७ नोव्हेंबरला संपलेल्या आठवड्यात सोने-चांदीने शेवटच्या सत्रांत जोरदार पुनर्प्राप्ती केली. त्याआधीच्या आठवड्यात सोने ९.४% घसरले होते - मागील आठ महिन्यांतील सर्वात मोठी साप्ताहिक घसरण. या आठवड्यात सोने बुधवारी थोड्या वेळासाठी ३,५०० डॉलरच्या खाली गेले; सप्टेंबर २०२५ नंतर हे पहिल्यांदाच घडले. चांदीने बुधवारी ३८.२० डॉलर प्रति औंसचा वार्षिक नीचांक नोंदवला. गुरुवारी अमेरिकेत थँक्सगिव्हिंग सुट्टी असल्याने व्यवहारांत सहभाग कमी होता आणि किमतींतील चढ-उतार वाढले. शुक्रवारी डॉलर निर्देशांक १०३.८१ वर राहिला; तो आधीच्या उच्चांकावरून मागे सरकला होता.",
+      "title_en": "Week in review: a 9.4% slide first, then a sharp two-session rebound",
+      "body_en": "According to HDFC Sky's weekly review (Saturday, 28 November), gold and silver rebounded sharply in the final sessions of the week ended 27 November. The previous week, gold had fallen 9.4%, its steepest weekly decline in eight months. During the week, gold briefly slipped below $3,500 on Wednesday for the first time since September 2025, while silver touched a yearly low of $38.20 per ounce on Wednesday. With US markets shut on Thursday for Thanksgiving, thinner volumes amplified price swings. The dollar index stood at 103.81 on Friday, having retreated from earlier peaks.",
+      "source": "HDFC Sky",
+      "url": "https://hdfcsky.com/news/gold-jumps-3-9percent-to-3672-as-silver-surges-6-6percent-in-volatile-week-mcx-gold-closes-at-rs122272-silver-at-rs153277"
+    },
     {
       "date": "2026-11-28",
       "title_mr": "शुक्रवारचे बंद भाव: एमसीएक्सवर चांदी ४.८% वाढून १,५२,८४३ रुपयांवर; कॉमेक्सवर चांदी ७.९२% जोरात",
@@ -18,33 +27,6 @@
       "body_en": "According to ET Now (Saturday, 28 November, 8:27 AM IST), on Friday spot gold was up more than 2% at $3,652.11 per ounce as of 8:00 AM, having risen over 3% at one point in the session. Gold gained nearly 3% for the week, its first weekly advance in three weeks. Investors bought at lower levels after prices hit a 15-month low earlier in the week.",
       "source": "ET Now",
       "url": "https://www.etnownews.com/markets/gold-silver-price-today-precious-metals-shine-again-as-gold-and-silver-rally-sharply-check-city-wise-rates-article-156577697"
-    },
-    {
-      "date": "2026-11-27",
-      "title_mr": "शुक्रवारी एमसीएक्सवर जोरदार तेजी: सोने २.८२% वाढून १,२८,०८३ रुपयांवर, चांदी ४.८७% वाढून १,५२,९४० रुपयांवर",
-      "body_mr": "कॅपिटल मार्केटच्या संध्याकाळच्या आढाव्यानुसार (शुक्रवार, २७ नोव्हेंबर, ६:०७ PM IST): अलीकडच्या घसरणीनंतर एमसीएक्सवर सोन्याने उत्तम पुनर्प्राप्ती केली. सोने दिवसभरात २.८२% वाढून १,२८,०८३ रुपये प्रति १० ग्रॅमवर होते; सत्रात ते १,२८,८०० रुपयांपर्यंत गेले होते. चांदी ४.८७% वाढून १,५२,९४० रुपये प्रति किलोवर होती.",
-      "title_en": "Strong rally on MCX on Friday: gold +2.82% at Rs 1,28,083, silver +4.87% at Rs 1,52,940",
-      "body_en": "According to Capital Market's evening wrap (Friday, 27 November, 6:07 PM IST), gold on MCX rebounded strongly after the recent losses, trading up 2.82% on the day at Rs 1,28,083 per 10 grams, after nearly touching a high of Rs 1,28,800. Silver futures were up 4.87% at Rs 1,52,940 per kg.",
-      "source": "Capital Market",
-      "url": "https://www.capitalmarket.com/markets/news/commodity-post-session-news/mcx-evening-wrap-bullion-futures-sparkle-silver-races-up-around-5/1752431"
-    },
-    {
-      "date": "2026-11-27",
-      "title_mr": "चांदीला ६% अप्पर सर्किट: दिवसातून एकदा १,५४,८०४ रुपये प्रति किलो; रुपया ९२.९८ वर घसरला",
-      "body_mr": "लाइव्हमिंटच्या वृत्तानुसार (शुक्रवार, २७ नोव्हेंबर, ४:२९ PM IST): एमसीएक्सवर चांदीने सत्रात ६% अप्पर सर्किट गाठून १,५४,८०४ रुपये प्रति किलोचा दिवसभरातील उच्चांक नोंदवला; दिवसभरात ती ८,५०० रुपयांनी वाढली. कॉमेक्सवर चांदी एका सत्रात १०% वाढून ४४.३०३ डॉलर प्रति औंसच्या उच्चांकावर गेली. अमेरिकी डॉलर १९ महिन्यांच्या उच्चांकावरून मागे सरकल्यानंतर कमी भावात खरेदी सुरू झाल्याचे वृत्तात म्हटले आहे. याच दरम्यान रुपया डॉलरच्या तुलनेत ६० पैशांनी घसरून ९२.९८ वर बंद झाला.",
-      "title_en": "Silver hits 6% upper circuit: intraday high Rs 1,54,804/kg; rupee slips to 92.98",
-      "body_en": "According to Livemint (Friday, 27 November, 4:29 PM IST), silver on MCX hit the 6% upper circuit during the session, touching an intraday high of Rs 1,54,804 per kg, up Rs 8,500 in a day. On Comex, silver rose 10% in a single session to a high of $44.303 per ounce. The report said bargain hunting followed the US dollar's retreat from a 19-month high. Meanwhile, the rupee fell 60 paise against the dollar to close at 92.98.",
-      "source": "Livemint",
-      "url": "https://www.livemint.com/market/commodities/silver-rate-today-27-november-mcx-price-6-upper-circuit-at-rs-1-54-lakh-kg-up-rs-8-500-in-a-day-right-time-to-buy-11795772565257.html"
-    },
-    {
-      "date": "2026-11-27",
-      "title_mr": "शुक्रवारचे सत्र: सोने २,०२८ रुपयांनी वाढून खुले, चांदी ५,८३३ रुपयांनी",
-      "body_mr": "बिझनेस स्टँडर्डच्या वृत्तानुसार (शुक्रवार, २७ नोव्हेंबर, ११:४५ AM IST): एमसीएक्सवर डिसेंबर सोने करार २,०२८ रुपयांनी वाढून १,२४,३०० रुपये प्रति १० ग्रॅमवर खुला (मागील बंद १,२२,२७२ रुपये) आणि लेखाच्या वेळी १,६१२ रुपयांनी वाढून १,२३,८८४ रुपयांवर होता. डिसेंबर चांदी करार ५,८३३ रुपयांनी वाढून १,५१,६७६ रुपये प्रति किलोवर खुला (मागील बंद १,४५,८४३ रुपये) आणि ५,५५१ रुपयांनी वाढून १,५१,३९४ रुपयांवर होता. कॉमेक्सवर सोने सुमारे ३,६३० डॉलर आणि चांदी सुमारे ४३.४० डॉलर प्रति औंसवर होती. कमी भावात खरेदी आणि शॉर्ट कव्हरिंगमुळे ही तेजी आल्याचे वृत्तात म्हटले आहे.",
-      "title_en": "Friday's session: gold opened Rs 2,028 higher, silver Rs 5,833 higher",
-      "body_en": "According to Business Standard (Friday, 27 November, 11:45 AM IST), MCX December gold opened Rs 2,028 higher at Rs 1,24,300 per 10 grams (previous close Rs 1,22,272) and was trading Rs 1,612 higher at Rs 1,23,884 at the time of writing. December silver opened Rs 5,833 higher at Rs 1,51,676 per kg (previous close Rs 1,45,843) and was trading Rs 5,551 higher at Rs 1,51,394. On Comex, gold was near $3,630 and silver near $43.40 per ounce. The report attributed the rise to buying at lower levels and short covering.",
-      "source": "Business Standard",
-      "url": "https://www.business-standard.com/markets/commodities/gold-silver-prices-extend-rebound-on-strong-buying-at-lower-levels-126112700373_1.html"
     }
   ]
 }
